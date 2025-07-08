@@ -1,17 +1,15 @@
 import { BalanceCard } from "@/components/dashboard/balance-card";
 import { StatsCard } from "@/components/dashboard/stats-card";
 import { TransactionsHistory } from "@/components/dashboard/transactions-history";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Coins, Gamepad2, Trophy, Users } from "lucide-react";
-import Link from "next/link";
+import { WalletActionsCard } from "@/components/dashboard/wallet-actions-card";
+import { Gamepad2, Trophy, PiggyBank } from "lucide-react";
 
 export default function DashboardPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-headline font-bold tracking-tight">Dashboard</h1>
-        <p className="text-muted-foreground">Welcome back, get an overview of your progress.</p>
+        <h1 className="text-3xl font-headline font-bold tracking-tight">My Wallet</h1>
+        <p className="text-muted-foreground">An overview of your KabuliCoin economy.</p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -29,10 +27,10 @@ export default function DashboardPage() {
           details="Top 15%"
         />
         <StatsCard
-          title="Friends"
-          value="32"
-          icon={Users}
-          details="+2 new friends"
+          title="Total Staked"
+          value="25,000"
+          icon={PiggyBank}
+          details="+5,000 this week"
         />
       </div>
 
@@ -41,25 +39,7 @@ export default function DashboardPage() {
           <TransactionsHistory />
         </div>
         <div className="lg:col-span-3">
-          <Card className="h-full flex flex-col">
-            <CardHeader>
-              <CardTitle className="font-headline">Start a New Game</CardTitle>
-              <CardDescription>
-                Choose a game to play and earn more coins.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex-1 flex flex-col justify-center items-center">
-              <div className="text-center">
-                 <div className="flex justify-center mb-4">
-                  <Gamepad2 className="w-16 h-16 text-accent" />
-                 </div>
-                 <p className="text-muted-foreground mb-4">Ready for a new challenge?</p>
-                 <Link href="/dashboard/games" passHref>
-                    <Button size="lg" className="font-bold">Play Now</Button>
-                 </Link>
-              </div>
-            </CardContent>
-          </Card>
+            <WalletActionsCard />
         </div>
       </div>
     </div>
