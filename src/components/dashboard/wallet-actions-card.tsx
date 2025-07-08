@@ -34,6 +34,7 @@ const chartConfig = {
 export function WalletActionsCard() {
     const stakedAmount = 25000;
     const apr = 20;
+    const lifetimeEarnings = 3450;
 
     return (
         <Card className="h-full flex flex-col">
@@ -52,14 +53,18 @@ export function WalletActionsCard() {
                     <TabsContent value="staking" className="flex-1 flex flex-col justify-center items-center text-center mt-4">
                         <h3 className="text-lg font-semibold">Staking Portfolio</h3>
                         <p className="text-muted-foreground text-sm mb-4">Lock your KBC to earn passive rewards.</p>
-                        <div className="w-full max-w-xs space-y-4">
-                            <div className="p-4 rounded-lg bg-muted/50">
+                        <div className="w-full max-w-xs space-y-2">
+                            <div className="p-3 rounded-lg bg-muted/50">
                                 <p className="text-sm text-muted-foreground">Currently Staked</p>
-                                <p className="text-3xl font-bold font-mono">{stakedAmount.toLocaleString()} KBC</p>
+                                <p className="text-2xl font-bold font-mono">{stakedAmount.toLocaleString()} KBC</p>
                             </div>
-                            <div className="p-4 rounded-lg bg-muted/50">
+                            <div className="p-3 rounded-lg bg-muted/50">
                                 <p className="text-sm text-muted-foreground">Annual Rate (APR)</p>
-                                <p className="text-3xl font-bold text-accent">{apr}%</p>
+                                <p className="text-2xl font-bold text-accent">{apr}%</p>
+                            </div>
+                             <div className="p-3 rounded-lg bg-muted/50">
+                                <p className="text-sm text-muted-foreground">Lifetime Earnings</p>
+                                <p className="text-2xl font-bold font-mono text-accent/90">+{lifetimeEarnings.toLocaleString()}</p>
                             </div>
                              <div className="flex gap-2 pt-2">
                                 <Button className="w-full font-bold">Stake More</Button>
@@ -82,9 +87,9 @@ export function WalletActionsCard() {
                              cursor={false}
                              content={<ChartTooltipContent indicator="dot" />}
                            />
-                           <Bar dataKey="tap" fill="var(--color-tap)" radius={4} />
-                           <Bar dataKey="move" fill="var(--color-move)" radius={4} />
-                           <Bar dataKey="quest" fill="var(--color-quest)" radius={4} />
+                           <Bar dataKey="tap" fill="var(--color-tap)" radius={0} stackId="a" />
+                           <Bar dataKey="move" fill="var(--color-move)" radius={0} stackId="a" />
+                           <Bar dataKey="quest" fill="var(--color-quest)" radius={[4, 4, 0, 0]} stackId="a" />
                          </BarChart>
                        </ChartContainer>
                     </TabsContent>

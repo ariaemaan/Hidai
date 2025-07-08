@@ -2,7 +2,7 @@ import { BalanceCard } from "@/components/dashboard/balance-card";
 import { StatsCard } from "@/components/dashboard/stats-card";
 import { TransactionsHistory } from "@/components/dashboard/transactions-history";
 import { WalletActionsCard } from "@/components/dashboard/wallet-actions-card";
-import { Gamepad2, Trophy, PiggyBank } from "lucide-react";
+import { PiggyBank, TrendingDown, TrendingUp } from "lucide-react";
 
 export default function DashboardPage() {
   return (
@@ -15,16 +15,16 @@ export default function DashboardPage() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <BalanceCard />
         <StatsCard
-          title="Games Played"
-          value="128"
-          icon={Gamepad2}
-          details="+5 from last week"
+          title="Earned (7d)"
+          value="15,350"
+          icon={TrendingUp}
+          details="KBC"
         />
         <StatsCard
-          title="Rank"
-          value="#1,204"
-          icon={Trophy}
-          details="Top 15%"
+          title="Spent (7d)"
+          value="12,500"
+          icon={TrendingDown}
+          details="KBC"
         />
         <StatsCard
           title="Total Staked"
