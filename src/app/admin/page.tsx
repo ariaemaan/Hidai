@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Users, BarChart2, DollarSign, Activity, AlertTriangle, Flame, Coins, ArrowRightLeft } from "lucide-react";
+import { Users, BarChart2, DollarSign, Activity, AlertTriangle, Flame, Coins, ArrowRightLeft, BookOpen, Globe, Sparkles } from "lucide-react";
 import { Bar, BarChart, XAxis, YAxis, Cell } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 
@@ -40,6 +40,29 @@ const suspiciousActivity = [
     { user: "user_3de4f", reason: "Impossible step count claimed", time: "15 min ago", level: "critical" },
     { user: "user_5gh6i", reason: "Multiple accounts from same IP", time: "1 hour ago", level: "medium" },
     { user: "user_7jk8l", reason: "Unusual transaction pattern", time: "3 hours ago", level: "low" },
+];
+
+const competitiveAdvantages = [
+    {
+        icon: BookOpen,
+        title: "Authentic Cultural Focus",
+        description: "High engagement in Cultural and Religious quests validates our core value proposition."
+    },
+    {
+        icon: Users,
+        title: "Community-First Features",
+        description: "Regional leaderboards and community challenges drive strong user retention and connection."
+    },
+    {
+        icon: Globe,
+        title: "Hyper-Localization",
+        description: "Support for Dari/Pashto and diaspora targeting creates a defensible market position."
+    },
+    {
+        icon: Sparkles,
+        title: "AI-Powered Personalization",
+        description: "Dynamic content and recommendations make the user experience unique and sticky."
+    }
 ];
 
 export default function AdminDashboardPage() {
@@ -135,6 +158,27 @@ export default function AdminDashboardPage() {
           </CardContent>
         </Card>
         
+        {/* Competitive Advantage Card */}
+        <Card className="md:col-span-2">
+            <CardHeader>
+                <CardTitle>Competitive Advantage</CardTitle>
+                <CardDescription>AI-driven analysis of our unique cultural and community-focused market position.</CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-6 sm:grid-cols-2">
+                {competitiveAdvantages.map((advantage, index) => (
+                    <div key={index} className="flex items-start gap-4">
+                        <div className="p-3 rounded-full bg-primary/10">
+                           <advantage.icon className="h-6 w-6 text-primary" />
+                        </div>
+                        <div>
+                            <h4 className="font-semibold">{advantage.title}</h4>
+                            <p className="text-sm text-muted-foreground">{advantage.description}</p>
+                        </div>
+                    </div>
+                ))}
+            </CardContent>
+        </Card>
+
         {/* Economic Health */}
         <Card>
             <CardHeader>
@@ -143,8 +187,8 @@ export default function AdminDashboardPage() {
             </CardHeader>
             <CardContent className="space-y-6">
                 <div className="flex items-center">
-                    <div className="p-3 rounded-full bg-primary/10 mr-4">
-                        <ArrowRightLeft className="h-6 w-6 text-primary" />
+                    <div className="p-3 rounded-full bg-accent/10 mr-4">
+                        <ArrowRightLeft className="h-6 w-6 text-accent" />
                     </div>
                     <div>
                         <p className="text-sm text-muted-foreground">Token Velocity (24h)</p>
@@ -152,8 +196,8 @@ export default function AdminDashboardPage() {
                     </div>
                 </div>
                  <div className="flex items-center">
-                    <div className="p-3 rounded-full bg-accent/10 mr-4">
-                        <Coins className="h-6 w-6 text-accent" />
+                    <div className="p-3 rounded-full bg-primary/10 mr-4">
+                        <Coins className="h-6 w-6 text-primary" />
                     </div>
                     <div>
                         <p className="text-sm text-muted-foreground">Daily Issuance</p>
