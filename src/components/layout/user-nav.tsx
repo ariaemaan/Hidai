@@ -27,7 +27,10 @@ export function UserNav() {
   const router = useRouter();
 
   const handleLogout = async () => {
-    await signOut(auth);
+    // Only attempt to sign out if Firebase is configured
+    if (auth) {
+      await signOut(auth);
+    }
     router.push('/');
   };
 

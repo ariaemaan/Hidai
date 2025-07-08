@@ -18,12 +18,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+    // Only subscribe to auth state changes if Firebase is initialized
+    if (auth) {
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        setUser(user);
+        setLoading(false);
+      });
+      return () => unsubscribe();
+    } else {
+      // If Firebase is not configured, stop loading and treat as logged out
       setLoading(false);
-    });
-
-    return () => unsubscribe();
+    }
   }, []);
 
   return (
@@ -42,7 +47,8 @@ export function AuthGuard({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!loading && !user && !pathname.startsWith('/admin')) {
+    // Only enforce auth guard if firebase is configured
+    if (auth && !loading && !user && !pathname.startsWith('/admin')) {
       router.push('/');
     }
   }, [user, loading, router, pathname]);
@@ -59,7 +65,8 @@ export function AuthGuard({ children }: { children: ReactNode }) {
     );
   }
 
-  if (!user && !pathname.startsWith('/admin')) {
+  // Only block render if firebase is configured and user is not present
+  if (auth && !user && !pathname.startsWith('/admin')) {
     // This will be caught by the useEffect, but as a fallback
     return null;
   }
