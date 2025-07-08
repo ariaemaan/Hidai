@@ -1,4 +1,5 @@
 
+
 import type { ElementType } from 'react';
 // In a real app, you would import this from 'firebase/firestore'
 // For now, we'll define a placeholder
@@ -150,4 +151,34 @@ export interface MarketAsset {
     price: string;
     change: string;
     isUp: boolean;
+}
+
+// Live Trading Account Showcase Types
+export interface LiveAccountStats {
+  startingBalance: number;
+  currentBalance: number;
+  totalProfit: number;
+  totalReturnPercentage: number;
+  monthlyReturnPercentage: number;
+  winRatePercentage: number;
+  riskScore: 'Low' | 'Moderate' | 'High';
+  activeTrades: number;
+}
+
+export interface LiveTrade {
+  id: string;
+  asset: string;
+  type: 'LONG' | 'SHORT';
+  entryPrice: number;
+  exitPrice?: number;
+  currentPrice?: number;
+  pnl?: number;
+  status: 'OPEN' | 'CLOSED_WIN' | 'CLOSED_LOSS';
+  timestamp: string;
+}
+
+export interface PerformanceMetric {
+  label: string;
+  value: string;
+  description: string;
 }

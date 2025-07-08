@@ -1,11 +1,13 @@
 
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import Link from "next/link";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { ChevronsUp, ChevronUp, Minus, ChevronDown, ChevronsDown, AlertCircle, CheckCircle, XCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ChevronsUp, ChevronUp, Minus, ChevronDown, ChevronsDown, AlertCircle, CheckCircle, XCircle, Trophy } from "lucide-react";
 import type { TradingSignal, SignalType, MarketAsset } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -60,6 +62,43 @@ export default function TradingPage() {
                 <h1 className="text-3xl font-headline font-bold tracking-tight">AI Trading Signals</h1>
                 <p className="text-muted-foreground">Professional-grade market analysis powered by Gemini AI.</p>
             </div>
+            
+            <Card className="bg-primary/5 border-primary/20">
+                <CardHeader>
+                    <CardTitle className="font-headline text-primary flex items-center gap-2">
+                        <Trophy className="w-6 h-6" />
+                        <span>Live Performance Showcase</span>
+                    </CardTitle>
+                    <CardDescription>
+                        See our AI-generated signals traded on a real account. We believe in full transparency.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
+                    <div className="p-4 rounded-lg bg-background">
+                        <p className="text-sm text-muted-foreground">Total Return</p>
+                        <p className="text-2xl font-bold font-mono text-accent">+89.4%</p>
+                    </div>
+                    <div className="p-4 rounded-lg bg-background">
+                        <p className="text-sm text-muted-foreground">Win Rate</p>
+                        <p className="text-2xl font-bold font-mono">76.8%</p>
+                    </div>
+                    <div className="p-4 rounded-lg bg-background">
+                        <p className="text-sm text-muted-foreground">Starting Balance</p>
+                        <p className="text-2xl font-bold font-mono">$25,000</p>
+                    </div>
+                    <div className="p-4 rounded-lg bg-background">
+                        <p className="text-sm text-muted-foreground">Current Balance</p>
+                        <p className="text-2xl font-bold font-mono">$47,350</p>
+                    </div>
+                </CardContent>
+                <CardFooter>
+                    <Button asChild className="w-full sm:w-auto">
+                        <Link href="/dashboard/trading/live-account">
+                            View Live Account Dashboard
+                        </Link>
+                    </Button>
+                </CardFooter>
+            </Card>
 
             {/* Market Overview */}
             <Card>
