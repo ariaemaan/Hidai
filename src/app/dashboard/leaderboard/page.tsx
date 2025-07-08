@@ -2,9 +2,11 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, ArrowUp, ArrowDown, Minus } from "lucide-react";
+import { Trophy, ArrowUp, ArrowDown, Minus, Share2 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+import { CommunityChallenges } from "@/components/leaderboard/community-challenges";
+import { Button } from "@/components/ui/button";
 
 const leaderboardData = [
   { rank: 1, name: "Ahmad Wali", score: 125030, trend: 'up' as const, change: 1 },
@@ -37,12 +39,13 @@ export default function LeaderboardPage() {
   return (
     <div className="space-y-8">
        <div>
-        <h1 className="text-3xl font-headline font-bold tracking-tight">Leaderboard</h1>
-        <p className="text-muted-foreground">See how you stack up against other players.</p>
+        <h1 className="text-3xl font-headline font-bold tracking-tight">Community Hub</h1>
+        <p className="text-muted-foreground">See how you stack up, join challenges, and connect with others.</p>
       </div>
        <Tabs defaultValue="global">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="global">Global</TabsTrigger>
+            <TabsTrigger value="challenges">Challenges</TabsTrigger>
             <TabsTrigger value="regional" disabled>Regional</TabsTrigger>
             <TabsTrigger value="friends" disabled>Friends</TabsTrigger>
         </TabsList>
@@ -60,6 +63,7 @@ export default function LeaderboardPage() {
                         <TableHead>Player</TableHead>
                         <TableHead className="text-center w-[100px]">Change</TableHead>
                         <TableHead className="text-right">Score</TableHead>
+                        <TableHead className="w-[50px]"></TableHead>
                     </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -86,12 +90,24 @@ export default function LeaderboardPage() {
                             <RankChange trend={player.trend} change={player.change} />
                         </TableCell>
                         <TableCell className="text-right font-mono text-lg">{player.score.toLocaleString()}</TableCell>
+                        <TableCell className="text-right">
+                           {player.isCurrentUser && (
+                             <Button variant="ghost" size="icon">
+                               <Share2 className="h-4 w-4" />
+                             </Button>
+                           )}
+                        </TableCell>
                         </TableRow>
                     ))}
                     </TableBody>
                 </Table>
                 </CardContent>
             </Card>
+        </TabsContent>
+        <TabsContent value="challenges">
+             <div className="mt-4">
+                <CommunityChallenges />
+            </div>
         </TabsContent>
       </Tabs>
     </div>
