@@ -6,3 +6,4 @@ import './flows/generateSocialPostFlow';
 import './flows/generateMarketingCopyFlow';
 import './flows/generateAdImageFlow';
 import './flows/generateTradingSignalFlow';
+import './flows/analyzeCompetitiveAdvantageFlow';

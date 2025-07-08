@@ -166,7 +166,7 @@ export default function AdminMarketingPage() {
                                     </Skeleton>
                                 ) : generatedImage && (
                                      <div className="mt-2 relative aspect-video rounded-lg overflow-hidden border">
-                                        <Image src={generatedImage} alt="Generated Ad Creative" fill objectFit="cover" />
+                                        <Image src={generatedImage} alt="Generated Ad Creative" fill className="object-cover" />
                                     </div>
                                 )}
                             </div>

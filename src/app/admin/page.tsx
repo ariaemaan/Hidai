@@ -1,9 +1,27 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Users, BarChart2, DollarSign, Activity, AlertTriangle, Flame, Coins, ArrowRightLeft, BookOpen, Globe, Sparkles } from "lucide-react";
+import { Users, BarChart2, DollarSign, Activity, AlertTriangle, Flame, Coins, ArrowRightLeft } from "lucide-react";
 import { Bar, BarChart, XAxis, YAxis, Cell } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { Skeleton } from "@/components/ui/skeleton";
+
+import { useEffect, useState } from "react";
+import { analyzeCompetitiveAdvantage, type CompetitiveAdvantage } from "@/ai/flows/analyzeCompetitiveAdvantageFlow";
+import { icons } from "lucide-react";
+
+type IconName = keyof typeof icons;
+
+const RenderIcon = ({ name, className }: { name: IconName; className?: string }) => {
+  const LucideIcon = icons[name];
+  if (!LucideIcon) {
+    // Return a default icon or null if the name is invalid
+    return <AlertTriangle className={className} />;
+  }
+  return <LucideIcon className={className} />;
+};
 
 
 const userGrowthData = [
@@ -42,30 +60,19 @@ const suspiciousActivity = [
     { user: "user_7jk8l", reason: "Unusual transaction pattern", time: "3 hours ago", level: "low" },
 ];
 
-const competitiveAdvantages = [
-    {
-        icon: BookOpen,
-        title: "Authentic Cultural Focus",
-        description: "High engagement in Cultural and Religious quests validates our core value proposition."
-    },
-    {
-        icon: Users,
-        title: "Community-First Features",
-        description: "Regional leaderboards and community challenges drive strong user retention and connection."
-    },
-    {
-        icon: Globe,
-        title: "Hyper-Localization",
-        description: "Support for Dari/Pashto and diaspora targeting creates a defensible market position."
-    },
-    {
-        icon: Sparkles,
-        title: "AI-Powered Personalization",
-        description: "Dynamic content and recommendations make the user experience unique and sticky."
-    }
-];
 
 export default function AdminDashboardPage() {
+  const [advantages, setAdvantages] = useState<CompetitiveAdvantage[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+      setIsLoading(true);
+      analyzeCompetitiveAdvantage()
+          .then(result => setAdvantages(result.advantages))
+          .catch(error => console.error("Failed to load competitive advantages:", error))
+          .finally(() => setIsLoading(false));
+  }, []);
+
   return (
     <div className="space-y-8">
       <div>
@@ -165,17 +172,30 @@ export default function AdminDashboardPage() {
                 <CardDescription>AI-driven analysis of our unique cultural and community-focused market position.</CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6 sm:grid-cols-2">
-                {competitiveAdvantages.map((advantage, index) => (
+              {isLoading ? (
+                Array.from({ length: 4 }).map((_, index) => (
+                  <div key={index} className="flex items-start gap-4">
+                    <Skeleton className="h-12 w-12 rounded-full" />
+                    <div className="flex-1 space-y-2">
+                      <Skeleton className="h-4 w-3/4" />
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-5/6" />
+                    </div>
+                  </div>
+                ))
+              ) : (
+                advantages.map((advantage, index) => (
                     <div key={index} className="flex items-start gap-4">
                         <div className="p-3 rounded-full bg-primary/10">
-                           <advantage.icon className="h-6 w-6 text-primary" />
+                           <RenderIcon name={advantage.icon as IconName} className="h-6 w-6 text-primary" />
                         </div>
                         <div>
                             <h4 className="font-semibold">{advantage.title}</h4>
                             <p className="text-sm text-muted-foreground">{advantage.description}</p>
                         </div>
                     </div>
-                ))}
+                ))
+              )}
             </CardContent>
         </Card>
 
