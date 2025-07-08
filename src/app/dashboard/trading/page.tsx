@@ -10,7 +10,7 @@ import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ChevronsUp, ChevronUp, Minus, ChevronDown, ChevronsDown, CheckCircle, XCircle, Trophy, Sparkles, Loader2, Users } from "lucide-react";
+import { ChevronsUp, ChevronUp, Minus, ChevronDown, ChevronsDown, CheckCircle, XCircle, Trophy, Sparkles, Loader2, Users, BrainCircuit } from "lucide-react";
 import { generateTradingSignal, type GenerateTradingSignalOutput } from "@/ai/flows/generateTradingSignalFlow";
 import type { TradingSignal, SignalType, MarketAsset } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -244,6 +244,25 @@ export default function TradingPage() {
                     <Button asChild className="w-full sm:w-auto">
                         <Link href="/dashboard/trading/live-account">
                             View Live Account Dashboard
+                        </Link>
+                    </Button>
+                </CardFooter>
+            </Card>
+            
+            <Card>
+                <CardHeader>
+                    <CardTitle className="font-headline flex items-center gap-2">
+                        <BrainCircuit className="w-6 h-6 text-primary" />
+                        <span>Market Intelligence Center</span>
+                    </CardTitle>
+                    <CardDescription>
+                        Access advanced AI-powered analytics, sentiment tracking, and economic event data.
+                    </CardDescription>
+                </CardHeader>
+                <CardFooter>
+                    <Button asChild className="w-full sm:w-auto">
+                        <Link href="/dashboard/trading/intelligence">
+                            Go to Intelligence Center
                         </Link>
                     </Button>
                 </CardFooter>

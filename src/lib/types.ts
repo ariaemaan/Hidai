@@ -202,3 +202,42 @@ export interface MasterTrader {
   strategy: string;
   isIslamicCompliant: boolean;
 }
+
+// Market Intelligence Types
+export interface MarketIntelligenceSummary {
+  sentiment: 'Bullish' | 'Bearish' | 'Neutral';
+  sentimentScore: number;
+  volatilityIndex: number;
+  volatilityDescription: 'Low' | 'Normal' | 'High';
+  usdStrength: number;
+  cryptoFearGreed: number;
+  cryptoFearGreedDescription: 'Extreme Fear' | 'Fear' | 'Neutral' | 'Greed' | 'Extreme Greed';
+  highImpactEvents: number;
+  newsSentiment: 'Positive' | 'Negative' | 'Neutral';
+  technicalBias: 'Bullish' | 'Bearish' | 'Neutral';
+  riskAppetite: 'High' | 'Moderate' | 'Low';
+}
+
+export type EconomicEventImpact = 'High' | 'Medium' | 'Low';
+
+export interface EconomicEvent {
+  impact: EconomicEventImpact;
+  event: string;
+  time: string;
+}
+
+export interface MarketCorrelation {
+  pair: string;
+  correlation: number;
+  description: 'Strong Negative' | 'Weak Negative' | 'Neutral' | 'Weak Positive' | 'Strong Positive';
+}
+
+export type TrendBias = 'Bullish' | 'Bearish' | 'Neutral' | 'Consolidating';
+
+export interface TrendAnalysis {
+  asset: string;
+  trends: {
+    timeframe: string;
+    bias: TrendBias;
+  }[];
+}
