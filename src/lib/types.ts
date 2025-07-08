@@ -1,3 +1,4 @@
+
 import type { ElementType } from 'react';
 // In a real app, you would import this from 'firebase/firestore'
 // For now, we'll define a placeholder

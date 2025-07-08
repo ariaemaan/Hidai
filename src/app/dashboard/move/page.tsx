@@ -1,3 +1,4 @@
+
 import { StepTracker } from "@/components/move/step-tracker";
 import { DailyGoals } from "@/components/move/daily-goals";
 import { ActivityBonuses } from "@/components/move/activity-bonuses";
