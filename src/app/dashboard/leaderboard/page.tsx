@@ -59,7 +59,7 @@ export default function LeaderboardPage() {
         <p className="text-muted-foreground">See how you stack up, join challenges, and connect with others.</p>
       </div>
        <Tabs defaultValue="global">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4">
             <TabsTrigger value="global">Global</TabsTrigger>
             <TabsTrigger value="regional">Regional</TabsTrigger>
             <TabsTrigger value="challenges">Challenges</TabsTrigger>
@@ -72,52 +72,54 @@ export default function LeaderboardPage() {
                 <CardDescription>Top players from around the world.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                <Table>
-                    <TableHeader>
-                    <TableRow>
-                        <TableHead className="w-[80px]">Rank</TableHead>
-                        <TableHead>Player</TableHead>
-                        <TableHead className="text-center w-[100px]">Change</TableHead>
-                        <TableHead className="text-right">Score</TableHead>
-                        <TableHead className="w-[50px]"></TableHead>
-                    </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                    {leaderboardData.map((player) => (
-                        <TableRow key={player.rank} className={player.isCurrentUser ? "bg-accent/50" : ""}>
-                        <TableCell className="font-bold text-lg">
-                            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-muted">
-                                {player.rank <= 3 ? <Trophy className={`w-6 h-6 ${player.rank === 1 ? 'text-yellow-500' : player.rank === 2 ? 'text-slate-400' : 'text-orange-600' }`} /> : player.rank}
-                            </div>
-                        </TableCell>
-                        <TableCell>
-                            <div className="flex items-center gap-4">
-                            <Avatar>
-                                <AvatarImage src={`https://placehold.co/40x40.png?text=${player.name.charAt(0)}`} alt={player.name} data-ai-hint="avatar user" />
-                                <AvatarFallback>{player.name.charAt(0)}</AvatarFallback>
-                            </Avatar>
-                             <div>
-                                <span className="font-medium">{player.name}</span>
-                                {player.isCurrentUser && <Badge variant="outline" className="ml-2">You</Badge>}
-                                {player.isFounder && <Badge variant="default" className="ml-2"><ShieldCheck className="h-3 w-3 mr-1" />Founder</Badge>}
-                            </div>
-                            </div>
-                        </TableCell>
-                        <TableCell className="text-center">
-                            <RankChange trend={player.trend} change={player.change} />
-                        </TableCell>
-                        <TableCell className="text-right font-mono text-lg">{player.score.toLocaleString()}</TableCell>
-                        <TableCell className="text-right">
-                           {player.isCurrentUser && (
-                             <Button variant="ghost" size="icon" onClick={() => handleShareClick(player)}>
-                               <Share2 className="h-4 w-4" />
-                             </Button>
-                           )}
-                        </TableCell>
+                  <div className="overflow-x-auto">
+                    <Table>
+                        <TableHeader>
+                        <TableRow>
+                            <TableHead className="w-[80px]">Rank</TableHead>
+                            <TableHead>Player</TableHead>
+                            <TableHead className="text-center w-[100px]">Change</TableHead>
+                            <TableHead className="text-right">Score</TableHead>
+                            <TableHead className="w-[50px]"></TableHead>
                         </TableRow>
-                    ))}
-                    </TableBody>
-                </Table>
+                        </TableHeader>
+                        <TableBody>
+                        {leaderboardData.map((player) => (
+                            <TableRow key={player.rank} className={player.isCurrentUser ? "bg-accent/50" : ""}>
+                            <TableCell className="font-bold text-lg">
+                                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-muted">
+                                    {player.rank <= 3 ? <Trophy className={`w-6 h-6 ${player.rank === 1 ? 'text-yellow-500' : player.rank === 2 ? 'text-slate-400' : 'text-orange-600' }`} /> : player.rank}
+                                </div>
+                            </TableCell>
+                            <TableCell>
+                                <div className="flex items-center gap-4">
+                                <Avatar>
+                                    <AvatarImage src={`https://placehold.co/40x40.png?text=${player.name.charAt(0)}`} alt={player.name} data-ai-hint="avatar user" />
+                                    <AvatarFallback>{player.name.charAt(0)}</AvatarFallback>
+                                </Avatar>
+                                <div>
+                                    <span className="font-medium">{player.name}</span>
+                                    {player.isCurrentUser && <Badge variant="outline" className="ml-2">You</Badge>}
+                                    {player.isFounder && <Badge variant="default" className="ml-2"><ShieldCheck className="h-3 w-3 mr-1" />Founder</Badge>}
+                                </div>
+                                </div>
+                            </TableCell>
+                            <TableCell className="text-center">
+                                <RankChange trend={player.trend} change={player.change} />
+                            </TableCell>
+                            <TableCell className="text-right font-mono text-lg">{player.score.toLocaleString()}</TableCell>
+                            <TableCell className="text-right">
+                            {player.isCurrentUser && (
+                                <Button variant="ghost" size="icon" onClick={() => handleShareClick(player)}>
+                                <Share2 className="h-4 w-4" />
+                                </Button>
+                            )}
+                            </TableCell>
+                            </TableRow>
+                        ))}
+                        </TableBody>
+                    </Table>
+                  </div>
                 </CardContent>
             </Card>
         </TabsContent>

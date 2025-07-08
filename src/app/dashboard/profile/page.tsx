@@ -10,7 +10,7 @@ export default function ProfilePage() {
         <h1 className="text-3xl font-headline font-bold tracking-tight">Profile & Social</h1>
         <p className="text-muted-foreground">Manage your account, settings, and referral code.</p>
       </div>
-      <div className="grid gap-8 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
         <div className="md:col-span-1 space-y-8">
           <AvatarUpload />
           <ReferralCard />

@@ -74,7 +74,7 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Users</CardTitle>
@@ -117,7 +117,7 @@ export default function AdminDashboardPage() {
         </Card>
       </div>
 
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         {/* User Growth Chart */}
         <Card>
           <CardHeader>
@@ -226,28 +226,30 @@ export default function AdminDashboardPage() {
                 <CardDescription>Recent suspicious activities detected.</CardDescription>
             </CardHeader>
             <CardContent>
-                 <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>User</TableHead>
-                            <TableHead>Reason</TableHead>
-                            <TableHead className="text-right">Risk</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {suspiciousActivity.map((activity, index) => (
-                            <TableRow key={index}>
-                                <TableCell className="font-mono text-xs">{activity.user}</TableCell>
-                                <TableCell className="text-xs">{activity.reason}</TableCell>
-                                <TableCell className="text-right">
-                                    <Badge variant={activity.level === 'critical' || activity.level === 'high' ? 'destructive' : 'secondary'}>
-                                        {activity.level}
-                                    </Badge>
-                                </TableCell>
+                <div className="overflow-x-auto">
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>User</TableHead>
+                                <TableHead>Reason</TableHead>
+                                <TableHead className="text-right">Risk</TableHead>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                        </TableHeader>
+                        <TableBody>
+                            {suspiciousActivity.map((activity, index) => (
+                                <TableRow key={index}>
+                                    <TableCell className="font-mono text-xs">{activity.user}</TableCell>
+                                    <TableCell className="text-xs">{activity.reason}</TableCell>
+                                    <TableCell className="text-right">
+                                        <Badge variant={activity.level === 'critical' || activity.level === 'high' ? 'destructive' : 'secondary'}>
+                                            {activity.level}
+                                        </Badge>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </div>
             </CardContent>
         </Card>
       </div>

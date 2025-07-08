@@ -2,9 +2,17 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  Sidebar,
+  SidebarHeader,
+  SidebarContent,
+  SidebarFooter,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+} from "@/components/ui/sidebar";
 import { Logo } from "@/components/logo";
-import { cn } from "@/lib/utils";
-import { Home, Users, BarChart2, Settings, Shield, FileText, Megaphone } from "lucide-react";
+import { Home, Users, BarChart2, Shield, FileText, Megaphone, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const menuItems = [
@@ -20,30 +28,45 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="hidden md:flex flex-col w-64 bg-background border-r">
-      <div className="p-4 border-b">
-        <Logo />
-      </div>
-      <nav className="flex-1 p-4 space-y-2">
-        {menuItems.map((item) => (
-          <Link href={item.href} key={item.href}>
-            <Button
-              variant={pathname.startsWith(item.href) && (item.href !== "/admin" || pathname === "/admin") ? "secondary" : "ghost"}
-              className="w-full justify-start"
-            >
-              <item.icon className="mr-2 h-4 w-4" />
-              {item.label}
-            </Button>
-          </Link>
-        ))}
-      </nav>
-      <div className="p-4 border-t">
-        <Link href="/dashboard">
-          <Button variant="outline" className="w-full">
-            Back to App
-          </Button>
-        </Link>
-      </div>
-    </div>
+    <Sidebar>
+      <SidebarHeader>
+        <div className="p-2">
+            <Logo />
+        </div>
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarMenu>
+          {menuItems.map((item) => (
+            <SidebarMenuItem key={item.href}>
+              <SidebarMenuButton
+                asChild
+                isActive={pathname.startsWith(item.href) && (item.href !== "/admin" || pathname === "/admin")}
+                tooltip={{
+                  children: item.label,
+                  className: "font-headline",
+                }}
+              >
+                <Link href={item.href}>
+                  <item.icon />
+                  <span>{item.label}</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
+      </SidebarContent>
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild variant="outline">
+              <Link href="/dashboard">
+                <ArrowLeft />
+                <span>Back to App</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
+    </Sidebar>
   );
 }

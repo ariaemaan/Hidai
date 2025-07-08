@@ -81,23 +81,23 @@ const tiers = [
 export default function SubscriptionsPage() {
     return (
         <div className="space-y-8">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
                     <h1 className="text-3xl font-headline font-bold tracking-tight">Trading Subscriptions</h1>
                     <p className="text-muted-foreground">Unlock premium signals and features to elevate your trading.</p>
                 </div>
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="w-full sm:w-auto">
                     <Link href="/dashboard/trading">
                         <ArrowLeft className="mr-2 h-4 w-4" /> Back to Trading Hub
                     </Link>
                 </Button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6 items-stretch">
+            <div className="grid grid-cols-1 gap-6 items-start md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                 {tiers.map((tier) => (
                     <Card key={tier.name} className={cn(
-                        "flex flex-col",
-                        tier.isRecommended && "border-primary shadow-primary/20 shadow-lg -translate-y-2",
+                        "flex flex-col h-full",
+                        tier.isRecommended && "border-primary shadow-primary/20 shadow-lg lg:-translate-y-2",
                         (tier.name === 'Platinum' || tier.name === 'Diamond') && "bg-muted/50"
                     )}>
                         <CardHeader className="relative">

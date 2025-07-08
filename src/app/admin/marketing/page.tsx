@@ -77,7 +77,7 @@ export default function AdminMarketingPage() {
                 <h1 className="text-3xl font-headline font-bold tracking-tight">AI Marketing Assistant</h1>
                 <p className="text-muted-foreground">Generate culturally-aware marketing content and ad creatives.</p>
             </div>
-            <div className="grid gap-8 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                 <Card>
                     <CardHeader>
                         <CardTitle>Content Generator</CardTitle>
@@ -166,7 +166,7 @@ export default function AdminMarketingPage() {
                                     </Skeleton>
                                 ) : generatedImage && (
                                      <div className="mt-2 relative aspect-video rounded-lg overflow-hidden border">
-                                        <Image src={generatedImage} alt="Generated Ad Creative" layout="fill" objectFit="cover" />
+                                        <Image src={generatedImage} alt="Generated Ad Creative" fill objectFit="cover" />
                                     </div>
                                 )}
                             </div>

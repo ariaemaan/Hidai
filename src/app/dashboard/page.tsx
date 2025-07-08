@@ -12,7 +12,7 @@ export default function DashboardPage() {
         <p className="text-muted-foreground">An overview of your Kabuli Coins economy.</p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         <BalanceCard />
         <StatsCard
           title="Earned (7d)"
@@ -28,7 +28,7 @@ export default function DashboardPage() {
         />
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-7">
         <div className="lg:col-span-4">
           <TransactionsHistory />
         </div>

@@ -59,12 +59,12 @@ const yourCopiedTraders = [
 export default function CopyTradingPage() {
     return (
         <div className="space-y-8">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
                     <h1 className="text-3xl font-headline font-bold tracking-tight">Copy & Social Trading</h1>
                     <p className="text-muted-foreground">Follow and copy the best traders in the community.</p>
                 </div>
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="w-full sm:w-auto">
                     <Link href="/dashboard/trading">
                         <ArrowLeft className="mr-2 h-4 w-4" /> Back to Trading Hub
                     </Link>
@@ -77,50 +77,52 @@ export default function CopyTradingPage() {
                     <CardDescription>Track the performance of traders you are currently copying.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Trader</TableHead>
-                                <TableHead>Risk Score</TableHead>
-                                <TableHead className="text-right">My P&L (USD)</TableHead>
-                                <TableHead className="text-center">Status</TableHead>
-                                <TableHead className="text-right">Actions</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {yourCopiedTraders.map((trader) => (
-                                <TableRow key={trader.id}>
-                                    <TableCell>
-                                        <div className="flex items-center gap-3">
-                                            <Avatar>
-                                                <AvatarImage src={`${trader.avatarUrl}?text=${trader.name.charAt(0)}`} alt={trader.name} data-ai-hint="avatar trader"/>
-                                                <AvatarFallback>{trader.name.charAt(0)}</AvatarFallback>
-                                            </Avatar>
-                                            <p className="font-medium">{trader.name}</p>
-                                        </div>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Badge variant={trader.riskScore === 'High' ? 'destructive' : 'secondary'}>{trader.riskScore}</Badge>
-                                    </TableCell>
-                                    <TableCell className={cn("text-right font-mono", trader.myPnl > 0 ? "text-accent" : "text-destructive")}>
-                                        {trader.myPnl > 0 ? "+" : ""}${trader.myPnl.toFixed(2)}
-                                    </TableCell>
-                                    <TableCell className="text-center">
-                                        <Badge>{trader.status}</Badge>
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        <Button variant="outline" size="sm">Stop Copying</Button>
-                                    </TableCell>
+                    <div className="overflow-x-auto">
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Trader</TableHead>
+                                    <TableHead>Risk Score</TableHead>
+                                    <TableHead className="text-right">My P&L (USD)</TableHead>
+                                    <TableHead className="text-center">Status</TableHead>
+                                    <TableHead className="text-right">Actions</TableHead>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
+                            </TableHeader>
+                            <TableBody>
+                                {yourCopiedTraders.map((trader) => (
+                                    <TableRow key={trader.id}>
+                                        <TableCell>
+                                            <div className="flex items-center gap-3">
+                                                <Avatar>
+                                                    <AvatarImage src={`${trader.avatarUrl}?text=${trader.name.charAt(0)}`} alt={trader.name} data-ai-hint="avatar trader"/>
+                                                    <AvatarFallback>{trader.name.charAt(0)}</AvatarFallback>
+                                                </Avatar>
+                                                <p className="font-medium">{trader.name}</p>
+                                            </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Badge variant={trader.riskScore === 'High' ? 'destructive' : 'secondary'}>{trader.riskScore}</Badge>
+                                        </TableCell>
+                                        <TableCell className={cn("text-right font-mono", trader.myPnl > 0 ? "text-accent" : "text-destructive")}>
+                                            {trader.myPnl > 0 ? "+" : ""}${trader.myPnl.toFixed(2)}
+                                        </TableCell>
+                                        <TableCell className="text-center">
+                                            <Badge>{trader.status}</Badge>
+                                        </TableCell>
+                                        <TableCell className="text-right">
+                                            <Button variant="outline" size="sm">Stop Copying</Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
                 </CardContent>
             </Card>
 
             <div>
                 <h2 className="text-2xl font-headline font-bold tracking-tight mb-4">Top Master Traders</h2>
-                <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
                     {masterTraders.map((trader) => (
                         <Card key={trader.id} className="flex flex-col">
                             <CardHeader>

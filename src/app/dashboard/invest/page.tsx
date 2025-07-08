@@ -42,7 +42,7 @@ export default function InvestPage() {
             </div>
 
             {/* Staking Dashboard */}
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium font-headline">Total Staked</CardTitle>
@@ -76,7 +76,7 @@ export default function InvestPage() {
             </div>
 
             {/* Staking Pools and Savings Goals */}
-            <div className="grid gap-8 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                 {/* Staking Pools */}
                 <Card className="flex flex-col">
                     <CardHeader>
@@ -91,28 +91,30 @@ export default function InvestPage() {
                                 <TabsTrigger value="charitable" disabled>Charitable</TabsTrigger>
                             </TabsList>
                             <TabsContent value="my-positions" className="mt-4">
-                                <Table>
-                                    <TableHeader>
-                                        <TableRow>
-                                            <TableHead>Amount</TableHead>
-                                            <TableHead>APR</TableHead>
-                                            <TableHead>Unlocks</TableHead>
-                                            <TableHead></TableHead>
-                                        </TableRow>
-                                    </TableHeader>
-                                    <TableBody>
-                                        {stakingPositions.map((pos) => (
-                                            <TableRow key={pos.id}>
-                                                <TableCell className="font-mono font-medium">{pos.amount.toLocaleString()} KBC</TableCell>
-                                                <TableCell className="text-accent">{pos.apr}%</TableCell>
-                                                <TableCell>{pos.unlocks}</TableCell>
-                                                <TableCell className="text-right">
-                                                    <Button variant="outline" size="sm" disabled>Unstake</Button>
-                                                </TableCell>
+                                <div className="overflow-x-auto">
+                                    <Table>
+                                        <TableHeader>
+                                            <TableRow>
+                                                <TableHead>Amount</TableHead>
+                                                <TableHead>APR</TableHead>
+                                                <TableHead>Unlocks</TableHead>
+                                                <TableHead></TableHead>
                                             </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
+                                        </TableHeader>
+                                        <TableBody>
+                                            {stakingPositions.map((pos) => (
+                                                <TableRow key={pos.id}>
+                                                    <TableCell className="font-mono font-medium">{pos.amount.toLocaleString()} KBC</TableCell>
+                                                    <TableCell className="text-accent">{pos.apr}%</TableCell>
+                                                    <TableCell>{pos.unlocks}</TableCell>
+                                                    <TableCell className="text-right">
+                                                        <Button variant="outline" size="sm" disabled>Unstake</Button>
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </div>
                             </TabsContent>
                         </Tabs>
                     </CardContent>

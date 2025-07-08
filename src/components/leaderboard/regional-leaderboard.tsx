@@ -90,43 +90,45 @@ export function RegionalLeaderboard() {
         </div>
       </CardHeader>
       <CardContent>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[80px]">Rank</TableHead>
-              <TableHead>Player</TableHead>
-              <TableHead className="text-right">Score</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {players.map((player) => (
-              <TableRow key={player.rank}>
-                <TableCell className="font-bold text-lg">
-                   <div className="flex items-center justify-center w-10 h-10 rounded-full bg-muted">
-                      {player.rank <= 3 ? <Trophy className={`w-6 h-6 ${player.rank === 1 ? 'text-yellow-500' : player.rank === 2 ? 'text-slate-400' : 'text-orange-600' }`} /> : player.rank}
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <div className="flex items-center gap-4">
-                    <Avatar>
-                      <AvatarImage src={`https://placehold.co/40x40.png?text=${player.name.charAt(0)}`} alt={player.name} data-ai-hint="avatar user"/>
-                      <AvatarFallback>{player.name.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                    <span className="font-medium">{player.name}</span>
-                  </div>
-                </TableCell>
-                <TableCell className="text-right font-mono text-lg">{player.score.toLocaleString()}</TableCell>
-              </TableRow>
-            ))}
-             {players.length === 0 && (
+        <div className="overflow-x-auto">
+            <Table>
+            <TableHeader>
                 <TableRow>
-                    <TableCell colSpan={3} className="text-center h-24 text-muted-foreground">
-                        No data available for this region yet.
-                    </TableCell>
+                <TableHead className="w-[80px]">Rank</TableHead>
+                <TableHead>Player</TableHead>
+                <TableHead className="text-right">Score</TableHead>
                 </TableRow>
-            )}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody>
+                {players.map((player) => (
+                <TableRow key={player.rank}>
+                    <TableCell className="font-bold text-lg">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-muted">
+                        {player.rank <= 3 ? <Trophy className={`w-6 h-6 ${player.rank === 1 ? 'text-yellow-500' : player.rank === 2 ? 'text-slate-400' : 'text-orange-600' }`} /> : player.rank}
+                    </div>
+                    </TableCell>
+                    <TableCell>
+                    <div className="flex items-center gap-4">
+                        <Avatar>
+                        <AvatarImage src={`https://placehold.co/40x40.png?text=${player.name.charAt(0)}`} alt={player.name} data-ai-hint="avatar user"/>
+                        <AvatarFallback>{player.name.charAt(0)}</AvatarFallback>
+                        </Avatar>
+                        <span className="font-medium">{player.name}</span>
+                    </div>
+                    </TableCell>
+                    <TableCell className="text-right font-mono text-lg">{player.score.toLocaleString()}</TableCell>
+                </TableRow>
+                ))}
+                {players.length === 0 && (
+                    <TableRow>
+                        <TableCell colSpan={3} className="text-center h-24 text-muted-foreground">
+                            No data available for this region yet.
+                        </TableCell>
+                    </TableRow>
+                )}
+            </TableBody>
+            </Table>
+        </div>
       </CardContent>
     </Card>
   );

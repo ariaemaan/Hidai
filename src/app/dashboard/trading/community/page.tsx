@@ -22,12 +22,12 @@ const educationalResources = [
 export default function CommunityHubPage() {
     return (
         <div className="space-y-8">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
                     <h1 className="text-3xl font-headline font-bold tracking-tight">Community Trading Hub</h1>
                     <p className="text-muted-foreground">Learn, share, and grow with the Kabuli Coins trading community.</p>
                 </div>
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="w-full sm:w-auto">
                     <Link href="/dashboard/trading">
                         <ArrowLeft className="mr-2 h-4 w-4" /> Back to Trading Hub
                     </Link>
@@ -40,7 +40,7 @@ export default function CommunityHubPage() {
                     <CardTitle className="font-headline">Trading Forums</CardTitle>
                     <CardDescription>Join the conversation and share your knowledge with fellow traders.</CardDescription>
                 </CardHeader>
-                <CardContent className="grid gap-6 md:grid-cols-2">
+                <CardContent className="grid grid-cols-1 gap-6 md:grid-cols-2">
                     {forumTopics.map((topic) => (
                         <div key={topic.title} className="flex items-start gap-4 p-4 border rounded-lg bg-muted/50">
                             <div className="p-3 rounded-full bg-background">
@@ -64,7 +64,7 @@ export default function CommunityHubPage() {
                     <CardTitle className="font-headline">Educational Resources</CardTitle>
                     <CardDescription>Sharpen your skills with our library of trading education content.</CardDescription>
                 </CardHeader>
-                <CardContent className="grid gap-6 md:grid-cols-3">
+                <CardContent className="grid grid-cols-1 gap-6 md:grid-cols-3">
                      {educationalResources.map((resource) => (
                         <Card key={resource.title}>
                             <CardHeader className="items-center text-center">
@@ -91,12 +91,12 @@ export default function CommunityHubPage() {
                     <CardDescription>Join our live webinars and Q&A sessions with expert traders.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <div className="p-4 border rounded-lg flex flex-wrap items-center justify-between gap-4">
+                    <div className="p-4 border rounded-lg flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div>
                             <p className="font-semibold">Weekly Market Outlook</p>
                             <p className="text-sm text-muted-foreground">With Senior Analyst, Omar Ahmadi | Tomorrow at 1:00 PM GMT</p>
                         </div>
-                        <Button disabled>Register Now</Button>
+                        <Button disabled className="w-full sm:w-auto">Register Now</Button>
                     </div>
                 </CardContent>
             </Card>

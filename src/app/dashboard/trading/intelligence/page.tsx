@@ -72,12 +72,12 @@ const summaryItems = [
 export default function MarketIntelligencePage() {
     return (
         <div className="space-y-8">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
                     <h1 className="text-3xl font-headline font-bold tracking-tight">Market Intelligence Center</h1>
                     <p className="text-muted-foreground">Advanced analytics for informed trading decisions.</p>
                 </div>
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="w-full sm:w-auto">
                     <Link href="/dashboard/trading">
                         <ArrowLeft className="mr-2 h-4 w-4" /> Back to Trading Hub
                     </Link>
@@ -91,7 +91,7 @@ export default function MarketIntelligencePage() {
                     </CardTitle>
                     <CardDescription>A real-time summary of key market indicators, analyzed by AI.</CardDescription>
                 </CardHeader>
-                <CardContent className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+                <CardContent className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
                     {summaryItems.map((item, index) => (
                         <div key={index} className="flex items-start gap-4">
                             <div className="p-3 rounded-full bg-background border">
@@ -106,35 +106,37 @@ export default function MarketIntelligencePage() {
                 </CardContent>
             </Card>
             
-            <div className="grid gap-8 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                 <Card>
                     <CardHeader>
                         <CardTitle className="font-headline flex items-center gap-2"><TrendingUp /> Trend Analysis</CardTitle>
                         <CardDescription>AI-detected trends across multiple timeframes.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                       <Table>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead>Asset</TableHead>
-                                    <TableHead>Timeframe</TableHead>
-                                    <TableHead className="text-right">Bias</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {trends.map((asset) => (
-                                    <React.Fragment key={asset.asset}>
-                                        {asset.trends.map((trend, index) => (
-                                            <TableRow key={trend.timeframe}>
-                                                {index === 0 && <TableCell rowSpan={asset.trends.length} className="font-medium align-middle">{asset.asset}</TableCell>}
-                                                <TableCell>{trend.timeframe}</TableCell>
-                                                <TableCell className={cn("text-right font-semibold", trendColors[trend.bias])}>{trend.bias}</TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </React.Fragment>
-                                ))}
-                            </TableBody>
-                       </Table>
+                        <div className="overflow-x-auto">
+                           <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead>Asset</TableHead>
+                                        <TableHead>Timeframe</TableHead>
+                                        <TableHead className="text-right">Bias</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    {trends.map((asset) => (
+                                        <React.Fragment key={asset.asset}>
+                                            {asset.trends.map((trend, index) => (
+                                                <TableRow key={trend.timeframe}>
+                                                    {index === 0 && <TableCell rowSpan={asset.trends.length} className="font-medium align-middle">{asset.asset}</TableCell>}
+                                                    <TableCell>{trend.timeframe}</TableCell>
+                                                    <TableCell className={cn("text-right font-semibold", trendColors[trend.bias])}>{trend.bias}</TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </React.Fragment>
+                                    ))}
+                                </TableBody>
+                           </Table>
+                        </div>
                     </CardContent>
                 </Card>
 
@@ -144,26 +146,28 @@ export default function MarketIntelligencePage() {
                         <CardDescription>Key events that may impact market volatility.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                       <Table>
-                             <TableHeader>
-                                <TableRow>
-                                    <TableHead>Event</TableHead>
-                                    <TableHead>Time</TableHead>
-                                    <TableHead className="text-right">Impact</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {events.map((event, index) => (
-                                    <TableRow key={index}>
-                                        <TableCell className="font-medium">{event.event}</TableCell>
-                                        <TableCell>{event.time}</TableCell>
-                                        <TableCell className="text-right">
-                                            <Badge variant="outline" className={cn("font-semibold", impactColors[event.impact])}>{event.impact}</Badge>
-                                        </TableCell>
+                       <div className="overflow-x-auto">
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead>Event</TableHead>
+                                        <TableHead>Time</TableHead>
+                                        <TableHead className="text-right">Impact</TableHead>
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                       </Table>
+                                </TableHeader>
+                                <TableBody>
+                                    {events.map((event, index) => (
+                                        <TableRow key={index}>
+                                            <TableCell className="font-medium">{event.event}</TableCell>
+                                            <TableCell>{event.time}</TableCell>
+                                            <TableCell className="text-right">
+                                                <Badge variant="outline" className={cn("font-semibold", impactColors[event.impact])}>{event.impact}</Badge>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                       </div>
                     </CardContent>
                 </Card>
             </div>
@@ -174,28 +178,30 @@ export default function MarketIntelligencePage() {
                     <CardDescription>Understand how different assets move in relation to each other.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Asset Pair</TableHead>
-                                <TableHead>Coefficient</TableHead>
-                                <TableHead className="text-right">Description</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                           {correlations.map((corr, index) => (
-                                <TableRow key={index}>
-                                    <TableCell className="font-medium">{corr.pair}</TableCell>
-                                    <TableCell className={cn("font-mono", corr.correlation > 0 ? 'text-accent' : 'text-destructive')}>
-                                        {corr.correlation.toFixed(2)}
-                                    </TableCell>
-                                    <TableCell className={cn("text-right font-medium", corr.correlation > 0.5 || corr.correlation < -0.5 ? 'text-foreground' : 'text-muted-foreground')}>
-                                        {corr.description}
-                                    </TableCell>
+                    <div className="overflow-x-auto">
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Asset Pair</TableHead>
+                                    <TableHead>Coefficient</TableHead>
+                                    <TableHead className="text-right">Description</TableHead>
                                 </TableRow>
-                           ))}
-                        </TableBody>
-                    </Table>
+                            </TableHeader>
+                            <TableBody>
+                            {correlations.map((corr, index) => (
+                                    <TableRow key={index}>
+                                        <TableCell className="font-medium">{corr.pair}</TableCell>
+                                        <TableCell className={cn("font-mono", corr.correlation > 0 ? 'text-accent' : 'text-destructive')}>
+                                            {corr.correlation.toFixed(2)}
+                                        </TableCell>
+                                        <TableCell className={cn("text-right font-medium", corr.correlation > 0.5 || corr.correlation < -0.5 ? 'text-foreground' : 'text-muted-foreground')}>
+                                            {corr.description}
+                                        </TableCell>
+                                    </TableRow>
+                            ))}
+                            </TableBody>
+                        </Table>
+                    </div>
                 </CardContent>
             </Card>
 

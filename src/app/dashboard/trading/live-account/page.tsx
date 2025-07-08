@@ -73,12 +73,12 @@ const RiskAlertIcon = ({ level }: { level: RiskAlertLevel }) => {
 export default function LiveAccountPage() {
     return (
         <div className="space-y-8">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
                     <h1 className="text-3xl font-headline font-bold tracking-tight">Live Trading Account</h1>
                     <p className="text-muted-foreground">Real performance and risk data for our AI signals.</p>
                 </div>
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="w-full sm:w-auto">
                     <Link href="/dashboard/trading">
                         <ArrowLeft className="mr-2 h-4 w-4" /> Back to Signals
                     </Link>
@@ -90,22 +90,22 @@ export default function LiveAccountPage() {
                     <CardTitle className="font-headline text-primary">Live Risk & Performance Dashboard</CardTitle>
                     <CardDescription>Comprehensive real-time analysis of the live trading account. Last updated: 2 minutes ago</CardDescription>
                 </CardHeader>
-                <CardContent className="grid gap-6 sm:grid-cols-2 md:grid-cols-4 text-center">
+                <CardContent className="grid grid-cols-2 gap-4 text-center md:grid-cols-4">
                     <div className="p-4 bg-muted/50 rounded-lg">
                         <p className="text-sm text-muted-foreground">Current Balance</p>
-                        <p className="text-3xl font-bold font-mono">{formatCurrency(accountStats.currentBalance)}</p>
+                        <p className="text-2xl sm:text-3xl font-bold font-mono">{formatCurrency(accountStats.currentBalance)}</p>
                     </div>
                     <div className="p-4 bg-muted/50 rounded-lg">
                         <p className="text-sm text-muted-foreground">Total Return</p>
-                        <p className="text-3xl font-bold font-mono text-accent">+{accountStats.totalReturnPercentage}%</p>
+                        <p className="text-2xl sm:text-3xl font-bold font-mono text-accent">+{accountStats.totalReturnPercentage}%</p>
                     </div>
                     <div className="p-4 bg-muted/50 rounded-lg">
                         <p className="text-sm text-muted-foreground">Win Rate</p>
-                        <p className="text-3xl font-bold font-mono">{accountStats.winRatePercentage}%</p>
+                        <p className="text-2xl sm:text-3xl font-bold font-mono">{accountStats.winRatePercentage}%</p>
                     </div>
                      <div className="p-4 bg-muted/50 rounded-lg">
                         <p className="text-sm text-muted-foreground">Sharpe Ratio</p>
-                        <p className="text-3xl font-bold font-mono">{accountStats.sharpeRatio}</p>
+                        <p className="text-2xl sm:text-3xl font-bold font-mono">{accountStats.sharpeRatio}</p>
                     </div>
                     <div className="p-4 bg-muted/50 rounded-lg">
                         <p className="text-sm text-muted-foreground">Max Drawdown</p>
@@ -126,7 +126,7 @@ export default function LiveAccountPage() {
                 </CardContent>
             </Card>
 
-            <div className="grid gap-8 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
                 <Card>
                     <CardHeader>
                         <CardTitle className="font-headline flex items-center gap-2">
@@ -178,41 +178,43 @@ export default function LiveAccountPage() {
                     <CardDescription>A transparent history of all executed trades.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Status</TableHead>
-                                <TableHead>Asset</TableHead>
-                                <TableHead>Type</TableHead>
-                                <TableHead className="text-right">Entry</TableHead>
-                                <TableHead className="text-right">Exit / Current</TableHead>
-                                <TableHead className="text-right">P&L</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {tradeHistory.map((trade) => (
-                                <TableRow key={trade.id}>
-                                    <TableCell><TradeStatusIcon status={trade.status} /></TableCell>
-                                    <TableCell className="font-medium">{trade.asset}</TableCell>
-                                    <TableCell>
-                                        <Badge variant={trade.type === 'LONG' ? 'default' : 'destructive'} className="bg-opacity-20 border-opacity-30">
-                                            {trade.type}
-                                        </Badge>
-                                    </TableCell>
-                                    <TableCell className="text-right font-mono">{trade.entryPrice.toLocaleString()}</TableCell>
-                                    <TableCell className="text-right font-mono">
-                                        {trade.status.startsWith('CLOSED') ? trade.exitPrice?.toLocaleString() : trade.currentPrice?.toLocaleString()}
-                                    </TableCell>
-                                    <TableCell className={cn(
-                                        "text-right font-mono",
-                                        (trade.pnl ?? 0) >= 0 ? 'text-accent' : 'text-destructive'
-                                    )}>
-                                        {trade.pnl ? formatCurrency(trade.pnl) : 'N/A'}
-                                    </TableCell>
+                    <div className="overflow-x-auto">
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Status</TableHead>
+                                    <TableHead>Asset</TableHead>
+                                    <TableHead>Type</TableHead>
+                                    <TableHead className="text-right">Entry</TableHead>
+                                    <TableHead className="text-right">Exit / Current</TableHead>
+                                    <TableHead className="text-right">P&L</TableHead>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
+                            </TableHeader>
+                            <TableBody>
+                                {tradeHistory.map((trade) => (
+                                    <TableRow key={trade.id}>
+                                        <TableCell><TradeStatusIcon status={trade.status} /></TableCell>
+                                        <TableCell className="font-medium">{trade.asset}</TableCell>
+                                        <TableCell>
+                                            <Badge variant={trade.type === 'LONG' ? 'default' : 'destructive'} className="bg-opacity-20 border-opacity-30">
+                                                {trade.type}
+                                            </Badge>
+                                        </TableCell>
+                                        <TableCell className="text-right font-mono">{trade.entryPrice.toLocaleString()}</TableCell>
+                                        <TableCell className="text-right font-mono">
+                                            {trade.status.startsWith('CLOSED') ? trade.exitPrice?.toLocaleString() : trade.currentPrice?.toLocaleString()}
+                                        </TableCell>
+                                        <TableCell className={cn(
+                                            "text-right font-mono",
+                                            (trade.pnl ?? 0) >= 0 ? 'text-accent' : 'text-destructive'
+                                        )}>
+                                            {trade.pnl ? formatCurrency(trade.pnl) : 'N/A'}
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
                 </CardContent>
             </Card>
             

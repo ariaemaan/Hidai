@@ -4,10 +4,12 @@ import { Logo } from "@/components/logo";
 
 export default function SignupPage() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-4">
+    <div className="flex min-h-screen flex-col items-center justify-center p-4 bg-background">
       <div className="w-full max-w-sm">
         <div className="flex justify-center mb-6">
-          <Logo />
+          <Link href="/">
+            <Logo />
+          </Link>
         </div>
         <h1 className="text-2xl font-headline text-center font-semibold text-foreground mb-2">
           Create an Account
@@ -20,7 +22,7 @@ export default function SignupPage() {
             <p>
             Already have an account?{" "}
             <Link
-                href="/"
+                href="/login"
                 className="font-medium text-primary hover:underline underline-offset-4"
             >
                 Sign in

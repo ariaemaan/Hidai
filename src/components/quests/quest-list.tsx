@@ -71,13 +71,15 @@ export function QuestList() {
             </CardHeader>
             <CardContent>
                 <Tabs defaultValue="recommended" className="w-full">
-                    <TabsList className="grid w-full grid-cols-2 sm:grid-cols-5">
-                        <TabsTrigger value="recommended"><Sparkles className="w-4 h-4 mr-2"/>For You</TabsTrigger>
-                        <TabsTrigger value="cultural">Cultural</TabsTrigger>
-                        <TabsTrigger value="religious">Religious</TabsTrigger>
-                        <TabsTrigger value="social">Social</TabsTrigger>
-                        <TabsTrigger value="educational">Educational</TabsTrigger>
-                    </TabsList>
+                    <div className="overflow-x-auto pb-2">
+                        <TabsList className="grid w-max grid-cols-5">
+                            <TabsTrigger value="recommended"><Sparkles className="w-4 h-4 mr-2"/>For You</TabsTrigger>
+                            <TabsTrigger value="cultural">Cultural</TabsTrigger>
+                            <TabsTrigger value="religious">Religious</TabsTrigger>
+                            <TabsTrigger value="social">Social</TabsTrigger>
+                            <TabsTrigger value="educational">Educational</TabsTrigger>
+                        </TabsList>
+                    </div>
                     
                      <TabsContent value="recommended" className="mt-4 border rounded-lg p-0">
                         {questData.recommended.map((quest, index) => (

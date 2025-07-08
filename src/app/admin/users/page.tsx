@@ -24,57 +24,59 @@ export default function AdminUsersPage() {
       </div>
       <Card>
         <CardHeader>
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
                     <CardTitle>All Users</CardTitle>
                     <CardDescription>A list of all users in the Kabuli Coins ecosystem.</CardDescription>
                 </div>
-                <div className="flex gap-2">
-                    <Input placeholder="Search users..." className="w-64" />
+                <div className="flex gap-2 w-full sm:w-auto">
+                    <Input placeholder="Search users..." className="w-full sm:w-64" />
                     <Button>Search</Button>
                 </div>
             </div>
         </CardHeader>
         <CardContent>
-           <Table>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead>User</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead>Balance (KBC)</TableHead>
-                        <TableHead>Joined Date</TableHead>
-                        <TableHead className="text-right">Actions</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {users.map((user) => (
-                        <TableRow key={user.id}>
-                            <TableCell>
-                                <div className="flex items-center gap-3">
-                                    <Avatar>
-                                        <AvatarImage src={`https://placehold.co/40x40.png?text=${user.name.charAt(0)}`} alt={user.name} data-ai-hint="avatar user"/>
-                                        <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
-                                    </Avatar>
-                                    <div>
-                                        <p className="font-medium">{user.name}</p>
-                                        <p className="text-xs text-muted-foreground">{user.email}</p>
-                                    </div>
-                                </div>
-                            </TableCell>
-                            <TableCell>
-                                <Badge variant={user.status === 'Active' ? 'default' : 'destructive'}>{user.status}</Badge>
-                            </TableCell>
-                            <TableCell className="font-mono">{user.balance}</TableCell>
-                            <TableCell>{user.joined}</TableCell>
-                            <TableCell className="text-right">
-                                <Button variant="ghost" size="icon">
-                                    <MoreHorizontal className="h-4 w-4" />
-                                </Button>
-                            </TableCell>
+           <div className="overflow-x-auto">
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>User</TableHead>
+                            <TableHead>Status</TableHead>
+                            <TableHead>Balance (KBC)</TableHead>
+                            <TableHead>Joined Date</TableHead>
+                            <TableHead className="text-right">Actions</TableHead>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+                    </TableHeader>
+                    <TableBody>
+                        {users.map((user) => (
+                            <TableRow key={user.id}>
+                                <TableCell>
+                                    <div className="flex items-center gap-3">
+                                        <Avatar>
+                                            <AvatarImage src={`https://placehold.co/40x40.png?text=${user.name.charAt(0)}`} alt={user.name} data-ai-hint="avatar user"/>
+                                            <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                                        </Avatar>
+                                        <div>
+                                            <p className="font-medium">{user.name}</p>
+                                            <p className="text-xs text-muted-foreground">{user.email}</p>
+                                        </div>
+                                    </div>
+                                </TableCell>
+                                <TableCell>
+                                    <Badge variant={user.status === 'Active' ? 'default' : 'destructive'}>{user.status}</Badge>
+                                </TableCell>
+                                <TableCell className="font-mono">{user.balance}</TableCell>
+                                <TableCell>{user.joined}</TableCell>
+                                <TableCell className="text-right">
+                                    <Button variant="ghost" size="icon">
+                                        <MoreHorizontal className="h-4 w-4" />
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+           </div>
         </CardContent>
       </Card>
     </div>
