@@ -119,7 +119,7 @@ export function TapGame() {
                     <Coins className="w-10 h-10 text-yellow-400" />
                     <h1 className="text-5xl font-bold font-mono tracking-tighter">{score.toLocaleString()}</h1>
                 </div>
-                <p className="text-muted-foreground">MullaCoins Earned</p>
+                <p className="text-muted-foreground">Kabuli Coins Earned</p>
                  <div className="flex items-center justify-center gap-2 mt-2">
                     <Star className="w-5 h-5 text-yellow-500" />
                     <p className="font-semibold">Level {level}</p>

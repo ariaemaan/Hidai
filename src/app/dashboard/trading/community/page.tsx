@@ -25,7 +25,7 @@ export default function CommunityHubPage() {
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-3xl font-headline font-bold tracking-tight">Community Trading Hub</h1>
-                    <p className="text-muted-foreground">Learn, share, and grow with the Kabuli Quest trading community.</p>
+                    <p className="text-muted-foreground">Learn, share, and grow with the Kabuli Coins trading community.</p>
                 </div>
                 <Button asChild variant="outline">
                     <Link href="/dashboard/trading">

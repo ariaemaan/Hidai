@@ -6,7 +6,7 @@ import * as z from "zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+import { auth, signInWithGoogle } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
 import * as React from "react";
 
@@ -24,6 +24,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { GoogleIcon, AppleIcon, FacebookIcon } from "@/components/icons";
+import { Loader2 } from "lucide-react";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email." }),
@@ -34,6 +35,7 @@ export function LoginForm() {
   const router = useRouter();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = React.useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -70,13 +72,32 @@ export function LoginForm() {
     }
   }
 
+  const handleGoogleSignIn = async () => {
+    setIsGoogleLoading(true);
+    try {
+        await signInWithGoogle();
+        router.push('/dashboard');
+    } catch (error: any) {
+        toast({
+            variant: "destructive",
+            title: "Google Sign-In Failed",
+            description: error.message || "There was a problem signing in with Google.",
+        });
+    } finally {
+        setIsGoogleLoading(false);
+    }
+  };
+
   return (
     <Card>
       <CardContent className="p-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-          <Button variant="outline" className="w-full"><GoogleIcon/> Google</Button>
-          <Button variant="outline" className="w-full"><FacebookIcon /> Facebook</Button>
-          <Button variant="outline" className="w-full sm:col-span-2"><AppleIcon /> Apple</Button>
+          <Button variant="outline" className="w-full" onClick={handleGoogleSignIn} disabled={isGoogleLoading}>
+            {isGoogleLoading ? <Loader2 className="animate-spin" /> : <GoogleIcon/>} 
+            Google
+          </Button>
+          <Button variant="outline" className="w-full" disabled><FacebookIcon /> Facebook</Button>
+          <Button variant="outline" className="w-full sm:col-span-2" disabled><AppleIcon /> Apple</Button>
         </div>
         <div className="relative mb-6">
           <Separator />

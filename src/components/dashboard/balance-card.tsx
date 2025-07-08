@@ -1,8 +1,20 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Coins } from "lucide-react"
 
 export function BalanceCard() {
-    const balance = 10000000000000;
+    const [balance, setBalance] = useState(1250340);
+    
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setBalance(prev => prev + (Math.floor(Math.random() * 10)));
+        }, 2000); // Update every 2 seconds
+
+        return () => clearInterval(interval);
+    }, []);
+    
     return (
         <Card className="bg-primary text-primary-foreground">
             <CardHeader>
@@ -13,7 +25,7 @@ export function BalanceCard() {
             </CardHeader>
             <CardContent>
                 <div className="text-4xl font-bold font-mono">{balance.toLocaleString()}</div>
-                <p className="text-xs text-primary-foreground/80 mt-1">Your available MullaCoin balance.</p>
+                <p className="text-xs text-primary-foreground/80 mt-1">Your available Kabuli Coins balance.</p>
             </CardContent>
         </Card>
     )

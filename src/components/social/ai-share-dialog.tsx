@@ -46,7 +46,7 @@ export function AIShareDialog({ open, onOpenChange, postContext }: AIShareDialog
             description: "Could not generate a post. Please try again.",
           });
           // Fallback message
-          setPost(`Come join me on MullaCoin! It's a fun way to learn about Afghan culture and earn rewards. #MullaCoin`);
+          setPost(`Come join me on Kabuli Coins! It's a fun way to learn about Afghan culture and earn rewards. #KabuliCoins`);
         })
         .finally(() => {
           setIsLoading(false);

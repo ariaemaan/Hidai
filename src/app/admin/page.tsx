@@ -70,7 +70,7 @@ export default function AdminDashboardPage() {
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-headline font-bold tracking-tight">Admin Dashboard</h1>
-        <p className="text-muted-foreground">Overview of the MullaCoin ecosystem.</p>
+        <p className="text-muted-foreground">Overview of the Kabuli Coins ecosystem.</p>
       </div>
 
       {/* Stats Cards */}
@@ -183,7 +183,7 @@ export default function AdminDashboardPage() {
         <Card>
             <CardHeader>
                 <CardTitle>Economic Health</CardTitle>
-                <CardDescription>Real-time MullaCoin economy vitals.</CardDescription>
+                <CardDescription>Real-time Kabuli Coins economy vitals.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 <div className="flex items-center">

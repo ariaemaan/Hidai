@@ -27,7 +27,7 @@ export function StepTracker() {
     const coinsEarned = Math.floor(steps / 100);
     toast({
       title: "Rewards Claimed!",
-      description: `You've earned ${coinsEarned.toLocaleString()} MullaCoins for ${steps.toLocaleString()} steps.`,
+      description: `You've earned ${coinsEarned.toLocaleString()} Kabuli Coins for ${steps.toLocaleString()} steps.`,
     });
     setSteps(0);
   };
@@ -72,7 +72,7 @@ export function StepTracker() {
       </CardContent>
       <CardFooter>
         <Button onClick={handleClaim} className="w-full font-bold" disabled={steps <= 0}>
-            Claim {Math.floor(steps / 100).toLocaleString()} MullaCoin
+            Claim {Math.floor(steps / 100).toLocaleString()} Kabuli Coins
         </Button>
       </CardFooter>
     </Card>

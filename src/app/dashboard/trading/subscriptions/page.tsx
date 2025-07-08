@@ -135,11 +135,11 @@ export default function SubscriptionsPage() {
             <Card>
                 <CardHeader>
                     <CardTitle className="font-headline">Flexible Payment Options</CardTitle>
-                    <CardDescription>We accept a variety of payment methods, including our own KabuliCoin for exclusive discounts.</CardDescription>
+                    <CardDescription>We accept a variety of payment methods, including our own Kabuli Coins for exclusive discounts.</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <div className="flex flex-wrap gap-4 items-center">
-                        <Button variant="outline" className="font-bold border-primary text-primary hover:bg-primary/10 hover:text-primary">Pay with KabuliCoin (KBC)</Button>
+                        <Button variant="outline" className="font-bold border-primary text-primary hover:bg-primary/10 hover:text-primary">Pay with Kabuli Coins (KBC)</Button>
                         <Button variant="outline">Credit/Debit Card</Button>
                         <Button variant="outline">PayPal</Button>
                         <Button variant="outline">Crypto (BTC, ETH)</Button>

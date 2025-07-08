@@ -38,7 +38,7 @@ export default function InvestPage() {
         <div className="space-y-8">
             <div>
                 <h1 className="text-3xl font-headline font-bold tracking-tight">Staking & Investments</h1>
-                <p className="text-muted-foreground">Grow your MullaCoins through staking and savings goals.</p>
+                <p className="text-muted-foreground">Grow your Kabuli Coins through staking and savings goals.</p>
             </div>
 
             {/* Staking Dashboard */}
@@ -49,7 +49,7 @@ export default function InvestPage() {
                         <PiggyBank className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold font-mono">{totalStaked.toLocaleString()} MullaCoin</div>
+                        <div className="text-2xl font-bold font-mono">{totalStaked.toLocaleString()} KBC</div>
                         <p className="text-xs text-muted-foreground">+5,000 this week</p>
                     </CardContent>
                 </Card>
@@ -69,7 +69,7 @@ export default function InvestPage() {
                         <div className="h-4 w-4 text-muted-foreground font-bold text-accent">+</div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold font-mono text-accent/90">+{Math.round(lifetimeEarnings).toLocaleString()} MullaCoin</div>
+                        <div className="text-2xl font-bold font-mono text-accent/90">+{Math.round(lifetimeEarnings).toLocaleString()} KBC</div>
                         <p className="text-xs text-muted-foreground">Total staking rewards</p>
                     </CardContent>
                 </Card>
@@ -103,7 +103,7 @@ export default function InvestPage() {
                                     <TableBody>
                                         {stakingPositions.map((pos) => (
                                             <TableRow key={pos.id}>
-                                                <TableCell className="font-mono font-medium">{pos.amount.toLocaleString()} MullaCoin</TableCell>
+                                                <TableCell className="font-mono font-medium">{pos.amount.toLocaleString()} KBC</TableCell>
                                                 <TableCell className="text-accent">{pos.apr}%</TableCell>
                                                 <TableCell>{pos.unlocks}</TableCell>
                                                 <TableCell className="text-right">
@@ -117,7 +117,7 @@ export default function InvestPage() {
                         </Tabs>
                     </CardContent>
                     <CardFooter>
-                         <Button className="w-full font-bold">Stake More MullaCoin</Button>
+                         <Button className="w-full font-bold">Stake More Kabuli Coins</Button>
                     </CardFooter>
                 </Card>
 

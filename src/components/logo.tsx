@@ -39,7 +39,7 @@ export function Logo() {
           strokeLinejoin="round"
         />
       </svg>
-      <span className="text-2xl font-headline font-bold text-foreground">MullaCoin</span>
+      <span className="text-2xl font-headline font-bold text-foreground">Kabuli Coins</span>
     </div>
   )
 }

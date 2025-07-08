@@ -10,7 +10,7 @@ import { AIShareDialog } from "@/components/social/ai-share-dialog";
 
 export function ReferralCard() {
     const { toast } = useToast();
-    const referralCode = "MULLA-1A2B3C"; // Mock referral code
+    const referralCode = "KABUL-1A2B3C"; // Mock referral code
     const [isAiDialogOpen, setIsAiDialogOpen] = React.useState(false);
     const [postContext, setPostContext] = React.useState("");
 
@@ -25,7 +25,7 @@ export function ReferralCard() {
     };
 
     const handleShareClick = () => {
-        setPostContext(`I want to invite my friends and family to MullaCoin. Please write a friendly invitation and include my referral code: ${referralCode}`);
+        setPostContext(`I want to invite my friends and family to Kabuli Coins. Please write a friendly invitation and include my referral code: ${referralCode}`);
         setIsAiDialogOpen(true);
     };
 
@@ -37,7 +37,7 @@ export function ReferralCard() {
                         <Gift className="w-5 h-5 text-primary" />
                         <span>Referral Program</span>
                     </CardTitle>
-                    <CardDescription>Share your code and earn 1,000 MullaCoin for each friend who joins!</CardDescription>
+                    <CardDescription>Share your code and earn 1,000 Kabuli Coins for each friend who joins!</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div>

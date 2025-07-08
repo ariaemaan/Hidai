@@ -16,7 +16,7 @@ import type { DisplayTransaction } from "@/lib/types"
 
 
 const transactions: DisplayTransaction[] = [
-    { type: 'Launch Bonus', amount: 1000, description: 'Welcome to the MullaCoin community!', icon: Rocket, time: '1 min ago', direction: 'in' },
+    { type: 'Launch Bonus', amount: 1000, description: 'Welcome to the Kabuli Coins community!', icon: Rocket, time: '1 min ago', direction: 'in' },
     { type: 'Game Reward', amount: 1500, description: 'Victory in "Kabul Towers"', icon: Gamepad2, time: '20 mins ago', direction: 'in' },
     { type: 'Staking Deposit', amount: -10000, description: 'Locked for 30 days', icon: PiggyBank, time: '1 hour ago', direction: 'out' },
     { type: 'Daily Bonus', amount: 500, description: 'Daily login reward', icon: Gift, time: '1 day ago', direction: 'in' },

@@ -66,7 +66,7 @@ export function MullaBotChat() {
                     </Avatar>
                     <div>
                         <CardTitle className="font-headline">MullaBot Assistant</CardTitle>
-                        <CardDescription>Your guide to MullaCoin.</CardDescription>
+                        <CardDescription>Your guide to Kabuli Coins.</CardDescription>
                     </div>
                 </div>
             </CardHeader>

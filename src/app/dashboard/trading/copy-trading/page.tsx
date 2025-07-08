@@ -127,7 +127,7 @@ export default function CopyTradingPage() {
                                 <div className="flex items-start justify-between gap-4">
                                     <div className="flex items-center gap-4">
                                         <Avatar className="h-16 w-16 border-2 border-primary">
-                                            <AvatarImage src={`${trader.avatarUrl}?text=${trader.name.charAt(0)}`} alt={trader.name} data-ai-hint="avatar trader"/>
+                                            <AvatarImage src={`${trader.avatarUrl}?text=${trader.name.charAt(0)}`} alt={trader.name} data-ai-hint="avatar trader profile"/>
                                             <AvatarFallback>{trader.name.charAt(0)}</AvatarFallback>
                                         </Avatar>
                                         <div>

@@ -37,7 +37,7 @@ const prompt = ai.definePrompt({
   name: 'generateTradingSignalPrompt',
   input: {schema: GenerateTradingSignalInputSchema},
   output: {schema: GenerateTradingSignalOutputSchema},
-  prompt: `You are a professional trading analyst AI for MullaCoin. Your task is to generate a high-quality, actionable trading signal for the asset: {{asset}} on the {{timeframe}} timeframe.
+  prompt: `You are a professional trading analyst AI for Kabuli Coins. Your task is to generate a high-quality, actionable trading signal for the asset: {{asset}} on the {{timeframe}} timeframe.
 
   Analyze all available data, including:
   1.  **Technical Analysis**: Use indicators like RSI, MACD, Bollinger Bands, Fibonacci retracements, and support/resistance levels.

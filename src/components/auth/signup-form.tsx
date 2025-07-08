@@ -67,7 +67,7 @@ export function SignupForm() {
       }
       toast({
         title: "Account Created!",
-        description: "Welcome to MullaCoin. Redirecting you to the dashboard.",
+        description: "Welcome to Kabuli Coins. Redirecting you to the dashboard.",
       });
       router.push("/dashboard");
     } catch (error: any) {
@@ -85,8 +85,8 @@ export function SignupForm() {
     <Card>
       <CardContent className="p-6">
         <div className="grid grid-cols-2 gap-4 mb-6">
-          <Button variant="outline"><GoogleIcon/> Google</Button>
-          <Button variant="outline"><AppleIcon /> Apple</Button>
+          <Button variant="outline" disabled><GoogleIcon/> Google</Button>
+          <Button variant="outline" disabled><AppleIcon /> Apple</Button>
         </div>
         <div className="relative mb-6">
           <Separator />

@@ -26,10 +26,10 @@ const challenges = [
   {
     icon: Rocket,
     title: "Social Media Blast",
-    description: "Help us spread the word! Let's reach 1,000 shares with #KabuliQuest.",
+    description: "Help us spread the word! Let's reach 1,000 shares with #KabuliCoins.",
     current: 150,
     target: 1000,
-    reward: "5,000 MullaCoin Drop",
+    reward: "5,000 KBC Drop",
     unit: "shares"
   }
 ];

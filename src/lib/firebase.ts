@@ -1,5 +1,5 @@
 import { initializeApp, getApps, getApp, type FirebaseApp } from "firebase/app";
-import { getAuth, type Auth } from "firebase/auth";
+import { getAuth, type Auth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -19,4 +19,18 @@ if (firebaseConfig.apiKey && firebaseConfig.apiKey !== 'YOUR_API_KEY') {
     auth = getAuth(app);
 }
 
-export { app, auth };
+const signInWithGoogle = async () => {
+    if (!auth) {
+        throw new Error("Firebase not configured. Please add API keys to your .env file.");
+    }
+    const provider = new GoogleAuthProvider();
+    try {
+        const result = await signInWithPopup(auth, provider);
+        return result.user;
+    } catch (error) {
+        console.error("Error during Google sign-in:", error);
+        throw error;
+    }
+};
+
+export { app, auth, signInWithGoogle };

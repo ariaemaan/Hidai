@@ -27,7 +27,7 @@ export default function AdminUsersPage() {
             <div className="flex justify-between items-center">
                 <div>
                     <CardTitle>All Users</CardTitle>
-                    <CardDescription>A list of all users in the MullaCoin ecosystem.</CardDescription>
+                    <CardDescription>A list of all users in the Kabuli Coins ecosystem.</CardDescription>
                 </div>
                 <div className="flex gap-2">
                     <Input placeholder="Search users..." className="w-64" />
