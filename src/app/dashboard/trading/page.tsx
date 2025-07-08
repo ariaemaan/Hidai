@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ChevronsUp, ChevronUp, Minus, ChevronDown, ChevronsDown, CheckCircle, Trophy, Sparkles, Loader2, Users, BrainCircuit, Gem, ShieldCheck } from "lucide-react";
+import { ChevronsUp, ChevronUp, Minus, ChevronDown, ChevronsDown, CheckCircle, Trophy, Sparkles, Loader2, Users, BrainCircuit, Gem, ShieldCheck, MessageSquare } from "lucide-react";
 import { generateTradingSignal, type GenerateTradingSignalOutput } from "@/ai/flows/generateTradingSignalFlow";
 import type { TradingSignal, SignalType, MarketAsset } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -294,11 +294,11 @@ export default function TradingPage() {
                 </CardFooter>
             </Card>
 
-            <Card className="md:col-span-full bg-accent/10 border-accent/20">
+            <Card>
                 <CardHeader>
-                    <CardTitle className="font-headline text-accent flex items-center gap-2">
+                    <CardTitle className="font-headline flex items-center gap-2">
                         <Users className="w-6 h-6" />
-                        <span>New: Copy & Social Trading</span>
+                        <span>Copy & Social Trading</span>
                     </CardTitle>
                     <CardDescription>
                         Follow the strategies of top-performing community members. Copy their trades automatically and share in their success.
@@ -308,6 +308,25 @@ export default function TradingPage() {
                      <Button asChild className="w-full sm:w-auto" variant="outline">
                         <Link href="/dashboard/trading/copy-trading">
                             Explore Master Traders
+                        </Link>
+                    </Button>
+                </CardFooter>
+            </Card>
+
+            <Card className="md:col-span-full bg-accent/10 border-accent/20">
+                <CardHeader>
+                    <CardTitle className="font-headline text-accent flex items-center gap-2">
+                        <MessageSquare className="w-6 h-6" />
+                        <span>New: Community Hub</span>
+                    </CardTitle>
+                    <CardDescription>
+                        Join the conversation. Share strategies, ask questions, and learn from fellow traders in our new community hub, featuring forums and educational resources.
+                    </CardDescription>
+                </CardHeader>
+                <CardFooter>
+                     <Button asChild className="w-full sm:w-auto" variant="outline">
+                        <Link href="/dashboard/trading/community">
+                            Explore the Community
                         </Link>
                     </Button>
                 </CardFooter>
