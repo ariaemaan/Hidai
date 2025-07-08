@@ -17,13 +17,13 @@ export default function DashboardPage() {
         <StatsCard
           title="Earned (7d)"
           value="15,350"
-          icon={TrendingUp}
+          icon={<TrendingUp className="h-4 w-4 text-muted-foreground" />}
           details="KBC"
         />
         <StatsCard
           title="Spent (7d)"
           value="12,500"
-          icon={TrendingDown}
+          icon={<TrendingDown className="h-4 w-4 text-muted-foreground" />}
           details="KBC"
         />
       </div>
