@@ -5,15 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Coins, Zap, ShieldCheck, Star } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Coins, Zap, Star } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 // --- Game Configuration Constants ---
-const INITIAL_SCORE = 10000000000000;
-const INITIAL_ENERGY = 1000;
-const MAX_ENERGY = 1000;
-const ENERGY_REGEN_RATE_MS = 1000; // 1 energy per second
-const ENERGY_REGEN_AMOUNT = 1;
+const INITIAL_SCORE = 0;
+const INITIAL_ENERGY = 500;
+const INITIAL_MAX_ENERGY = 500;
+const ENERGY_REGEN_RATE_MS = 1000;
 const XP_PER_TAP = 1;
 const XP_MULTIPLIER_PER_LEVEL = 100;
 const TAP_LIMIT_PER_SECOND = 10;
@@ -39,11 +38,18 @@ type FloatingNumber = {
 };
 
 export function TapGame() {
+    const { toast } = useToast();
     const [score, setScore] = useState(INITIAL_SCORE);
-    const [energy, setEnergy] = useState(INITIAL_ENERGY);
     const [level, setLevel] = useState(1);
     const [xp, setXp] = useState(0);
-    const coinsPerTap = 1 + Math.floor(level / 10);
+    const xpToNextLevel = level * XP_MULTIPLIER_PER_LEVEL;
+
+    // Dynamic attributes based on level
+    const coinsPerTap = 1 + Math.floor(level * 0.5);
+    const maxEnergy = INITIAL_MAX_ENERGY + (level - 1) * 50;
+    const energyRegenAmount = 1 + Math.floor(level / 5);
+
+    const [energy, setEnergy] = useState(INITIAL_ENERGY);
     const taps = useRef<number[]>([]);
     const [floatingNumbers, setFloatingNumbers] = useState<FloatingNumber[]>([]);
     const [isTapping, setIsTapping] = useState(false);
@@ -51,19 +57,23 @@ export function TapGame() {
     // Energy regeneration
     useEffect(() => {
         const timer = setInterval(() => {
-            setEnergy((prevEnergy) => Math.min(prevEnergy + ENERGY_REGEN_AMOUNT, MAX_ENERGY));
+            setEnergy((prevEnergy) => Math.min(prevEnergy + energyRegenAmount, maxEnergy));
         }, ENERGY_REGEN_RATE_MS);
         return () => clearInterval(timer);
-    }, []);
+    }, [energyRegenAmount, maxEnergy]);
 
     // XP and Leveling
     useEffect(() => {
-        const xpToNextLevel = level * XP_MULTIPLIER_PER_LEVEL;
         if (xp >= xpToNextLevel) {
-            setLevel(prevLevel => prevLevel + 1);
+            const newLevel = level + 1;
+            setLevel(newLevel);
             setXp(xp - xpToNextLevel); // Carry over extra XP
+            toast({
+                title: "Level Up!",
+                description: `Congratulations! You've reached Level ${newLevel}. Your rewards are now greater.`,
+            });
         }
-    }, [xp, level]);
+    }, [xp, level, xpToNextLevel, toast]);
 
 
     const handleTap = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -72,12 +82,17 @@ export function TapGame() {
         taps.current.push(now);
         taps.current = taps.current.filter(timestamp => now - timestamp < 1000);
         if (taps.current.length > TAP_LIMIT_PER_SECOND) {
+            toast({
+                variant: "destructive",
+                title: "Slow down!",
+                description: "You are tapping too fast.",
+            })
             return;
         }
 
-        if (energy >= 1) {
+        if (energy >= coinsPerTap) {
             setScore(prev => prev + coinsPerTap);
-            setEnergy(prev => prev - 1);
+            setEnergy(prev => prev - coinsPerTap);
             setXp(prev => prev + XP_PER_TAP);
 
             // Floating number animation
@@ -104,10 +119,14 @@ export function TapGame() {
                     <Coins className="w-10 h-10 text-yellow-400" />
                     <h1 className="text-5xl font-bold font-mono tracking-tighter">{score.toLocaleString()}</h1>
                 </div>
-                <p className="text-muted-foreground">MullaCoins</p>
+                <p className="text-muted-foreground">MullaCoins Earned</p>
                  <div className="flex items-center justify-center gap-2 mt-2">
                     <Star className="w-5 h-5 text-yellow-500" />
-                    <p className="font-semibold">Level {level} ({xp} / {level * XP_MULTIPLIER_PER_LEVEL} XP)</p>
+                    <p className="font-semibold">Level {level}</p>
+                </div>
+                <div className="w-48 mx-auto mt-2">
+                    <Progress value={(xp / xpToNextLevel) * 100} className="h-2" />
+                    <p className="text-xs text-muted-foreground mt-1">{xp.toLocaleString()} / {xpToNextLevel.toLocaleString()} XP</p>
                 </div>
             </div>
 
@@ -134,6 +153,7 @@ export function TapGame() {
                     whileTap={{ scale: 0.95 }}
                     animate={{ scale: isTapping ? 1.05 : 1 }}
                     transition={{ type: "spring", stiffness: 500, damping: 15 }}
+                    disabled={energy < coinsPerTap}
                 >
                     <TapIcon />
                 </motion.button>
@@ -146,10 +166,10 @@ export function TapGame() {
                        <Zap className="w-5 h-5 text-yellow-400" />
                        <span>Energy</span>
                     </div>
-                    <span className="font-mono">{energy}/{MAX_ENERGY}</span>
+                    <span className="font-mono">{energy.toFixed(0)}/{maxEnergy}</span>
                 </div>
-                <Progress value={(energy / MAX_ENERGY) * 100} className="h-4" />
-                <p className="text-xs text-muted-foreground text-center">+1 energy / second</p>
+                <Progress value={(energy / maxEnergy) * 100} className="h-4" />
+                <p className="text-xs text-muted-foreground text-center">+{energyRegenAmount} energy / second</p>
             </div>
             
             {/* Boosters */}
@@ -157,23 +177,23 @@ export function TapGame() {
                 <Card>
                     <CardHeader>
                         <CardTitle className="font-headline text-xl">Boosters</CardTitle>
-                        <CardDescription>Activate power-ups for extra rewards.</CardDescription>
+                        <CardDescription>Upgrade your abilities to earn faster.</CardDescription>
                     </CardHeader>
                     <CardContent className="grid grid-cols-3 gap-4">
-                        <Button variant="outline" className="flex-col h-20" disabled>
+                        <Button variant="outline" className="flex-col h-24 gap-1" disabled>
                             <span className="text-xl">🚀</span>
-                            <span>2x Coins</span>
-                            <span className="text-xs text-muted-foreground">30 min</span>
+                            <span className="font-semibold">Multi-Tap</span>
+                            <span className="text-xs text-muted-foreground">Level {level + 1}</span>
                         </Button>
-                        <Button variant="outline" className="flex-col h-20" disabled>
+                        <Button variant="outline" className="flex-col h-24 gap-1" disabled>
                              <span className="text-xl">⚡️</span>
-                            <span>Refill</span>
-                            <span className="text-xs text-muted-foreground">Energy</span>
+                            <span className="font-semibold">Energy Limit</span>
+                            <span className="text-xs text-muted-foreground">Level {level + 1}</span>
                         </Button>
-                         <Button variant="outline" className="flex-col h-20" disabled>
+                         <Button variant="outline" className="flex-col h-24 gap-1" disabled>
                              <span className="text-xl">🤖</span>
-                            <span>Auto-Tap</span>
-                             <span className="text-xs text-muted-foreground">10 sec</span>
+                             <span className="font-semibold">Recharge</span>
+                             <span className="text-xs text-muted-foreground">Level {level + 1}</span>
                         </Button>
                     </CardContent>
                 </Card>
