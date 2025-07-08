@@ -21,6 +21,7 @@ import { auth } from "@/lib/firebase"
 import { signOut } from "firebase/auth"
 import { useRouter } from "next/navigation"
 import { Skeleton } from "../ui/skeleton"
+import { InstallPWAButton } from "@/components/shared/install-pwa-button"
 
 export function UserNav() {
   const { user, loading } = useAuth();
@@ -40,7 +41,7 @@ export function UserNav() {
   
   if (!user) {
     return (
-      <Link href="/">
+      <Link href="/login">
         <Button variant="outline">Sign In</Button>
       </Link>
     );
@@ -74,6 +75,7 @@ export function UserNav() {
               Profile
             </DropdownMenuItem>
           </Link>
+          <InstallPWAButton />
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">

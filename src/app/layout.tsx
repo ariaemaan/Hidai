@@ -20,6 +20,12 @@ const ptSans = PT_Sans({
 export const metadata: Metadata = {
   title: "Kabuli Coins",
   description: "A culturally-rich Afghan tap-to-earn game.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Kabuli Coins",
+  },
 };
 
 export default function RootLayout({
@@ -30,6 +36,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta name="theme-color" content="#D7263D" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png"></link>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
