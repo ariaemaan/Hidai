@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Apple,Facebook, Activity } from 'lucide-react';
+import { Apple, Facebook } from 'lucide-react';
 
 
 import { Button } from "@/components/ui/button";
@@ -61,9 +61,10 @@ export function LoginForm() {
   return (
     <Card>
       <CardContent className="p-6">
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <Button variant="outline"><GoogleIcon/> Google</Button>
-          <Button variant="outline"><Apple /> Apple</Button>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+          <Button variant="outline" className="w-full"><GoogleIcon/> Google</Button>
+          <Button variant="outline" className="w-full"><Facebook /> Facebook</Button>
+          <Button variant="outline" className="w-full sm:col-span-2"><Apple /> Apple</Button>
         </div>
         <div className="relative mb-6">
           <Separator />

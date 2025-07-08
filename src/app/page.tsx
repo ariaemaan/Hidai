@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { LoginForm } from "@/components/auth/login-form";
 import { Logo } from "@/components/logo";
+import { Button } from "@/components/ui/button";
 
 export default function LoginPage() {
   return (
@@ -16,15 +17,30 @@ export default function LoginPage() {
           Enter your credentials to access your account.
         </p>
         <LoginForm />
-        <p className="mt-4 text-center text-sm text-muted-foreground">
-          Don&apos;t have an account?{" "}
-          <Link
-            href="/signup"
-            className="font-medium text-primary hover:underline underline-offset-4"
-          >
-            Sign up
-          </Link>
-        </p>
+        <div className="mt-4 text-center text-sm text-muted-foreground">
+            <p className="mb-2">
+                Don&apos;t have an account?{" "}
+                <Link
+                    href="/signup"
+                    className="font-medium text-primary hover:underline underline-offset-4"
+                >
+                    Sign up
+                </Link>
+            </p>
+            <div className="relative my-4">
+                <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">
+                    Or
+                    </span>
+                </div>
+            </div>
+            <Link href="/dashboard" passHref>
+                <Button variant="outline" className="w-full">Continue as a Guest</Button>
+            </Link>
+        </div>
       </div>
     </div>
   );
