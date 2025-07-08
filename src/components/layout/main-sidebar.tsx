@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -43,18 +42,19 @@ export function MainSidebar() {
         <SidebarMenu>
           {menuItems.map((item) => (
             <SidebarMenuItem key={item.href}>
-              <Link href={item.href} asChild>
-                <SidebarMenuButton
-                  isActive={pathname === item.href}
-                  tooltip={{
-                    children: item.label,
-                    className: "font-headline",
-                  }}
-                >
+              <SidebarMenuButton
+                asChild
+                isActive={pathname === item.href}
+                tooltip={{
+                  children: item.label,
+                  className: "font-headline",
+                }}
+              >
+                <Link href={item.href}>
                   <item.icon />
                   <span>{item.label}</span>
-                </SidebarMenuButton>
-              </Link>
+                </Link>
+              </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
