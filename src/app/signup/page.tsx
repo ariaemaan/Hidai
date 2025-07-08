@@ -16,15 +16,28 @@ export default function SignupPage() {
           Join MullaCoin and start your quest!
         </p>
         <SignupForm />
-        <p className="mt-4 text-center text-sm text-muted-foreground">
-          Already have an account?{" "}
-          <Link
-            href="/"
-            className="font-medium text-primary hover:underline underline-offset-4"
-          >
-            Sign in
-          </Link>
-        </p>
+        <div className="mt-6 text-center text-sm text-muted-foreground">
+            <p>
+            Already have an account?{" "}
+            <Link
+                href="/"
+                className="font-medium text-primary hover:underline underline-offset-4"
+            >
+                Sign in
+            </Link>
+            </p>
+            <p className="px-8 mt-4 text-xs">
+                By creating an account, you agree to our{" "}
+                <Link href="/terms" className="underline hover:text-primary">
+                    Terms of Service
+                </Link>{" "}
+                and{" "}
+                <Link href="/privacy" className="underline hover:text-primary">
+                    Privacy Policy
+                </Link>
+                .
+            </p>
+        </div>
       </div>
     </div>
   );
