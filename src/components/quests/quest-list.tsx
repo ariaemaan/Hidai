@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -44,19 +45,23 @@ const questData: DisplayQuestData = {
 };
 
 const QuestItem = ({ quest }: { quest: DisplayQuest }) => (
-    <div className="flex items-center gap-4 p-4 border-b last:border-b-0">
-        <div className="bg-muted p-3 rounded-full">
-            <quest.icon className="w-6 h-6 text-accent" />
-        </div>
-        <div className="flex-1">
-            <h4 className="font-semibold">{quest.title}</h4>
-            <p className="text-sm text-muted-foreground">{quest.description}</p>
-        </div>
-        <div className="text-right">
-            <p className="font-mono font-bold text-lg text-primary">+{quest.reward} KBC</p>
-            <Button size="sm" disabled={quest.status === 'completed'}>
-                {quest.status === 'completed' ? 'Claimed' : 'Claim'}
-            </Button>
+    <div className="p-4 border-b last:border-b-0">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="flex items-center gap-4">
+                <div className="bg-muted p-3 rounded-full flex-shrink-0">
+                    <quest.icon className="w-6 h-6 text-accent" />
+                </div>
+                <div className="flex-1">
+                    <h4 className="font-semibold">{quest.title}</h4>
+                    <p className="text-sm text-muted-foreground">{quest.description}</p>
+                </div>
+            </div>
+            <div className="flex items-center justify-between sm:justify-end sm:flex-col sm:items-end sm:gap-1 pl-14 sm:pl-0 shrink-0">
+                <p className="font-mono font-bold text-lg text-primary">+{quest.reward} KBC</p>
+                <Button size="sm" disabled={quest.status === 'completed'}>
+                    {quest.status === 'completed' ? 'Claimed' : 'Claim'}
+                </Button>
+            </div>
         </div>
     </div>
 );

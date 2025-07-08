@@ -21,7 +21,7 @@ export function ActivityBonuses() {
             </CardHeader>
             <CardContent>
                 <Tabs defaultValue="prayer" className="w-full">
-                    <TabsList className="grid w-full grid-cols-4">
+                    <TabsList className="grid w-full grid-cols-2 gap-1 sm:grid-cols-4">
                         <TabsTrigger value="prayer">Prayer</TabsTrigger>
                         <TabsTrigger value="sports">Sports</TabsTrigger>
                         <TabsTrigger value="chores">Chores</TabsTrigger>

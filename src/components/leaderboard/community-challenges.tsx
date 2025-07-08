@@ -41,15 +41,19 @@ export function CommunityChallenges() {
         const progress = (challenge.current / challenge.target) * 100;
         return (
           <Card key={index}>
-            <CardHeader className="flex flex-row items-start gap-4">
-               <div className="bg-primary/10 text-primary p-3 rounded-full">
-                  <challenge.icon className="w-6 h-6" />
-                </div>
-              <div>
-                <CardTitle className="font-headline text-xl">{challenge.title}</CardTitle>
-                <CardDescription>{challenge.description}</CardDescription>
+             <CardHeader>
+              <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
+                  <div className="flex items-start gap-4">
+                      <div className="bg-primary/10 text-primary p-3 rounded-full flex-shrink-0">
+                          <challenge.icon className="w-6 h-6" />
+                      </div>
+                      <div>
+                          <CardTitle className="font-headline text-xl">{challenge.title}</CardTitle>
+                          <CardDescription>{challenge.description}</CardDescription>
+                      </div>
+                  </div>
+                  <Button variant="outline" className="w-full sm:w-auto shrink-0">Participate</Button>
               </div>
-               <Button variant="outline" className="ml-auto">Participate</Button>
             </CardHeader>
             <CardContent>
               <div className="flex justify-between items-center mb-2">
