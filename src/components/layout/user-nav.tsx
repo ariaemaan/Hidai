@@ -74,16 +74,6 @@ export function UserNav() {
               Profile
             </DropdownMenuItem>
           </Link>
-          <Link href="/dashboard">
-            <DropdownMenuItem>
-              Billing
-            </DropdownMenuItem>
-          </Link>
-           <Link href="/dashboard">
-            <DropdownMenuItem>
-              Settings
-            </DropdownMenuItem>
-          </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
