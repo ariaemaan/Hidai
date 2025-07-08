@@ -4,6 +4,7 @@ import { TransactionsHistory } from "@/components/dashboard/transactions-history
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Coins, Gamepad2, Trophy, Users } from "lucide-react";
+import Link from "next/link";
 
 export default function DashboardPage() {
   return (
@@ -53,7 +54,9 @@ export default function DashboardPage() {
                   <Gamepad2 className="w-16 h-16 text-accent" />
                  </div>
                  <p className="text-muted-foreground mb-4">Ready for a new challenge?</p>
-                 <Button size="lg" className="font-bold">Play Now</Button>
+                 <Link href="/dashboard/games" passHref>
+                    <Button size="lg" className="font-bold">Play Now</Button>
+                 </Link>
               </div>
             </CardContent>
           </Card>

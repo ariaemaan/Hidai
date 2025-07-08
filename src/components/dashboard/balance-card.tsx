@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Coins } from "lucide-react"
 
 export function BalanceCard() {
+    const balance = 10000000000000;
     return (
         <Card className="bg-primary text-primary-foreground">
             <CardHeader>
@@ -11,7 +12,7 @@ export function BalanceCard() {
                 </CardTitle>
             </CardHeader>
             <CardContent>
-                <div className="text-4xl font-bold font-mono">1,250,830</div>
+                <div className="text-4xl font-bold font-mono">{balance.toLocaleString()}</div>
                 <p className="text-xs text-primary-foreground/80 mt-1">+1,500 from last game</p>
             </CardContent>
         </Card>
