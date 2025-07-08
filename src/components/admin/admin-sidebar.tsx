@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
-import { Home, Users, BarChart2, Settings, Shield, FileText } from "lucide-react";
+import { Home, Users, BarChart2, Settings, Shield, FileText, Megaphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const menuItems = [
@@ -12,6 +12,7 @@ const menuItems = [
   { href: "/admin/users", label: "Users", icon: Users },
   { href: "/admin/economy", label: "Economy", icon: BarChart2 },
   { href: "/admin/content", label: "Content", icon: FileText },
+  { href: "/admin/marketing", label: "Marketing", icon: Megaphone },
   { href: "/admin/security", label: "Security", icon: Shield },
 ];
 
