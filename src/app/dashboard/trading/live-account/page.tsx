@@ -2,13 +2,13 @@
 "use client";
 
 import Link from "next/link";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, CheckCircle2, XCircle, Clock, ShieldCheck, BookOpen, HeartHandshake } from "lucide-react";
+import { ArrowLeft, CheckCircle2, XCircle, Clock, ShieldCheck, BookOpen, HeartHandshake, AlertTriangle, Ban } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
-import type { LiveAccountStats, LiveTrade, PerformanceMetric } from "@/lib/types";
+import type { LiveAccountStats, LiveTrade, RiskAlert, RiskAlertLevel } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 // Mock Data
@@ -17,10 +17,14 @@ const accountStats: LiveAccountStats = {
   currentBalance: 47350,
   totalProfit: 22350,
   totalReturnPercentage: 89.4,
-  monthlyReturnPercentage: 12.3,
   winRatePercentage: 76.8,
   riskScore: "Moderate",
   activeTrades: 3,
+  maxDrawdown: 8.3,
+  sharpeRatio: 2.14,
+  dailyVaR: 1250,
+  currentExposure: 45,
+  correlationRisk: "Low"
 };
 
 const tradeHistory: LiveTrade[] = [
@@ -33,11 +37,10 @@ const tradeHistory: LiveTrade[] = [
   { id: 't7', asset: 'Oil (WTI)', type: 'SHORT', entryPrice: 78.90, currentPrice: 78.50, pnl: 200, status: 'OPEN', timestamp: '2024-05-21T12:00:00Z' },
 ];
 
-const performanceMetrics: PerformanceMetric[] = [
-    { label: "Max Drawdown", value: "8.2%", description: "Largest peak-to-trough decline." },
-    { label: "Sharpe Ratio", value: "1.85", description: "Risk-adjusted return." },
-    { label: "Average Trade Duration", value: "8.5 Hours", description: "Average time a trade is held." },
-    { label: "Profit Factor", value: "2.5", description: "Gross profits / gross losses." },
+const riskAlerts: RiskAlert[] = [
+    { level: 'High', message: 'High correlation detected between open EUR/USD and GBP/USD positions.', asset: 'Portfolio' },
+    { level: 'Medium', message: 'Upcoming high-impact news event (US CPI) may cause significant volatility.', asset: 'USD Pairs' },
+    { level: 'Low', message: 'BTC/USD volatility is within normal parameters for the current trend.', asset: 'BTC/USD' },
 ];
 
 const accountGrowthData = [
@@ -50,7 +53,7 @@ const accountGrowthData = [
 
 const formatCurrency = (value: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
 
-const TradeStatusIcon = ({ status, pnl }: { status: LiveTrade['status'], pnl?: number }) => {
+const TradeStatusIcon = ({ status }: { status: LiveTrade['status'] }) => {
     if (status.startsWith('CLOSED')) {
         return status === 'CLOSED_WIN' ? 
             <CheckCircle2 className="h-5 w-5 text-accent" /> : 
@@ -59,13 +62,21 @@ const TradeStatusIcon = ({ status, pnl }: { status: LiveTrade['status'], pnl?: n
     return <Clock className="h-5 w-5 text-yellow-500" />;
 }
 
+const RiskAlertIcon = ({ level }: { level: RiskAlertLevel }) => {
+    switch (level) {
+        case 'High': return <AlertTriangle className="h-5 w-5 mt-1 text-destructive flex-shrink-0" />;
+        case 'Medium': return <AlertTriangle className="h-5 w-5 mt-1 text-yellow-500 flex-shrink-0" />;
+        case 'Low': return <ShieldCheck className="h-5 w-5 mt-1 text-accent flex-shrink-0" />;
+    }
+}
+
 export default function LiveAccountPage() {
     return (
         <div className="space-y-8">
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-3xl font-headline font-bold tracking-tight">Live Trading Account</h1>
-                    <p className="text-muted-foreground">Real performance data for our AI signals.</p>
+                    <p className="text-muted-foreground">Real performance and risk data for our AI signals.</p>
                 </div>
                 <Button asChild variant="outline">
                     <Link href="/dashboard/trading">
@@ -74,41 +85,69 @@ export default function LiveAccountPage() {
                 </Button>
             </div>
 
+            <Card>
+                <CardHeader>
+                    <CardTitle className="font-headline text-primary">Live Risk & Performance Dashboard</CardTitle>
+                    <CardDescription>Comprehensive real-time analysis of the live trading account. Last updated: 2 minutes ago</CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-6 sm:grid-cols-2 md:grid-cols-4 text-center">
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                        <p className="text-sm text-muted-foreground">Current Balance</p>
+                        <p className="text-3xl font-bold font-mono">{formatCurrency(accountStats.currentBalance)}</p>
+                    </div>
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                        <p className="text-sm text-muted-foreground">Total Return</p>
+                        <p className="text-3xl font-bold font-mono text-accent">+{accountStats.totalReturnPercentage}%</p>
+                    </div>
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                        <p className="text-sm text-muted-foreground">Win Rate</p>
+                        <p className="text-3xl font-bold font-mono">{accountStats.winRatePercentage}%</p>
+                    </div>
+                     <div className="p-4 bg-muted/50 rounded-lg">
+                        <p className="text-sm text-muted-foreground">Sharpe Ratio</p>
+                        <p className="text-3xl font-bold font-mono">{accountStats.sharpeRatio}</p>
+                    </div>
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                        <p className="text-sm text-muted-foreground">Max Drawdown</p>
+                        <p className="text-xl font-bold font-mono text-destructive">{accountStats.maxDrawdown}%</p>
+                    </div>
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                        <p className="text-sm text-muted-foreground">Daily VaR (95%)</p>
+                        <p className="text-xl font-bold font-mono">{formatCurrency(accountStats.dailyVaR)}</p>
+                    </div>
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                        <p className="text-sm text-muted-foreground">Exposure</p>
+                        <p className="text-xl font-bold font-mono">{accountStats.currentExposure}%</p>
+                    </div>
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                        <p className="text-sm text-muted-foreground">Correlation Risk</p>
+                        <p className="text-xl font-bold">{accountStats.correlationRisk}</p>
+                    </div>
+                </CardContent>
+            </Card>
+
             <div className="grid gap-8 md:grid-cols-3">
-                <Card className="md:col-span-2">
+                <Card>
                     <CardHeader>
-                        <CardTitle className="font-headline text-primary">Live Performance Dashboard</CardTitle>
-                        <CardDescription>Last updated: 2 minutes ago</CardDescription>
+                        <CardTitle className="font-headline flex items-center gap-2">
+                            <AlertTriangle className="h-5 w-5" /> Risk Alerts
+                        </CardTitle>
+                        <CardDescription>Live monitor for portfolio risks.</CardDescription>
                     </CardHeader>
-                    <CardContent className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 text-center">
-                        <div className="p-4 bg-muted/50 rounded-lg">
-                            <p className="text-sm text-muted-foreground">Current Balance</p>
-                            <p className="text-3xl font-bold font-mono">{formatCurrency(accountStats.currentBalance)}</p>
-                        </div>
-                        <div className="p-4 bg-muted/50 rounded-lg">
-                            <p className="text-sm text-muted-foreground">Total Profit</p>
-                            <p className="text-3xl font-bold font-mono text-accent">{formatCurrency(accountStats.totalProfit)}</p>
-                        </div>
-                         <div className="p-4 bg-muted/50 rounded-lg">
-                            <p className="text-sm text-muted-foreground">Total Return</p>
-                            <p className="text-3xl font-bold font-mono text-accent">+{accountStats.totalReturnPercentage}%</p>
-                        </div>
-                         <div className="p-4 bg-muted/50 rounded-lg">
-                            <p className="text-sm text-muted-foreground">Win Rate</p>
-                            <p className="text-2xl font-bold font-mono">{accountStats.winRatePercentage}%</p>
-                        </div>
-                         <div className="p-4 bg-muted/50 rounded-lg">
-                            <p className="text-sm text-muted-foreground">Monthly Return</p>
-                            <p className="text-2xl font-bold font-mono">+{accountStats.monthlyReturnPercentage}%</p>
-                        </div>
-                         <div className="p-4 bg-muted/50 rounded-lg">
-                            <p className="text-sm text-muted-foreground">Risk Score</p>
-                            <p className="text-2xl font-bold">{accountStats.riskScore}</p>
-                        </div>
+                    <CardContent className="space-y-4">
+                        {riskAlerts.map((alert, index) => (
+                            <div key={index} className="flex items-start gap-3">
+                                <RiskAlertIcon level={alert.level} />
+                                <div>
+                                    <p className="font-semibold text-sm">{alert.asset}</p>
+                                    <p className="text-xs text-muted-foreground">{alert.message}</p>
+                                </div>
+                            </div>
+                        ))}
                     </CardContent>
                 </Card>
 
-                 <Card>
+                 <Card className="md:col-span-2">
                     <CardHeader>
                         <CardTitle className="font-headline">Account Growth</CardTitle>
                         <CardDescription>Starting Balance: {formatCurrency(accountStats.startingBalance)}</CardDescription>
@@ -153,7 +192,7 @@ export default function LiveAccountPage() {
                         <TableBody>
                             {tradeHistory.map((trade) => (
                                 <TableRow key={trade.id}>
-                                    <TableCell><TradeStatusIcon status={trade.status} pnl={trade.pnl} /></TableCell>
+                                    <TableCell><TradeStatusIcon status={trade.status} /></TableCell>
                                     <TableCell className="font-medium">{trade.asset}</TableCell>
                                     <TableCell>
                                         <Badge variant={trade.type === 'LONG' ? 'default' : 'destructive'} className="bg-opacity-20 border-opacity-30">
@@ -177,46 +216,35 @@ export default function LiveAccountPage() {
                 </CardContent>
             </Card>
             
-             <div className="grid gap-8 md:grid-cols-2">
-                 <Card>
-                    <CardHeader>
-                        <CardTitle className="font-headline">Performance Metrics</CardTitle>
-                        <CardDescription>Detailed risk and performance analytics.</CardDescription>
-                    </CardHeader>
-                    <CardContent className="grid gap-6 sm:grid-cols-2">
-                        {performanceMetrics.map((metric) => (
-                            <div key={metric.label}>
-                                <p className="text-sm text-muted-foreground">{metric.label}</p>
-                                <p className="text-2xl font-bold font-mono">{metric.value}</p>
-                                <p className="text-xs text-muted-foreground">{metric.description}</p>
-                            </div>
-                        ))}
-                    </CardContent>
-                </Card>
-
-                 <Card>
-                    <CardHeader>
-                        <CardTitle className="font-headline flex items-center gap-2"><ShieldCheck className="text-primary" /> Islamic Trading Compliance</CardTitle>
-                        <CardDescription>Our commitment to Sharia-compliant principles.</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                        <div className="flex items-start gap-3">
-                            <BookOpen className="h-5 w-5 mt-1 text-accent" />
-                            <div>
-                                <h4 className="font-semibold">Spot Trading Only</h4>
-                                <p className="text-sm text-muted-foreground">We avoid interest-based (Riba) derivatives and focus on direct asset ownership through spot trading.</p>
-                            </div>
+             <Card>
+                <CardHeader>
+                    <CardTitle className="font-headline flex items-center gap-2"><ShieldCheck className="text-primary" /> Islamic Finance Principles</CardTitle>
+                    <CardDescription>Our commitment to Sharia-compliant trading and risk management.</CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-6 md:grid-cols-3">
+                    <div className="flex items-start gap-3">
+                        <BookOpen className="h-5 w-5 mt-1 text-accent flex-shrink-0" />
+                        <div>
+                            <h4 className="font-semibold">Spot Trading Only (No Riba)</h4>
+                            <p className="text-sm text-muted-foreground">We avoid interest-based derivatives and focus on direct asset ownership through spot trading.</p>
                         </div>
-                         <div className="flex items-start gap-3">
-                            <HeartHandshake className="h-5 w-5 mt-1 text-accent" />
-                            <div>
-                                <h4 className="font-semibold">Charitable Contributions</h4>
-                                <p className="text-sm text-muted-foreground">A portion of profits is allocated to charitable causes, fulfilling the principle of Zakat.</p>
-                            </div>
+                    </div>
+                     <div className="flex items-start gap-3">
+                        <Ban className="h-5 w-5 mt-1 text-accent flex-shrink-0" />
+                        <div>
+                            <h4 className="font-semibold">Gharar-Free (No Speculation)</h4>
+                            <p className="text-sm text-muted-foreground">Trades are based on clear analysis, avoiding excessive uncertainty or gambling, which is forbidden.</p>
                         </div>
-                    </CardContent>
-                </Card>
-            </div>
+                    </div>
+                     <div className="flex items-start gap-3">
+                        <HeartHandshake className="h-5 w-5 mt-1 text-accent flex-shrink-0" />
+                        <div>
+                            <h4 className="font-semibold">Ethical Screening & Zakat</h4>
+                            <p className="text-sm text-muted-foreground">We trade ethically screened assets and allocate a portion of profits to charity, fulfilling Zakat.</p>
+                        </div>
+                    </div>
+                </CardContent>
+            </Card>
         </div>
     );
 }

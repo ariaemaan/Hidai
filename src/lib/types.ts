@@ -159,10 +159,14 @@ export interface LiveAccountStats {
   currentBalance: number;
   totalProfit: number;
   totalReturnPercentage: number;
-  monthlyReturnPercentage: number;
   winRatePercentage: number;
   riskScore: 'Low' | 'Moderate' | 'High';
   activeTrades: number;
+  maxDrawdown: number;
+  sharpeRatio: number;
+  dailyVaR: number; // Value at Risk
+  currentExposure: number; // Percentage
+  correlationRisk: 'Low' | 'Moderate' | 'High';
 }
 
 export interface LiveTrade {
@@ -177,10 +181,12 @@ export interface LiveTrade {
   timestamp: string;
 }
 
-export interface PerformanceMetric {
-  label: string;
-  value: string;
-  description: string;
+export type RiskAlertLevel = 'High' | 'Medium' | 'Low';
+
+export interface RiskAlert {
+  level: RiskAlertLevel;
+  message: string;
+  asset?: string;
 }
 
 // Copy Trading Types
