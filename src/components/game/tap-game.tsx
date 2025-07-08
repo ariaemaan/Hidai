@@ -8,6 +8,19 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Coins, Zap, ShieldCheck, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+// --- Game Configuration Constants ---
+const INITIAL_SCORE = 10000000000000;
+const INITIAL_ENERGY = 1000;
+const MAX_ENERGY = 1000;
+const ENERGY_REGEN_RATE_MS = 1000; // 1 energy per second
+const ENERGY_REGEN_AMOUNT = 1;
+const XP_PER_TAP = 1;
+const XP_MULTIPLIER_PER_LEVEL = 100;
+const TAP_LIMIT_PER_SECOND = 10;
+const FLOATING_NUMBER_DURATION_MS = 1000;
+const TAP_ANIMATION_DURATION_MS = 100;
+
+
 // This is a placeholder for a more complex cultural symbol
 const TapIcon = () => (
     <svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary drop-shadow-lg">
@@ -26,13 +39,11 @@ type FloatingNumber = {
 };
 
 export function TapGame() {
-    const [score, setScore] = useState(10000000000000);
-    const [energy, setEnergy] = useState(1000);
+    const [score, setScore] = useState(INITIAL_SCORE);
+    const [energy, setEnergy] = useState(INITIAL_ENERGY);
     const [level, setLevel] = useState(1);
     const [xp, setXp] = useState(0);
-    const maxEnergy = 1000;
     const coinsPerTap = 1 + Math.floor(level / 10);
-    const xpPerTap = 1;
     const taps = useRef<number[]>([]);
     const [floatingNumbers, setFloatingNumbers] = useState<FloatingNumber[]>([]);
     const [isTapping, setIsTapping] = useState(false);
@@ -40,36 +51,34 @@ export function TapGame() {
     // Energy regeneration
     useEffect(() => {
         const timer = setInterval(() => {
-            setEnergy((prevEnergy) => Math.min(prevEnergy + 1, maxEnergy));
-        }, 1000);
+            setEnergy((prevEnergy) => Math.min(prevEnergy + ENERGY_REGEN_AMOUNT, MAX_ENERGY));
+        }, ENERGY_REGEN_RATE_MS);
         return () => clearInterval(timer);
     }, []);
 
     // XP and Leveling
     useEffect(() => {
-        const xpToNextLevel = level * 100;
+        const xpToNextLevel = level * XP_MULTIPLIER_PER_LEVEL;
         if (xp >= xpToNextLevel) {
             setLevel(prevLevel => prevLevel + 1);
-            setXp(0);
+            setXp(xp - xpToNextLevel); // Carry over extra XP
         }
     }, [xp, level]);
 
 
     const handleTap = (event: React.MouseEvent<HTMLButtonElement>) => {
-        // Anti-cheat: Max 10 taps per second
+        // Anti-cheat: Max taps per second
         const now = Date.now();
         taps.current.push(now);
         taps.current = taps.current.filter(timestamp => now - timestamp < 1000);
-        if (taps.current.length > 10) {
-            console.warn("Tap limit exceeded!");
+        if (taps.current.length > TAP_LIMIT_PER_SECOND) {
             return;
         }
 
         if (energy >= 1) {
-            const newScore = score + coinsPerTap;
-            setScore(newScore);
-            setEnergy(energy - 1);
-            setXp(xp + xpPerTap);
+            setScore(prev => prev + coinsPerTap);
+            setEnergy(prev => prev - 1);
+            setXp(prev => prev + XP_PER_TAP);
 
             // Floating number animation
             const rect = event.currentTarget.getBoundingClientRect();
@@ -79,11 +88,11 @@ export function TapGame() {
             setFloatingNumbers(current => [...current, newFloatingNumber]);
             setTimeout(() => {
                 setFloatingNumbers(current => current.filter(n => n.id !== newFloatingNumber.id));
-            }, 1000);
+            }, FLOATING_NUMBER_DURATION_MS);
 
             // Tap animation
             setIsTapping(true);
-            setTimeout(() => setIsTapping(false), 100);
+            setTimeout(() => setIsTapping(false), TAP_ANIMATION_DURATION_MS);
         }
     };
     
@@ -98,7 +107,7 @@ export function TapGame() {
                 <p className="text-muted-foreground">MullaCoins</p>
                  <div className="flex items-center justify-center gap-2 mt-2">
                     <Star className="w-5 h-5 text-yellow-500" />
-                    <p className="font-semibold">Level {level} ({xp} / {level * 100} XP)</p>
+                    <p className="font-semibold">Level {level} ({xp} / {level * XP_MULTIPLIER_PER_LEVEL} XP)</p>
                 </div>
             </div>
 
@@ -137,9 +146,9 @@ export function TapGame() {
                        <Zap className="w-5 h-5 text-yellow-400" />
                        <span>Energy</span>
                     </div>
-                    <span className="font-mono">{energy}/{maxEnergy}</span>
+                    <span className="font-mono">{energy}/{MAX_ENERGY}</span>
                 </div>
-                <Progress value={(energy / maxEnergy) * 100} className="h-4" />
+                <Progress value={(energy / MAX_ENERGY) * 100} className="h-4" />
                 <p className="text-xs text-muted-foreground text-center">+1 energy / second</p>
             </div>
             
