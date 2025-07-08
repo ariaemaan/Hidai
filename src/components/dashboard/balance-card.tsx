@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Coins } from "lucide-react"
 
 export function BalanceCard() {
-    const balance = 85200;
+    const balance = 10000000000000;
     return (
         <Card className="bg-primary text-primary-foreground">
             <CardHeader>

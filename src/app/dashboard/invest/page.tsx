@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -18,6 +21,18 @@ const savingsGoals = [
 ];
 
 export default function InvestPage() {
+    const [totalStaked, setTotalStaked] = useState(25000);
+    const [lifetimeEarnings, setLifetimeEarnings] = useState(3450);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTotalStaked(prev => prev + 1);
+            setLifetimeEarnings(prev => prev + (Math.random() * 0.05));
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <div className="space-y-8">
             <div>
@@ -33,7 +48,7 @@ export default function InvestPage() {
                         <PiggyBank className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold font-mono">25,000 KBC</div>
+                        <div className="text-2xl font-bold font-mono">{totalStaked.toLocaleString()} KBC</div>
                         <p className="text-xs text-muted-foreground">+5,000 this week</p>
                     </CardContent>
                 </Card>
@@ -53,7 +68,7 @@ export default function InvestPage() {
                         <div className="h-4 w-4 text-muted-foreground font-bold text-accent">+</div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold font-mono text-accent/90">+3,450 KBC</div>
+                        <div className="text-2xl font-bold font-mono text-accent/90">+{Math.round(lifetimeEarnings).toLocaleString()} KBC</div>
                         <p className="text-xs text-muted-foreground">Total staking rewards</p>
                     </CardContent>
                 </Card>

@@ -26,7 +26,7 @@ type FloatingNumber = {
 };
 
 export function TapGame() {
-    const [score, setScore] = useState(85200);
+    const [score, setScore] = useState(10000000000000);
     const [energy, setEnergy] = useState(1000);
     const [level, setLevel] = useState(1);
     const [xp, setXp] = useState(0);

@@ -1,7 +1,7 @@
 import { BalanceCard } from "@/components/dashboard/balance-card";
 import { StatsCard } from "@/components/dashboard/stats-card";
 import { TransactionsHistory } from "@/components/dashboard/transactions-history";
-import { WalletActionsCard } from "@/components/dashboard/wallet-actions-card";
+import { KabiBotChat } from "@/components/dashboard/kabi-bot-chat";
 import { TrendingDown, TrendingUp } from "lucide-react";
 
 export default function DashboardPage() {
@@ -33,7 +33,7 @@ export default function DashboardPage() {
           <TransactionsHistory />
         </div>
         <div className="lg:col-span-3">
-            <WalletActionsCard />
+            <KabiBotChat />
         </div>
       </div>
     </div>
