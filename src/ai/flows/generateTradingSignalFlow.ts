@@ -1,4 +1,3 @@
-
 'use server';
 /**
  * @fileOverview Generates professional trading signals using AI analysis.
@@ -57,25 +56,7 @@ const generateTradingSignalFlow = ai.defineFlow(
     outputSchema: GenerateTradingSignalOutputSchema,
   },
   async (input) => {
-    // In a real application, this would call the prompt:
-    // const {output} = await prompt(input);
-    // return output!;
-    
-    // For this prototype, we return realistic mock data.
-    console.log(`Generating signal for ${input.asset} on ${input.timeframe} timeframe...`);
-    
-    const mockSignal: GenerateTradingSignalOutput = {
-        asset: input.asset,
-        type: "BUY",
-        entry: 1.0850,
-        tp: [1.0880, 1.0920],
-        sl: 1.0820,
-        riskReward: "1:2.3",
-        confidence: 82,
-        timeframe: input.timeframe,
-        reasoning: "Bullish divergence on the 4H MACD, with price finding support at a key Fibonacci level. Market sentiment is positive following recent economic data."
-    };
-    
-    return mockSignal;
+    const {output} = await prompt(input);
+    return output!;
   }
 );

@@ -1,15 +1,20 @@
 
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
-import { ChevronsUp, ChevronUp, Minus, ChevronDown, ChevronsDown, AlertCircle, CheckCircle, XCircle, Trophy } from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ChevronsUp, ChevronUp, Minus, ChevronDown, ChevronsDown, CheckCircle, XCircle, Trophy, Sparkles, Loader2 } from "lucide-react";
+import { generateTradingSignal, type GenerateTradingSignalOutput } from "@/ai/flows/generateTradingSignalFlow";
 import type { TradingSignal, SignalType, MarketAsset } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
 
 const marketData: MarketAsset[] = [
@@ -20,6 +25,7 @@ const marketData: MarketAsset[] = [
     { name: "Oil (WTI)", ticker: "USO", price: "78.90", change: "-0.50", isUp: false },
     { name: "ETH/USD", ticker: "ETHUSD", price: "3,780.10", change: "+120.45", isUp: true },
 ];
+const timeframes = ["5min", "15min", "1H", "4H", "1D"];
 
 const signalData: TradingSignal[] = [
   { id: "1247", asset: "EUR/USD", assetClass: 'forex', type: "STRONG_BUY", entry: 1.0845, tp: [1.0875, 1.0910, 1.0945], sl: 1.0815, riskReward: "1:2.2", confidence: 87, timeframe: "4H", status: "active" },
@@ -54,14 +60,157 @@ const SignalBadge = ({ type }: { type: SignalType }) => {
   );
 };
 
+const SignalStrengthIndicator = ({ type }: { type: SignalType }) => {
+    const strengthMap: Record<SignalType, { label: string; color: string; icon: React.ReactNode }> = {
+        STRONG_BUY: { label: "Strong Buy", color: "text-accent", icon: <ChevronsUp /> },
+        BUY: { label: "Buy", color: "text-accent", icon: <ChevronUp /> },
+        HOLD: { label: "Hold", color: "text-muted-foreground", icon: <Minus /> },
+        SELL: { label: "Sell", color: "text-destructive", icon: <ChevronDown /> },
+        STRONG_SELL: { label: "Strong Sell", color: "text-destructive", icon: <ChevronsDown /> },
+    };
+    const { label, color, icon } = strengthMap[type];
+    return (
+        <div className={cn("flex items-center gap-2 text-2xl font-bold", color)}>
+            {icon}
+            <span>{label}</span>
+        </div>
+    );
+};
+
+function GeneratedSignalCard({ signal }: { signal: GenerateTradingSignalOutput }) {
+    return (
+        <Card className="border-primary/50 shadow-lg animate-in fade-in-50">
+            <CardHeader>
+                <div className="flex justify-between items-start">
+                    <div>
+                        <CardTitle className="font-headline text-2xl text-primary">{signal.asset} Signal ({signal.timeframe})</CardTitle>
+                        <CardDescription>AI-generated signal based on multi-factor analysis.</CardDescription>
+                    </div>
+                     <Badge variant="secondary" className="text-sm">Confidence: {signal.confidence}%</Badge>
+                </div>
+            </CardHeader>
+            <CardContent className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6 items-center">
+                    <div className="p-6 rounded-lg bg-muted/50 text-center">
+                        <p className="text-sm text-muted-foreground">Signal Type</p>
+                        <SignalStrengthIndicator type={signal.type} />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 text-center">
+                        <div className="p-2 rounded-lg">
+                            <p className="text-sm text-muted-foreground">Entry Price</p>
+                            <p className="text-xl font-bold font-mono">{signal.entry.toLocaleString()}</p>
+                        </div>
+                         <div className="p-2 rounded-lg">
+                            <p className="text-sm text-muted-foreground">Stop Loss</p>
+                            <p className="text-xl font-bold font-mono text-destructive">{signal.sl.toLocaleString()}</p>
+                        </div>
+                         <div className="p-2 rounded-lg col-span-2">
+                            <p className="text-sm text-muted-foreground">Risk/Reward Ratio</p>
+                            <p className="text-xl font-bold font-mono">{signal.riskReward}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                 <div>
+                    <h4 className="font-semibold mb-2">Take Profit Levels</h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        {signal.tp.map((target, i) => (
+                             <div key={i} className="p-3 rounded-md border text-center bg-accent/10 border-accent/20">
+                                <p className="text-xs font-semibold text-accent/80">TP{i+1}</p>
+                                <p className="font-mono font-bold text-accent">{target.toLocaleString()}</p>
+                             </div>
+                        ))}
+                    </div>
+                 </div>
+
+                 <div>
+                    <h4 className="font-semibold mb-2">AI Reasoning</h4>
+                    <p className="text-sm text-muted-foreground bg-muted p-3 rounded-md">{signal.reasoning}</p>
+                 </div>
+            </CardContent>
+        </Card>
+    )
+}
+
 
 export default function TradingPage() {
+    const { toast } = useToast();
+    const [isLoading, setIsLoading] = useState(false);
+    const [selectedAsset, setSelectedAsset] = useState(marketData[0].name);
+    const [selectedTimeframe, setSelectedTimeframe] = useState(timeframes[2]);
+    const [generatedSignal, setGeneratedSignal] = useState<GenerateTradingSignalOutput | null>(null);
+
+    const handleGenerateSignal = async () => {
+        setIsLoading(true);
+        setGeneratedSignal(null);
+        try {
+            const result = await generateTradingSignal({
+                asset: selectedAsset,
+                timeframe: selectedTimeframe,
+            });
+            setGeneratedSignal(result);
+        } catch (error) {
+            console.error("Error generating trading signal:", error);
+            toast({
+                variant: "destructive",
+                title: "AI Signal Error",
+                description: "Failed to generate a trading signal. The AI may be busy or the request timed out.",
+            });
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    
     return (
         <div className="space-y-8">
             <div>
                 <h1 className="text-3xl font-headline font-bold tracking-tight">AI Trading Signals</h1>
                 <p className="text-muted-foreground">Professional-grade market analysis powered by Gemini AI.</p>
             </div>
+            
+             <Card>
+                <CardHeader>
+                    <CardTitle className="font-headline">On-Demand Signal Generation</CardTitle>
+                    <CardDescription>Select an asset and timeframe to get a new AI-powered trading signal instantly.</CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4 md:grid-cols-3">
+                    <div>
+                        <Label htmlFor="asset-select">Asset</Label>
+                        <Select value={selectedAsset} onValueChange={setSelectedAsset} disabled={isLoading}>
+                            <SelectTrigger id="asset-select"><SelectValue /></SelectTrigger>
+                            <SelectContent>
+                                {marketData.map(asset => <SelectItem key={asset.ticker} value={asset.name}>{asset.name}</SelectItem>)}
+                            </SelectContent>
+                        </Select>
+                    </div>
+                    <div>
+                        <Label htmlFor="timeframe-select">Timeframe</Label>
+                        <Select value={selectedTimeframe} onValueChange={setSelectedTimeframe} disabled={isLoading}>
+                            <SelectTrigger id="timeframe-select"><SelectValue /></SelectTrigger>
+                            <SelectContent>
+                                {timeframes.map(tf => <SelectItem key={tf} value={tf}>{tf}</SelectItem>)}
+                            </SelectContent>
+                        </Select>
+                    </div>
+                    <div className="md:self-end">
+                        <Button onClick={handleGenerateSignal} className="w-full font-bold" disabled={isLoading}>
+                            {isLoading ? <Loader2 className="animate-spin" /> : <Sparkles className="mr-2 h-4 w-4" />}
+                            {isLoading ? "Analyzing..." : "Generate Signal"}
+                        </Button>
+                    </div>
+                </CardContent>
+            </Card>
+
+            {isLoading && (
+                <Card className="flex items-center justify-center p-8 bg-muted/50 border-dashed">
+                    <div className="text-center text-muted-foreground">
+                        <Loader2 className="h-8 w-8 animate-spin mx-auto mb-2" />
+                        <p>Our AI is analyzing the market... This may take a moment.</p>
+                    </div>
+                </Card>
+            )}
+
+            {generatedSignal && <GeneratedSignalCard signal={generatedSignal} />}
             
             <Card className="bg-primary/5 border-primary/20">
                 <CardHeader>
@@ -100,7 +249,6 @@ export default function TradingPage() {
                 </CardFooter>
             </Card>
 
-            {/* Market Overview */}
             <Card>
                 <CardHeader>
                     <CardTitle className="font-headline">Market Overview</CardTitle>
@@ -116,10 +264,9 @@ export default function TradingPage() {
                 </CardContent>
             </Card>
 
-            {/* Active Signals */}
             <Card>
                 <CardHeader>
-                    <CardTitle className="font-headline">Active Trading Signals</CardTitle>
+                    <CardTitle className="font-headline">Recent AI Signals</CardTitle>
                     <CardDescription>Real-time signals generated by our AI. Use with caution and your own analysis.</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -166,7 +313,6 @@ export default function TradingPage() {
                 </CardContent>
             </Card>
 
-            {/* Performance Metrics */}
             <div className="grid gap-8 md:grid-cols-3">
                 <Card>
                     <CardHeader>
