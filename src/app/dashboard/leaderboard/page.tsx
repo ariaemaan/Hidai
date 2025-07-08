@@ -13,6 +13,7 @@ import { CommunityChallenges } from "@/components/leaderboard/community-challeng
 import { Button } from "@/components/ui/button";
 import type { LeaderboardPlayer } from "@/lib/types";
 import { AIShareDialog } from "@/components/social/ai-share-dialog";
+import { RegionalLeaderboard } from "@/components/leaderboard/regional-leaderboard";
 
 const leaderboardData: LeaderboardPlayer[] = [
   { rank: 1, name: "Ahmad Wali", score: 125030, trend: 'up', change: 1, isFounder: true },
@@ -60,8 +61,8 @@ export default function LeaderboardPage() {
        <Tabs defaultValue="global">
         <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="global">Global</TabsTrigger>
+            <TabsTrigger value="regional">Regional</TabsTrigger>
             <TabsTrigger value="challenges">Challenges</TabsTrigger>
-            <TabsTrigger value="regional" disabled>Regional</TabsTrigger>
             <TabsTrigger value="friends" disabled>Friends</TabsTrigger>
         </TabsList>
         <TabsContent value="global">
@@ -119,6 +120,11 @@ export default function LeaderboardPage() {
                 </Table>
                 </CardContent>
             </Card>
+        </TabsContent>
+        <TabsContent value="regional">
+            <div className="mt-4">
+                <RegionalLeaderboard />
+            </div>
         </TabsContent>
         <TabsContent value="challenges">
              <div className="mt-4">
