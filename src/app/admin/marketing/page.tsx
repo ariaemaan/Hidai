@@ -8,8 +8,11 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Sparkles, Loader2 } from "lucide-react";
+import Image from "next/image";
 import { generateMarketingCopy, type GenerateMarketingCopyInput, type GenerateMarketingCopyOutput } from "@/ai/flows/generateMarketingCopyFlow";
+import { generateAdImage } from "@/ai/flows/generateAdImageFlow";
 import { useToast } from "@/hooks/use-toast";
 
 const campaignGoals = ["Drive new user sign-ups", "Promote a new feature", "Announce a community event", "Increase engagement"];
@@ -19,10 +22,12 @@ const platforms = ["Facebook", "Instagram", "TikTok", "X (Twitter)", "Email News
 
 export default function AdminMarketingPage() {
     const { toast } = useToast();
-    const [isLoading, setIsLoading] = useState(false);
+    const [isTextLoading, setIsTextLoading] = useState(false);
+    const [isImageLoading, setIsImageLoading] = useState(false);
     const [generatedContent, setGeneratedContent] = useState<GenerateMarketingCopyOutput | null>(null);
+    const [generatedImage, setGeneratedImage] = useState<string | null>(null);
 
-    const { control, handleSubmit, formState: { errors } } = useForm<GenerateMarketingCopyInput>({
+    const { control, handleSubmit } = useForm<GenerateMarketingCopyInput>({
         defaultValues: {
             goal: campaignGoals[0],
             audience: targetAudiences[0],
@@ -32,34 +37,51 @@ export default function AdminMarketingPage() {
     });
 
     const onSubmit = async (data: GenerateMarketingCopyInput) => {
-        setIsLoading(true);
+        setIsTextLoading(true);
+        setIsImageLoading(true);
         setGeneratedContent(null);
-        try {
-            const result = await generateMarketingCopy(data);
-            setGeneratedContent(result);
-        } catch (error) {
-            console.error("Error generating marketing copy:", error);
-            toast({
-                variant: "destructive",
-                title: "AI Error",
-                description: "Failed to generate marketing content. Please try again.",
-            });
-        } finally {
-            setIsLoading(false);
-        }
+        setGeneratedImage(null);
+
+        const campaignDetails = `Goal: ${data.goal}, Audience: ${data.audience}, Tone: ${data.tone}`;
+
+        generateMarketingCopy(data)
+            .then(setGeneratedContent)
+            .catch(error => {
+                console.error("Error generating marketing copy:", error);
+                toast({
+                    variant: "destructive",
+                    title: "AI Text Error",
+                    description: "Failed to generate marketing content. Please try again.",
+                });
+            })
+            .finally(() => setIsTextLoading(false));
+
+        generateAdImage({ campaignDetails })
+            .then(result => setGeneratedImage(result.imageUrl))
+            .catch(error => {
+                console.error("Error generating ad image:", error);
+                toast({
+                    variant: "destructive",
+                    title: "AI Image Error",
+                    description: "Failed to generate ad image. Please try again.",
+                });
+            })
+            .finally(() => setIsImageLoading(false));
     };
+
+    const isLoading = isTextLoading || isImageLoading;
 
     return (
         <div className="space-y-8">
             <div>
                 <h1 className="text-3xl font-headline font-bold tracking-tight">AI Marketing Assistant</h1>
-                <p className="text-muted-foreground">Generate culturally-aware marketing content for your campaigns.</p>
+                <p className="text-muted-foreground">Generate culturally-aware marketing content and ad creatives.</p>
             </div>
             <div className="grid gap-8 md:grid-cols-2">
                 <Card>
                     <CardHeader>
                         <CardTitle>Content Generator</CardTitle>
-                        <CardDescription>Define your campaign parameters and let the AI do the writing.</CardDescription>
+                        <CardDescription>Define your campaign parameters and let the AI do the work.</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -124,35 +146,65 @@ export default function AdminMarketingPage() {
                 </Card>
                  <Card>
                     <CardHeader>
-                        <CardTitle>Generated Content</CardTitle>
-                        <CardDescription>Review, edit, and copy the generated content.</CardDescription>
+                        <CardTitle>Generated Creative</CardTitle>
+                        <CardDescription>Review, edit, and use the generated content.</CardDescription>
                     </CardHeader>
-                    <CardContent className="space-y-4">
-                        {isLoading && (
-                            <div className="flex justify-center items-center h-64">
-                                <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                            </div>
-                        )}
-                        {generatedContent && (
-                            <div className="space-y-4">
-                                <div>
-                                    <Label>Headline</Label>
-                                    <Input value={generatedContent.headline} readOnly />
-                                </div>
-                                <div>
-                                    <Label>Body</Label>
-                                    <Textarea value={generatedContent.body} readOnly rows={10} />
-                                </div>
-                                <div>
-                                    <Label>Hashtags</Label>
-                                    <Input value={generatedContent.hashtags} readOnly />
-                                </div>
-                            </div>
-                        )}
-                         {!isLoading && !generatedContent && (
-                            <div className="flex flex-col justify-center items-center h-64 text-center text-muted-foreground p-4 border-2 border-dashed rounded-lg">
+                    <CardContent className="space-y-6">
+                        {!isLoading && !generatedContent && !generatedImage && (
+                            <div className="flex flex-col justify-center items-center h-full text-center text-muted-foreground p-4 border-2 border-dashed rounded-lg min-h-[400px]">
                                 <Sparkles className="h-10 w-10 mb-4" />
                                 <p>Your generated marketing content will appear here.</p>
+                            </div>
+                        )}
+
+                        {(isImageLoading || generatedImage) && (
+                            <div>
+                                <Label>Generated Ad Image</Label>
+                                {isImageLoading ? (
+                                    <Skeleton className="w-full aspect-video rounded-lg mt-2 flex items-center justify-center">
+                                        <Loader2 className="h-8 w-8 animate-spin" />
+                                    </Skeleton>
+                                ) : generatedImage && (
+                                     <div className="mt-2 relative aspect-video rounded-lg overflow-hidden border">
+                                        <Image src={generatedImage} alt="Generated Ad Creative" layout="fill" objectFit="cover" />
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                        
+                         {(isTextLoading || generatedContent) && (
+                            <div className="space-y-4">
+                                {isTextLoading ? (
+                                    <>
+                                        <div>
+                                            <Label>Headline</Label>
+                                            <Skeleton className="h-10 w-full mt-2" />
+                                        </div>
+                                         <div>
+                                            <Label>Body</Label>
+                                            <Skeleton className="h-24 w-full mt-2" />
+                                        </div>
+                                         <div>
+                                            <Label>Hashtags</Label>
+                                            <Skeleton className="h-10 w-full mt-2" />
+                                        </div>
+                                    </>
+                                ) : generatedContent && (
+                                    <>
+                                        <div>
+                                            <Label>Headline</Label>
+                                            <Input value={generatedContent.headline} readOnly />
+                                        </div>
+                                        <div>
+                                            <Label>Body</Label>
+                                            <Textarea value={generatedContent.body} readOnly rows={6} />
+                                        </div>
+                                        <div>
+                                            <Label>Hashtags</Label>
+                                            <Input value={generatedContent.hashtags} readOnly />
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         )}
                     </CardContent>

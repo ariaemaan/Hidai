@@ -3,3 +3,4 @@
 import './flows/mullaBotFlow';
 import './flows/generateSocialPostFlow';
 import './flows/generateMarketingCopyFlow';
+import './flows/generateAdImageFlow';
