@@ -7,18 +7,19 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { CommunityChallenges } from "@/components/leaderboard/community-challenges";
 import { Button } from "@/components/ui/button";
+import type { LeaderboardPlayer } from "@/lib/types";
 
-const leaderboardData = [
-  { rank: 1, name: "Ahmad Wali", score: 125030, trend: 'up' as const, change: 1 },
-  { rank: 2, name: "Fatima Noori", score: 122500, trend: 'down' as const, change: 1 },
-  { rank: 3, name: "Yusuf Ahmadi", score: 119800, trend: 'same' as const, change: 0 },
-  { rank: 4, name: "Zainab Popal", score: 115210, trend: 'up' as const, change: 2 },
-  { rank: 5, name: "Mustafa Khan", score: 112000, trend: 'same' as const, change: 0 },
-  { rank: 6, name: "Layla Hotak", score: 109750, trend: 'up' as const, change: 3 },
-  { rank: 7, name: "Your Rank", score: 85200, trend: 'same' as const, change: 0, isCurrentUser: true },
-  { rank: 8, name: "Samira Ghafari", score: 81300, trend: 'down' as const, change: 2 },
-  { rank: 9, name: "Omar Zakhilwal", score: 79500, trend: 'up' as const, change: 1 },
-  { rank: 10, name: "Aisha Barakzai", score: 78200, trend: 'down' as const, change: 1 },
+const leaderboardData: LeaderboardPlayer[] = [
+  { rank: 1, name: "Ahmad Wali", score: 125030, trend: 'up', change: 1 },
+  { rank: 2, name: "Fatima Noori", score: 122500, trend: 'down', change: 1 },
+  { rank: 3, name: "Yusuf Ahmadi", score: 119800, trend: 'same', change: 0 },
+  { rank: 4, name: "Zainab Popal", score: 115210, trend: 'up', change: 2 },
+  { rank: 5, name: "Mustafa Khan", score: 112000, trend: 'same', change: 0 },
+  { rank: 6, name: "Layla Hotak", score: 109750, trend: 'up', change: 3 },
+  { rank: 7, name: "Your Rank", score: 85200, trend: 'same', change: 0, isCurrentUser: true },
+  { rank: 8, name: "Samira Ghafari", score: 81300, trend: 'down', change: 2 },
+  { rank: 9, name: "Omar Zakhilwal", score: 79500, trend: 'up', change: 1 },
+  { rank: 10, name: "Aisha Barakzai", score: 78200, trend: 'down', change: 1 },
 ];
 
 const RankChange = ({ trend, change }: { trend: 'up' | 'down' | 'same'; change: number }) => {

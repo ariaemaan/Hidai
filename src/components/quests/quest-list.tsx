@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Landmark, Users, Share2, GraduationCap, Newspaper, Mic, Utensils, Calendar, Handshake, Heart } from "lucide-react";
+import type { DisplayQuest, DisplayQuestData } from "@/lib/types";
 
 // Re-using MosqueIcon from another component for consistency.
 const MosqueIcon = () => (
@@ -12,10 +13,10 @@ const MosqueIcon = () => (
     </svg>
 )
 
-const questData = {
+const questData: DisplayQuestData = {
     cultural: [
         { title: "Daily Phrase", description: "Learn a new Dari/Pashto phrase.", reward: 50, icon: BookOpen, status: "incomplete" },
-        { title: "Kabul Trivia", description: "Answer a question about a Kabul landmark.", reward: 100, icon: Landmark, status: "incomplete" },
+        { title: "Kabul Trivia", description: "Answer a question about a Kabul landmark.", reward: 100, icon: Landmark, status: "completed" },
         { title: "Recipe Share", description: "Share a traditional Afghan recipe.", reward: 200, icon: Utensils, status: "completed" },
         { title: "Poetry Corner", description: "Recite a short poem from Rumi.", reward: 150, icon: Mic, status: "incomplete" },
     ],
@@ -36,7 +37,7 @@ const questData = {
     ]
 };
 
-const QuestItem = ({ quest }: { quest: any }) => (
+const QuestItem = ({ quest }: { quest: DisplayQuest }) => (
     <div className="flex items-center gap-4 p-4 border-b last:border-b-0">
         <div className="bg-muted p-3 rounded-full">
             <quest.icon className="w-6 h-6 text-accent" />

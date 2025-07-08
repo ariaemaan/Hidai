@@ -5,8 +5,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { MoreHorizontal } from "lucide-react";
+import type { DisplayUser } from "@/lib/types";
 
-const users = [
+const users: DisplayUser[] = [
   { id: "usr_1", name: "Ahmad Wali", email: "ahmad@example.com", balance: "1.2M", status: "Active", joined: "2023-01-15" },
   { id: "usr_2", name: "Fatima Noori", email: "fatima@example.com", balance: "850K", status: "Active", joined: "2023-02-20" },
   { id: "usr_3", name: "Yusuf Ahmadi", email: "yusuf@example.com", balance: "120K", status: "Suspended", joined: "2023-03-10" },
