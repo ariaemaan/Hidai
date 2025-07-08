@@ -182,3 +182,17 @@ export interface PerformanceMetric {
   value: string;
   description: string;
 }
+
+// Copy Trading Types
+export interface MasterTrader {
+  id: string;
+  name: string;
+  avatarUrl: string;
+  performance_12m: number;
+  winRate: number;
+  riskScore: 'Low' | 'Moderate' | 'High';
+  followers: number;
+  specialty: string;
+  strategy: string;
+  isIslamicCompliant: boolean;
+}
