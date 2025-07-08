@@ -16,7 +16,15 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { Checkbox } from "@/components/ui/checkbox"
 import { useToast } from "@/hooks/use-toast"
+
+const interests = [
+    { id: 'history', label: 'History & Culture' },
+    { id: 'religion', label: 'Religion & Spirituality' },
+    { id: 'social', label: 'Social & Community' },
+    { id: 'fitness', label: 'Fitness & Health' },
+];
 
 const profileFormSchema = z.object({
   name: z
@@ -34,6 +42,7 @@ const profileFormSchema = z.object({
     })
     .email(),
   bio: z.string().max(160).min(4),
+  interests: z.array(z.string()).optional(),
 })
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>
@@ -43,6 +52,7 @@ const defaultValues: Partial<ProfileFormValues> = {
   username: "ahmadwali",
   email: "ahmad@example.com",
   bio: "Eager to top the leaderboards!",
+  interests: ["history", "religion"],
 }
 
 export function ProfileForm() {
@@ -119,6 +129,51 @@ export function ProfileForm() {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="interests"
+          render={() => (
+            <FormItem>
+              <FormLabel>Interests</FormLabel>
+              <FormDescription>
+                Select your interests to get personalized quest recommendations.
+              </FormDescription>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                {interests.map((item) => (
+                  <FormField
+                    key={item.id}
+                    control={form.control}
+                    name="interests"
+                    render={({ field }) => {
+                      return (
+                        <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md border p-4">
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value?.includes(item.id)}
+                              onCheckedChange={(checked) => {
+                                return checked
+                                  ? field.onChange([...(field.value || []), item.id])
+                                  : field.onChange(
+                                      field.value?.filter(
+                                        (value) => value !== item.id
+                                      )
+                                    )
+                              }}
+                            />
+                          </FormControl>
+                          <FormLabel className="font-normal text-sm">
+                            {item.label}
+                          </FormLabel>
+                        </FormItem>
+                      )
+                    }}
+                  />
+                ))}
+              </div>
               <FormMessage />
             </FormItem>
           )}

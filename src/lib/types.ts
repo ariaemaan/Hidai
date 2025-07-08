@@ -63,12 +63,6 @@ export interface Transaction {
 }
 
 // Quests Collection
-export interface LocalizedText {
-  dari: string;
-  pashto: string;
-  english: string;
-}
-
 export interface Quest {
   id:string; // Document ID
   title: LocalizedText;
@@ -109,6 +103,7 @@ export interface DisplayQuest {
 }
 
 export type DisplayQuestData = {
+  recommended: DisplayQuest[];
   cultural: DisplayQuest[];
   religious: DisplayQuest[];
   social: DisplayQuest[];

@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Landmark, Users, Share2, GraduationCap, Newspaper, Mic, Utensils, Calendar, Handshake, Heart } from "lucide-react";
+import { BookOpen, Landmark, Users, Share2, GraduationCap, Newspaper, Mic, Utensils, Calendar, Handshake, Heart, Sparkles, Footprints } from "lucide-react";
 import type { DisplayQuest, DisplayQuestData } from "@/lib/types";
 
 // Re-using MosqueIcon from another component for consistency.
@@ -14,6 +14,12 @@ const MosqueIcon = () => (
 )
 
 const questData: DisplayQuestData = {
+    recommended: [
+        { title: "Kabul Trivia", description: "Answer a question about a Kabul landmark.", reward: 100, icon: Landmark, status: "incomplete" },
+        { title: "Daily Prayers", description: "Check-in for all 5 daily prayers.", reward: 125, icon: MosqueIcon, status: "incomplete" },
+        { title: "Language Module", description: "Complete a 5-minute Dari lesson.", reward: 250, icon: GraduationCap, status: "completed" },
+        { title: "Weekly Step Challenge", description: "Walk 10,000 steps this week", reward: 500, icon: Footprints, status: "incomplete" },
+    ],
     cultural: [
         { title: "Daily Phrase", description: "Learn a new Dari/Pashto phrase.", reward: 50, icon: BookOpen, status: "incomplete" },
         { title: "Kabul Trivia", description: "Answer a question about a Kabul landmark.", reward: 100, icon: Landmark, status: "completed" },
@@ -64,14 +70,21 @@ export function QuestList() {
                 <CardDescription>New quests are available daily. Complete them to earn MullaCoins!</CardDescription>
             </CardHeader>
             <CardContent>
-                <Tabs defaultValue="cultural" className="w-full">
-                    <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4">
+                <Tabs defaultValue="recommended" className="w-full">
+                    <TabsList className="grid w-full grid-cols-2 sm:grid-cols-5">
+                        <TabsTrigger value="recommended"><Sparkles className="w-4 h-4 mr-2"/>For You</TabsTrigger>
                         <TabsTrigger value="cultural">Cultural</TabsTrigger>
                         <TabsTrigger value="religious">Religious</TabsTrigger>
                         <TabsTrigger value="social">Social</TabsTrigger>
                         <TabsTrigger value="educational">Educational</TabsTrigger>
                     </TabsList>
                     
+                     <TabsContent value="recommended" className="mt-4 border rounded-lg p-0">
+                        {questData.recommended.map((quest, index) => (
+                           <QuestItem key={`recommended-${index}`} quest={quest} />
+                        ))}
+                    </TabsContent>
+
                     <TabsContent value="cultural" className="mt-4 border rounded-lg p-0">
                         {questData.cultural.map((quest, index) => (
                            <QuestItem key={`cultural-${index}`} quest={quest} />
