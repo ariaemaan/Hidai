@@ -1,35 +1,36 @@
+
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Users, Footprints, Heart } from "lucide-react";
+import { Users, Trophy, Rocket } from "lucide-react";
 
 const challenges = [
   {
-    icon: Footprints,
-    title: "Weekly Step Challenge",
-    description: "Help the community reach 10,000,000 steps this week!",
-    current: 6750000,
-    target: 10000000,
-    reward: "5,000 MullaCoin",
-    unit: "steps"
-  },
-  {
-    icon: Heart,
-    title: "Charity Drive: Education",
-    description: "Contribute to a community fund to provide school supplies for children in Kabul.",
-    current: 12500000,
-    target: 50000000,
-    reward: "Special Badge",
-    unit: "MullaCoin"
-  },
-  {
     icon: Users,
-    title: "Community Growth",
-    description: "Invite new members to MullaCoin. Let's reach 1,000 new users this month.",
-    current: 450,
-    target: 1000,
-    reward: "2x Earnings Boost",
+    title: "Launch Week Growth",
+    description: "Help the community reach 10,000 users in our first week!",
+    current: 1250,
+    target: 10000,
+    reward: "Founder Status + 2x Earnings",
     unit: "users"
+  },
+  {
+    icon: Trophy,
+    title: "Founder's Quest Challenge",
+    description: "Complete 10 quests this week to earn an exclusive 'Founder's Trophy' badge.",
+    current: 2,
+    target: 10,
+    reward: "Exclusive Badge",
+    unit: "quests"
+  },
+  {
+    icon: Rocket,
+    title: "Social Media Blast",
+    description: "Help us spread the word! Let's reach 1,000 shares with #KabuliQuest.",
+    current: 150,
+    target: 1000,
+    reward: "5,000 MullaCoin Drop",
+    unit: "shares"
   }
 ];
 
@@ -59,7 +60,7 @@ export function CommunityChallenges() {
               </div>
               <Progress value={progress} />
               <p className="text-xs text-muted-foreground mt-2">
-                Reward for all participants: <span className="font-semibold text-primary">{challenge.reward}</span>
+                Community Reward: <span className="font-semibold text-primary">{challenge.reward}</span>
               </p>
             </CardContent>
           </Card>

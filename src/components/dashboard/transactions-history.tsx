@@ -10,18 +10,18 @@ import {
   Avatar,
   AvatarFallback,
 } from "@/components/ui/avatar"
-import { Gamepad2, Gift, PiggyBank, ShoppingCart } from "lucide-react"
+import { Gamepad2, Gift, PiggyBank, ShoppingCart, Rocket } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { DisplayTransaction } from "@/lib/types"
 
 
 const transactions: DisplayTransaction[] = [
+    { type: 'Launch Bonus', amount: 1000, description: 'Welcome to the MullaCoin community!', icon: Rocket, time: '1 min ago', direction: 'in' },
     { type: 'Game Reward', amount: 1500, description: 'Victory in "Kabul Towers"', icon: Gamepad2, time: '20 mins ago', direction: 'in' },
     { type: 'Staking Deposit', amount: -10000, description: 'Locked for 30 days', icon: PiggyBank, time: '1 hour ago', direction: 'out' },
     { type: 'Daily Bonus', amount: 500, description: 'Daily login reward', icon: Gift, time: '1 day ago', direction: 'in' },
     { type: 'Game Reward', amount: 850, description: 'High score in "Afghan Runner"', icon: Gamepad2, time: '2 days ago', direction: 'in' },
     { type: 'Booster Purchase', amount: -2500, description: '2x Coin Multiplier', icon: ShoppingCart, time: '2 days ago', direction: 'out' },
-    { type: 'Game Reward', amount: 1200, description: 'Victory in "Kabul Towers"', icon: Gamepad2, time: '2 days ago', direction: 'in' },
 ]
 
 export function TransactionsHistory() {

@@ -8,7 +8,6 @@ export type Timestamp = {
   toDate: () => Date;
 };
 
-
 // Users Collection
 export interface UserProfile {
   name: string;
@@ -56,7 +55,7 @@ export interface FirestoreUser {
 export interface Transaction {
   id: string; // Document ID
   userId: string;
-  type: 'tap_earn' | 'move_earn' | 'quest_reward' | 'daily_bonus' | 'referral_bonus' | 'staking_reward' | 'booster_purchase' | 'staking_deposit';
+  type: 'tap_earn' | 'move_earn' | 'quest_reward' | 'daily_bonus' | 'referral_bonus' | 'staking_reward' | 'booster_purchase' | 'staking_deposit' | 'launch_bonus';
   amount: number;
   timestamp: Timestamp;
   metadata: Record<string, any>;
@@ -72,6 +71,12 @@ export interface Quest {
   difficulty: 'easy' | 'medium' | 'hard';
   isActive: boolean;
   createdAt: Timestamp;
+}
+
+export interface LocalizedText {
+    dari: string;
+    pashto: string;
+    english: string;
 }
 
 // UI-specific types that may not map 1:1 with Firestore
@@ -117,4 +122,5 @@ export interface LeaderboardPlayer {
     trend: 'up' | 'down' | 'same';
     change: number;
     isCurrentUser?: boolean;
+    isFounder?: boolean;
 }

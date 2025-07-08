@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -5,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, ArrowUp, ArrowDown, Minus, Share2 } from "lucide-react";
+import { Trophy, ArrowUp, ArrowDown, Minus, Share2, ShieldCheck } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { CommunityChallenges } from "@/components/leaderboard/community-challenges";
@@ -14,9 +15,9 @@ import type { LeaderboardPlayer } from "@/lib/types";
 import { AIShareDialog } from "@/components/social/ai-share-dialog";
 
 const leaderboardData: LeaderboardPlayer[] = [
-  { rank: 1, name: "Ahmad Wali", score: 125030, trend: 'up', change: 1 },
-  { rank: 2, name: "Fatima Noori", score: 122500, trend: 'down', change: 1 },
-  { rank: 3, name: "Yusuf Ahmadi", score: 119800, trend: 'same', change: 0 },
+  { rank: 1, name: "Ahmad Wali", score: 125030, trend: 'up', change: 1, isFounder: true },
+  { rank: 2, name: "Fatima Noori", score: 122500, trend: 'down', change: 1, isFounder: true },
+  { rank: 3, name: "Yusuf Ahmadi", score: 119800, trend: 'same', change: 0, isFounder: true },
   { rank: 4, name: "Zainab Popal", score: 115210, trend: 'up', change: 2 },
   { rank: 5, name: "Mustafa Khan", score: 112000, trend: 'same', change: 0 },
   { rank: 6, name: "Layla Hotak", score: 109750, trend: 'up', change: 3 },
@@ -97,6 +98,7 @@ export default function LeaderboardPage() {
                              <div>
                                 <span className="font-medium">{player.name}</span>
                                 {player.isCurrentUser && <Badge variant="outline" className="ml-2">You</Badge>}
+                                {player.isFounder && <Badge variant="default" className="ml-2"><ShieldCheck className="h-3 w-3 mr-1" />Founder</Badge>}
                             </div>
                             </div>
                         </TableCell>
