@@ -4,7 +4,7 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Landmark, Users, Share2, GraduationCap, Newspaper, Mic, Utensils, Calendar, Handshake, Heart, Sparkles, Footprints } from "lucide-react";
+import { BookOpen, Landmark, Users, Share2, GraduationCap, Newspaper, Mic, Utensils, Calendar, Handshake, Heart, Sparkles, Footprints, CheckCircle } from "lucide-react";
 import type { DisplayQuest, DisplayQuestData } from "@/lib/types";
 
 // Re-using MosqueIcon from another component for consistency.
@@ -45,21 +45,21 @@ const questData: DisplayQuestData = {
 };
 
 const QuestItem = ({ quest }: { quest: DisplayQuest }) => (
-    <div className="p-4 border-b last:border-b-0">
+    <div className="p-4 bg-card border rounded-lg">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex items-center gap-4">
-                <div className="bg-muted p-3 rounded-full flex-shrink-0">
-                    <quest.icon className="w-6 h-6 text-accent" />
+                <div className="bg-primary/10 text-primary p-3 rounded-full flex-shrink-0">
+                    <quest.icon className="w-6 h-6" />
                 </div>
                 <div className="flex-1">
                     <h4 className="font-semibold">{quest.title}</h4>
                     <p className="text-sm text-muted-foreground">{quest.description}</p>
                 </div>
             </div>
-            <div className="flex items-center justify-between sm:justify-end sm:flex-col sm:items-end sm:gap-1 pl-14 sm:pl-0 shrink-0">
+            <div className="flex items-center justify-end gap-4 sm:flex-col sm:items-end sm:gap-1 pl-14 sm:pl-0 shrink-0">
                 <p className="font-mono font-bold text-lg text-primary">+{quest.reward} KBC</p>
                 <Button size="sm" disabled={quest.status === 'completed'}>
-                    {quest.status === 'completed' ? 'Claimed' : 'Claim'}
+                    {quest.status === 'completed' ? <><CheckCircle className="mr-2 h-4 w-4"/>Claimed</> : 'Claim Reward'}
                 </Button>
             </div>
         </div>
@@ -86,31 +86,31 @@ export function QuestList() {
                         </TabsList>
                     </div>
                     
-                     <TabsContent value="recommended" className="mt-4 border rounded-lg p-0">
+                     <TabsContent value="recommended" className="mt-4 space-y-4">
                         {questData.recommended.map((quest, index) => (
                            <QuestItem key={`recommended-${index}`} quest={quest} />
                         ))}
                     </TabsContent>
 
-                    <TabsContent value="cultural" className="mt-4 border rounded-lg p-0">
+                    <TabsContent value="cultural" className="mt-4 space-y-4">
                         {questData.cultural.map((quest, index) => (
                            <QuestItem key={`cultural-${index}`} quest={quest} />
                         ))}
                     </TabsContent>
                     
-                    <TabsContent value="religious" className="mt-4 border rounded-lg p-0">
+                    <TabsContent value="religious" className="mt-4 space-y-4">
                         {questData.religious.map((quest, index) => (
                            <QuestItem key={`religious-${index}`} quest={quest} />
                         ))}
                     </TabsContent>
 
-                    <TabsContent value="social" className="mt-4 border rounded-lg p-0">
+                    <TabsContent value="social" className="mt-4 space-y-4">
                        {questData.social.map((quest, index) => (
                            <QuestItem key={`social-${index}`} quest={quest} />
                         ))}
                     </TabsContent>
 
-                    <TabsContent value="educational" className="mt-4 border rounded-lg p-0">
+                    <TabsContent value="educational" className="mt-4 space-y-4">
                         {questData.educational.map((quest, index) => (
                            <QuestItem key={`educational-${index}`} quest={quest} />
                         ))}

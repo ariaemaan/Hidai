@@ -24,9 +24,12 @@ const menuItems = [
   { href: "/dashboard/quests", label: "Quests", icon: ClipboardList },
   { href: "/dashboard/invest", label: "Invest", icon: PiggyBank },
   { href: "/dashboard/trading", label: "Trading", icon: TrendingUp },
+];
+
+const userMenuItems = [
   { href: "/dashboard/leaderboard", label: "Leaderboard", icon: Trophy },
   { href: "/dashboard/profile", label: "Profile", icon: User },
-];
+]
 
 export function MainSidebar() {
   const pathname = usePathname();
@@ -41,6 +44,24 @@ export function MainSidebar() {
       <SidebarContent>
         <SidebarMenu>
           {menuItems.map((item) => (
+            <SidebarMenuItem key={item.href}>
+              <SidebarMenuButton
+                asChild
+                isActive={pathname === item.href}
+                tooltip={{
+                  children: item.label,
+                  className: "font-headline",
+                }}
+              >
+                <Link href={item.href}>
+                  <item.icon />
+                  <span>{item.label}</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+          <SidebarSeparator className="my-2"/>
+           {userMenuItems.map((item) => (
             <SidebarMenuItem key={item.href}>
               <SidebarMenuButton
                 asChild

@@ -11,13 +11,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useEffect, useState } from "react";
 import { analyzeCompetitiveAdvantage, type CompetitiveAdvantage } from "@/ai/flows/analyzeCompetitiveAdvantageFlow";
 import { icons } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type IconName = keyof typeof icons;
 
 const RenderIcon = ({ name, className }: { name: IconName; className?: string }) => {
   const LucideIcon = icons[name];
   if (!LucideIcon) {
-    // Return a default icon or null if the name is invalid
     return <AlertTriangle className={className} />;
   }
   return <LucideIcon className={className} />;
@@ -73,6 +73,16 @@ export default function AdminDashboardPage() {
           .finally(() => setIsLoading(false));
   }, []);
 
+  const getRiskBadgeVariant = (level: string): 'destructive' | 'secondary' => {
+    switch (level) {
+        case 'critical':
+        case 'high':
+            return 'destructive';
+        default:
+            return 'secondary';
+    }
+  }
+
   return (
     <div className="space-y-8">
       <div>
@@ -80,7 +90,6 @@ export default function AdminDashboardPage() {
         <p className="text-muted-foreground">Overview of the Kabuli Coins ecosystem.</p>
       </div>
 
-      {/* Stats Cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -124,8 +133,7 @@ export default function AdminDashboardPage() {
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        {/* User Growth Chart */}
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <Card>
           <CardHeader>
             <CardTitle>User Growth</CardTitle>
@@ -143,7 +151,6 @@ export default function AdminDashboardPage() {
           </CardContent>
         </Card>
 
-        {/* Quest Engagement Chart */}
         <Card>
           <CardHeader>
             <CardTitle>Quest Engagement</CardTitle>
@@ -152,7 +159,7 @@ export default function AdminDashboardPage() {
           <CardContent className="pl-2">
              <ChartContainer config={questChartConfig} className="h-[300px] w-full">
                 <BarChart data={questEngagementData} layout="vertical" margin={{ top: 20, right: 20, bottom: 0, left: 20 }}>
-                    <YAxis dataKey="name" type="category" tickLine={false} axisLine={false} stroke="#888888" fontSize={12} className="w-10" />
+                    <YAxis dataKey="name" type="category" tickLine={false} axisLine={false} stroke="#888888" fontSize={12} width={80} />
                     <XAxis type="number" tickLine={false} axisLine={false} stroke="#888888" fontSize={12} tickFormatter={(value) => `${value / 1000}k`} />
                     <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="dot" />} />
                     <Bar dataKey="engagement" radius={[0, 4, 4, 0]} barSize={32}>
@@ -165,16 +172,15 @@ export default function AdminDashboardPage() {
           </CardContent>
         </Card>
         
-        {/* Competitive Advantage Card */}
-        <Card className="md:col-span-2">
+        <Card className="lg:col-span-2">
             <CardHeader>
                 <CardTitle>Competitive Advantage</CardTitle>
                 <CardDescription>AI-driven analysis of our unique cultural and community-focused market position.</CardDescription>
             </CardHeader>
-            <CardContent className="grid gap-6 sm:grid-cols-2">
+            <CardContent className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {isLoading ? (
                 Array.from({ length: 4 }).map((_, index) => (
-                  <div key={index} className="flex items-start gap-4">
+                  <div key={index} className="flex items-start gap-4 p-4 rounded-lg bg-muted/50">
                     <Skeleton className="h-12 w-12 rounded-full" />
                     <div className="flex-1 space-y-2">
                       <Skeleton className="h-4 w-3/4" />
@@ -185,7 +191,7 @@ export default function AdminDashboardPage() {
                 ))
               ) : (
                 advantages.map((advantage, index) => (
-                    <div key={index} className="flex items-start gap-4">
+                    <div key={index} className="flex items-start gap-4 p-4 rounded-lg bg-muted/50">
                         <div className="p-3 rounded-full bg-primary/10">
                            <RenderIcon name={advantage.icon as IconName} className="h-6 w-6 text-primary" />
                         </div>
@@ -199,7 +205,6 @@ export default function AdminDashboardPage() {
             </CardContent>
         </Card>
 
-        {/* Economic Health */}
         <Card>
             <CardHeader>
                 <CardTitle>Economic Health</CardTitle>
@@ -236,7 +241,6 @@ export default function AdminDashboardPage() {
             </CardContent>
         </Card>
 
-        {/* Security Alerts */}
         <Card>
             <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -261,7 +265,7 @@ export default function AdminDashboardPage() {
                                     <TableCell className="font-mono text-xs">{activity.user}</TableCell>
                                     <TableCell className="text-xs">{activity.reason}</TableCell>
                                     <TableCell className="text-right">
-                                        <Badge variant={activity.level === 'critical' || activity.level === 'high' ? 'destructive' : 'secondary'}>
+                                        <Badge variant={getRiskBadgeVariant(activity.level)}>
                                             {activity.level}
                                         </Badge>
                                     </TableCell>

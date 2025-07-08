@@ -1,13 +1,56 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
-import { Gamepad2, BookOpen, Users } from "lucide-react";
+import { Gamepad2, BookOpen, Users, Palette, Heart, BrainCircuit } from "lucide-react";
 import Image from 'next/image';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+const features = [
+    {
+      icon: Gamepad2,
+      title: "Play & Earn",
+      description: "Engage in fun games like Tap-to-Earn and Move-to-Earn. The more you play, the more Kabuli Coins you collect.",
+      image: "https://placehold.co/600x400.png",
+      aiHint: "game controller",
+    },
+    {
+      icon: BookOpen,
+      title: "Cultural Quests",
+      description: "Complete daily quests about Afghan history, art, and traditions to unlock special rewards and deepen your knowledge.",
+      image: "https://placehold.co/600x400.png",
+      aiHint: "ancient book",
+    },
+    {
+      icon: Users,
+      title: "Community Hub",
+      description: "Climb the leaderboards, participate in community challenges, and connect with a global diaspora.",
+      image: "https://placehold.co/600x400.png",
+      aiHint: "community gathering",
+    },
+];
+
+const whyUsItems = [
+    {
+        icon: Palette,
+        title: "Culturally Authentic",
+        description: "Designed with deep respect for Afghan traditions, offering a genuine connection to the culture."
+    },
+    {
+        icon: Heart,
+        title: "Community Focused",
+        description: "Built to connect the Afghan diaspora and friends of Afghanistan in a positive, shared experience."
+    },
+    {
+        icon: BrainCircuit,
+        title: "AI-Powered Learning",
+        description: "Utilizes advanced AI to create personalized educational content and engaging quests."
+    }
+];
 
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-dvh bg-background">
-      <header className="px-4 lg:px-6 h-14 flex items-center border-b">
+      <header className="px-4 lg:px-6 h-14 flex items-center border-b sticky top-0 bg-background/95 backdrop-blur-sm z-20">
         <Link href="/" className="flex items-center justify-center" prefetch={false}>
           <Logo />
         </Link>
@@ -26,7 +69,7 @@ export default function LandingPage() {
             <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
-                  <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none font-headline">
+                  <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none font-headline">
                     Explore Afghan Culture. Earn Rewards.
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
@@ -53,49 +96,72 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+        
         <section id="features" className="w-full py-12 md:py-24 lg:py-32 bg-muted">
           <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
               <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-background px-3 py-1 text-sm">Key Features</div>
+                <div className="inline-block rounded-lg bg-background px-3 py-1 text-sm text-primary font-semibold">Key Features</div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">A Rich Cultural Journey</h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Dive into an interactive experience that goes beyond the game. Learn, connect, and grow with our community-focused features.
                 </p>
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl items-start gap-8 sm:grid-cols-2 md:grid-cols-3 lg:gap-12 mt-12">
-              <div className="grid gap-2 text-center">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4">
-                    <Gamepad2 className="h-8 w-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold font-headline">Play & Earn</h3>
-                <p className="text-sm text-muted-foreground">
-                  Engage in fun games like Tap-to-Earn and Move-to-Earn. The more you play, the more Kabuli Coins you collect.
-                </p>
-              </div>
-               <div className="grid gap-2 text-center">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4">
-                    <BookOpen className="h-8 w-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold font-headline">Cultural Quests</h3>
-                <p className="text-sm text-muted-foreground">
-                  Complete daily quests about Afghan history, art, and traditions to unlock special rewards and deepen your knowledge.
-                </p>
-              </div>
-               <div className="grid gap-2 text-center">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4">
-                    <Users className="h-8 w-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold font-headline">Community Hub</h3>
-                <p className="text-sm text-muted-foreground">
-                  Climb the leaderboards, participate in community challenges, and connect with a global diaspora.
-                </p>
-              </div>
+            <div className="mx-auto grid max-w-5xl items-stretch gap-8 sm:grid-cols-2 md:grid-cols-3">
+              {features.map((feature) => (
+                <Card key={feature.title} className="flex flex-col">
+                  <CardHeader>
+                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4">
+                        <feature.icon className="h-8 w-8 text-primary" />
+                    </div>
+                    <CardTitle className="text-center font-headline">{feature.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-1 text-center">
+                    <p className="text-muted-foreground">{feature.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
+
         <section className="w-full py-12 md:py-24 lg:py-32">
+          <div className="container px-4 md:px-6">
+            <div className="grid items-center gap-6 lg:grid-cols-2 lg:gap-12">
+              <div className="space-y-4">
+                <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm font-semibold">Why Choose Us?</div>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">More Than Just a Game</h2>
+                <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  We are building a bridge to Afghan culture, powered by technology and a passion for community.
+                </p>
+                 <div className="space-y-6 pt-4">
+                    {whyUsItems.map((item) => (
+                        <div key={item.title} className="flex items-start gap-4">
+                            <div className="bg-primary/10 text-primary p-3 rounded-full flex-shrink-0">
+                                <item.icon className="w-6 h-6" />
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-bold">{item.title}</h3>
+                                <p className="text-muted-foreground">{item.description}</p>
+                            </div>
+                        </div>
+                    ))}
+                 </div>
+              </div>
+              <Image
+                alt="Map"
+                className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full"
+                height="400"
+                src="https://placehold.co/600x400.png"
+                data-ai-hint="afghanistan map art"
+                width="600"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="w-full py-12 md:py-24 lg:py-32 border-t bg-muted">
           <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight font-headline">

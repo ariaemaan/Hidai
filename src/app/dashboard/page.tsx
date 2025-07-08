@@ -28,11 +28,11 @@ export default function DashboardPage() {
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-7">
-        <div className="lg:col-span-4">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
+        <div className="lg:col-span-3">
           <TransactionsHistory />
         </div>
-        <div className="lg:col-span-3">
+        <div className="lg:col-span-2">
             <MullaBotChat />
         </div>
       </div>

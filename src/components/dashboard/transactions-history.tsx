@@ -3,6 +3,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -10,9 +11,10 @@ import {
   Avatar,
   AvatarFallback,
 } from "@/components/ui/avatar"
-import { Gamepad2, Gift, PiggyBank, ShoppingCart, Rocket } from "lucide-react"
+import { Gamepad2, Gift, PiggyBank, ShoppingCart, Rocket, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { DisplayTransaction } from "@/lib/types"
+import { Button } from "../ui/button"
 
 
 const transactions: DisplayTransaction[] = [
@@ -26,21 +28,21 @@ const transactions: DisplayTransaction[] = [
 
 export function TransactionsHistory() {
   return (
-    <Card>
+    <Card className="h-full flex flex-col">
       <CardHeader>
         <CardTitle className="font-headline">Transaction History</CardTitle>
         <CardDescription>
           Your recent coin earnings and spendings.
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="flex-1 space-y-3">
         {transactions.map((transaction, index) => (
-            <div key={index} className="flex items-center">
-                 <Avatar className="h-9 w-9">
+            <div key={index} className="flex items-center p-3 -mx-3 rounded-lg transition-colors hover:bg-muted/50">
+                 <Avatar className="h-10 w-10 border">
                     <AvatarFallback className={cn(
-                        transaction.direction === 'in' ? "bg-accent/20 text-accent" : "bg-destructive/20 text-destructive"
+                        transaction.direction === 'in' ? "bg-accent/10 text-accent" : "bg-destructive/10 text-destructive"
                     )}>
-                        <transaction.icon className="h-4 w-4" />
+                        <transaction.icon className="h-5 w-5" />
                     </AvatarFallback>
                 </Avatar>
                 <div className="ml-4 space-y-1">
@@ -52,13 +54,18 @@ export function TransactionsHistory() {
                         "font-mono font-medium",
                         transaction.direction === 'in' ? "text-accent" : "text-destructive"
                     )}>
-                        {transaction.direction === 'in' ? '+' : ''}{transaction.amount.toLocaleString()} coins
+                        {transaction.direction === 'in' ? '+' : ''}{transaction.amount.toLocaleString()} KBC
                     </p>
                     <p className="text-xs text-muted-foreground">{transaction.time}</p>
                 </div>
             </div>
         ))}
       </CardContent>
+       <CardFooter>
+        <Button variant="outline" className="w-full">
+          View All Transactions <ChevronRight className="ml-2 h-4 w-4" />
+        </Button>
+      </CardFooter>
     </Card>
   )
 }

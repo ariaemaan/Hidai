@@ -7,9 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { PiggyBank, Target, Users, Heart } from "lucide-react";
+import { PiggyBank, Target, Users, Heart, Percent, LineChart } from "lucide-react";
 
-// Mock Data
 const stakingPositions = [
     { id: 1, amount: 15000, apr: 25, lockPeriod: "30 days", unlocks: "in 21 days", compounded: true },
     { id: 2, amount: 10000, apr: 20, lockPeriod: "7 days", unlocks: "in 3 days", compounded: false },
@@ -41,7 +40,6 @@ export default function InvestPage() {
                 <p className="text-muted-foreground">Grow your Kabuli Coins through staking and savings goals.</p>
             </div>
 
-            {/* Staking Dashboard */}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -56,7 +54,7 @@ export default function InvestPage() {
                  <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium font-headline">Average APR</CardTitle>
-                        <div className="h-4 w-4 text-muted-foreground font-bold">%</div>
+                        <Percent className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                         <div className="text-2xl font-bold text-accent">23%</div>
@@ -66,7 +64,7 @@ export default function InvestPage() {
                  <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium font-headline">Lifetime Earnings</CardTitle>
-                        <div className="h-4 w-4 text-muted-foreground font-bold text-accent">+</div>
+                        <LineChart className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                         <div className="text-2xl font-bold font-mono text-accent/90">+{Math.round(lifetimeEarnings).toLocaleString()} KBC</div>
@@ -75,9 +73,7 @@ export default function InvestPage() {
                 </Card>
             </div>
 
-            {/* Staking Pools and Savings Goals */}
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-                {/* Staking Pools */}
+            <div className="grid grid-cols-1 gap-8 xl:grid-cols-2">
                 <Card className="flex flex-col">
                     <CardHeader>
                         <CardTitle className="font-headline">Staking Positions</CardTitle>
@@ -91,21 +87,21 @@ export default function InvestPage() {
                                 <TabsTrigger value="charitable" disabled>Charitable</TabsTrigger>
                             </TabsList>
                             <TabsContent value="my-positions" className="mt-4">
-                                <div className="overflow-x-auto">
+                                <div className="overflow-x-auto rounded-lg border">
                                     <Table>
                                         <TableHeader>
                                             <TableRow>
                                                 <TableHead>Amount</TableHead>
                                                 <TableHead>APR</TableHead>
                                                 <TableHead>Unlocks</TableHead>
-                                                <TableHead></TableHead>
+                                                <TableHead className="text-right">Action</TableHead>
                                             </TableRow>
                                         </TableHeader>
                                         <TableBody>
                                             {stakingPositions.map((pos) => (
                                                 <TableRow key={pos.id}>
                                                     <TableCell className="font-mono font-medium">{pos.amount.toLocaleString()} KBC</TableCell>
-                                                    <TableCell className="text-accent">{pos.apr}%</TableCell>
+                                                    <TableCell className="text-accent font-semibold">{pos.apr}%</TableCell>
                                                     <TableCell>{pos.unlocks}</TableCell>
                                                     <TableCell className="text-right">
                                                         <Button variant="outline" size="sm" disabled>Unstake</Button>
@@ -123,7 +119,6 @@ export default function InvestPage() {
                     </CardFooter>
                 </Card>
 
-                {/* Savings Goals */}
                 <Card>
                     <CardHeader>
                         <CardTitle className="font-headline">Savings Goals</CardTitle>
@@ -131,7 +126,7 @@ export default function InvestPage() {
                     </CardHeader>
                     <CardContent className="space-y-6">
                         {savingsGoals.map((goal) => (
-                            <div key={goal.name}>
+                            <div key={goal.name} className="p-4 border rounded-lg">
                                 <div className="flex justify-between items-center mb-2">
                                     <p className="font-semibold">{goal.name}</p>
                                     <p className="text-sm text-muted-foreground font-mono">{goal.current.toLocaleString()} / {goal.target.toLocaleString()}</p>

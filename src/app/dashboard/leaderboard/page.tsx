@@ -41,6 +41,26 @@ const RankChange = ({ trend, change }: { trend: 'up' | 'down' | 'same'; change: 
   );
 };
 
+const RankCell = ({ rank }: { rank: number }) => {
+    const isTopThree = rank <= 3;
+    const rankColors: Record<number, string> = {
+        1: "bg-yellow-400/20 text-yellow-500 border-yellow-500/30",
+        2: "bg-slate-400/20 text-slate-500 border-slate-500/30",
+        3: "bg-orange-500/20 text-orange-600 border-orange-600/30",
+    }
+    const iconColors: Record<number, string> = {
+        1: "text-yellow-400 drop-shadow-[0_2px_4px_theme(colors.yellow.500)]",
+        2: "text-slate-400 drop-shadow-[0_2px_4px_theme(colors.slate.500)]",
+        3: "text-orange-600 drop-shadow-[0_2px_4px_theme(colors.orange.600)]",
+    }
+
+    return (
+        <div className={cn("flex items-center justify-center w-12 h-12 rounded-full bg-muted font-bold text-lg border", isTopThree && rankColors[rank])}>
+            {isTopThree ? <Trophy className={cn("w-7 h-7", iconColors[rank])} /> : rank}
+        </div>
+    );
+};
+
 
 export default function LeaderboardPage() {
   const [isAiDialogOpen, setIsAiDialogOpen] = useState(false);
@@ -85,21 +105,19 @@ export default function LeaderboardPage() {
                         </TableHeader>
                         <TableBody>
                         {leaderboardData.map((player) => (
-                            <TableRow key={player.rank} className={player.isCurrentUser ? "bg-accent/50" : ""}>
-                            <TableCell className="font-bold text-lg">
-                                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-muted">
-                                    {player.rank <= 3 ? <Trophy className={`w-6 h-6 ${player.rank === 1 ? 'text-yellow-500' : player.rank === 2 ? 'text-slate-400' : 'text-orange-600' }`} /> : player.rank}
-                                </div>
+                            <TableRow key={player.rank} className={cn(player.isCurrentUser && "bg-primary/10 border-primary/20")}>
+                            <TableCell>
+                                <RankCell rank={player.rank} />
                             </TableCell>
                             <TableCell>
                                 <div className="flex items-center gap-4">
-                                <Avatar>
+                                <Avatar className="h-12 w-12">
                                     <AvatarImage src={`https://placehold.co/40x40.png?text=${player.name.charAt(0)}`} alt={player.name} data-ai-hint="avatar user" />
                                     <AvatarFallback>{player.name.charAt(0)}</AvatarFallback>
                                 </Avatar>
                                 <div>
-                                    <span className="font-medium">{player.name}</span>
-                                    {player.isCurrentUser && <Badge variant="outline" className="ml-2">You</Badge>}
+                                    <span className="font-medium text-base">{player.name}</span>
+                                    {player.isCurrentUser && <Badge variant="outline" className="ml-2 border-primary text-primary">You</Badge>}
                                     {player.isFounder && <Badge variant="default" className="ml-2"><ShieldCheck className="h-3 w-3 mr-1" />Founder</Badge>}
                                 </div>
                                 </div>
