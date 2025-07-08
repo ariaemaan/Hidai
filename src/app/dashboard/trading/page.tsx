@@ -32,7 +32,7 @@ const signalData: TradingSignal[] = [
   { id: "1249", asset: "Gold (XAU/USD)", assetClass: 'commodity', type: "SELL", entry: 2350.75, tp: [2330.50, 2315.00], sl: 2365.25, riskReward: "1:1.8", confidence: 72, timeframe: "1H", status: "active" },
   { id: "1245", asset: "GBP/USD", assetClass: 'forex', type: "BUY", entry: 1.2710, tp: [1.2750], sl: 1.2680, riskReward: "1:1.3", confidence: 92, timeframe: "15min", status: "closed_win" },
   { id: "1244", asset: "ETH/USD", assetClass: 'crypto', type: "STRONG_SELL", entry: 3850.00, tp: [3700.00], sl: 3950.00, riskReward: "1:1.5", confidence: 81, timeframe: "4H", status: "closed_loss" },
-  { id: "1246", asset: "USD/JPY", assetClass: 'forex', type: "HOLD", entry: 157.20, tp: [], sl: 0, riskReward: "N/A", confidence: 50, timeframe: "active" },
+  { id: "1246", asset: "USD/JPY", assetClass: 'forex', type: "HOLD", entry: 157.20, tp: [], sl: 0, riskReward: "N/A", confidence: 50, timeframe: "1H", status: "active" },
 ];
 
 const SignalBadge = ({ type }: { type: SignalType }) => {
