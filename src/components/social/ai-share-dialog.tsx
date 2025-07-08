@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { generateReferralMessage } from "@/ai/flows/generateReferralMessageFlow";
+import { generateSocialPost } from "@/ai/flows/generateSocialPostFlow";
 import { useAuth } from "@/components/auth/auth-provider";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -16,50 +16,50 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2, Copy, Send } from "lucide-react";
 
-type AIReferralDialogProps = {
+type AIShareDialogProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  referralCode: string;
+  postContext: string;
 };
 
-export function AIReferralDialog({ open, onOpenChange, referralCode }: AIReferralDialogProps) {
+export function AIShareDialog({ open, onOpenChange, postContext }: AIShareDialogProps) {
   const { user } = useAuth();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = React.useState(false);
-  const [message, setMessage] = React.useState("");
+  const [post, setPost] = React.useState("");
 
   React.useEffect(() => {
-    if (open && user) {
+    if (open && user && postContext) {
       setIsLoading(true);
-      generateReferralMessage({
+      generateSocialPost({
         userName: user.displayName || "a friend",
-        referralCode,
+        context: postContext,
       })
         .then((response) => {
-          setMessage(response.message);
+          setPost(response.post);
         })
         .catch((error) => {
-          console.error("Error generating referral message:", error);
+          console.error("Error generating social post:", error);
           toast({
             variant: "destructive",
             title: "AI Error",
-            description: "Could not generate a referral message. Please try again.",
+            description: "Could not generate a post. Please try again.",
           });
           // Fallback message
-          setMessage(`As-salamu alaykum! Join me on MullaCoin to earn rewards and learn about Afghan culture. Use my code: ${referralCode}`);
+          setPost(`Come join me on MullaCoin! It's a fun way to learn about Afghan culture and earn rewards. #MullaCoin`);
         })
         .finally(() => {
           setIsLoading(false);
         });
     }
-  }, [open, user, referralCode, toast]);
+  }, [open, user, postContext, toast]);
 
   const copyToClipboard = () => {
     if (navigator.clipboard) {
-      navigator.clipboard.writeText(message);
+      navigator.clipboard.writeText(post);
       toast({
         title: "Copied to clipboard!",
-        description: "Your referral message has been copied.",
+        description: "Your message has been copied.",
       });
     }
   };
@@ -68,9 +68,9 @@ export function AIReferralDialog({ open, onOpenChange, referralCode }: AIReferra
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="font-headline">Share with a Friend</DialogTitle>
+          <DialogTitle className="font-headline">Create a Social Post</DialogTitle>
           <DialogDescription>
-            Our AI has crafted a personalized message for you to share.
+            Our AI has crafted a post for you to share your progress.
           </DialogDescription>
         </DialogHeader>
         <div className="py-4">
@@ -80,20 +80,18 @@ export function AIReferralDialog({ open, onOpenChange, referralCode }: AIReferra
             </div>
           ) : (
             <Textarea
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              rows={6}
+              value={post}
+              onChange={(e) => setPost(e.target.value)}
+              rows={8}
               className="resize-none"
             />
           )}
         </div>
         <DialogFooter className="sm:justify-between">
-            <div className="flex gap-2">
-                <Button onClick={copyToClipboard} variant="outline" disabled={isLoading}>
-                    <Copy className="mr-2 h-4 w-4" />
-                    Copy Message
-                </Button>
-            </div>
+             <Button onClick={copyToClipboard} variant="outline" disabled={isLoading}>
+                <Copy className="mr-2 h-4 w-4" />
+                Copy Message
+            </Button>
              <Button disabled={isLoading}>
                 <Send className="mr-2 h-4 w-4" />
                 Share

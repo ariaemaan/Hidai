@@ -6,12 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Copy, Gift, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { AIReferralDialog } from "./ai-referral-dialog";
+import { AIShareDialog } from "@/components/social/ai-share-dialog";
 
 export function ReferralCard() {
     const { toast } = useToast();
     const referralCode = "MULLA-1A2B3C"; // Mock referral code
     const [isAiDialogOpen, setIsAiDialogOpen] = React.useState(false);
+    const [postContext, setPostContext] = React.useState("");
 
     const copyToClipboard = () => {
         if (navigator.clipboard) {
@@ -21,6 +22,11 @@ export function ReferralCard() {
                 description: "Your referral code has been copied.",
             });
         }
+    };
+
+    const handleShareClick = () => {
+        setPostContext(`I want to invite my friends and family to MullaCoin. Please write a friendly invitation and include my referral code: ${referralCode}`);
+        setIsAiDialogOpen(true);
     };
 
     return (
@@ -43,7 +49,7 @@ export function ReferralCard() {
                             </Button>
                         </div>
                     </div>
-                    <Button className="w-full" onClick={() => setIsAiDialogOpen(true)}>
+                    <Button className="w-full" onClick={handleShareClick}>
                         <Sparkles className="mr-2 h-4 w-4" />
                         Create Share Message with AI
                     </Button>
@@ -52,10 +58,10 @@ export function ReferralCard() {
                      </p>
                 </CardContent>
             </Card>
-            <AIReferralDialog
+            <AIShareDialog
                 open={isAiDialogOpen}
                 onOpenChange={setIsAiDialogOpen}
-                referralCode={referralCode}
+                postContext={postContext}
             />
         </>
     );

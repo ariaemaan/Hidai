@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -8,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { CommunityChallenges } from "@/components/leaderboard/community-challenges";
 import { Button } from "@/components/ui/button";
 import type { LeaderboardPlayer } from "@/lib/types";
+import { AIShareDialog } from "@/components/social/ai-share-dialog";
 
 const leaderboardData: LeaderboardPlayer[] = [
   { rank: 1, name: "Ahmad Wali", score: 125030, trend: 'up', change: 1 },
@@ -37,9 +41,18 @@ const RankChange = ({ trend, change }: { trend: 'up' | 'down' | 'same'; change: 
 
 
 export default function LeaderboardPage() {
+  const [isAiDialogOpen, setIsAiDialogOpen] = useState(false);
+  const [postContext, setPostContext] = useState("");
+
+  const handleShareClick = (player: LeaderboardPlayer) => {
+    setPostContext(`I'm celebrating my achievement on MullaCoin! I'm currently rank #${player.rank} on the global leaderboard with ${player.score.toLocaleString()} points.`);
+    setIsAiDialogOpen(true);
+  };
+
   return (
-    <div className="space-y-8">
-       <div>
+    <>
+      <div className="space-y-8">
+      <div>
         <h1 className="text-3xl font-headline font-bold tracking-tight">Community Hub</h1>
         <p className="text-muted-foreground">See how you stack up, join challenges, and connect with others.</p>
       </div>
@@ -93,7 +106,7 @@ export default function LeaderboardPage() {
                         <TableCell className="text-right font-mono text-lg">{player.score.toLocaleString()}</TableCell>
                         <TableCell className="text-right">
                            {player.isCurrentUser && (
-                             <Button variant="ghost" size="icon">
+                             <Button variant="ghost" size="icon" onClick={() => handleShareClick(player)}>
                                <Share2 className="h-4 w-4" />
                              </Button>
                            )}
@@ -111,6 +124,12 @@ export default function LeaderboardPage() {
             </div>
         </TabsContent>
       </Tabs>
-    </div>
+      </div>
+      <AIShareDialog
+        open={isAiDialogOpen}
+        onOpenChange={setIsAiDialogOpen}
+        postContext={postContext}
+      />
+    </>
   );
 }
