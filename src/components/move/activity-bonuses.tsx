@@ -31,7 +31,7 @@ export function ActivityBonuses() {
                             <div className="text-center">
                                 <MosqueIcon />
                                 <h3 className="text-lg font-semibold mt-2">Prayer Bonus</h3>
-                                <p className="text-muted-foreground text-sm">Earn 500 KBC for each of the 5 daily prayers.</p>
+                                <p className="text-muted-foreground text-sm">Earn 500 MullaCoin for each of the 5 daily prayers.</p>
                             </div>
                             <div className="flex-1 space-y-2">
                                 <div className="flex justify-between items-center"><p>Fajr (Dawn)</p> <Button size="sm" variant="outline">Claim</Button></div>
@@ -48,7 +48,7 @@ export function ActivityBonuses() {
                              <div className="flex-1">
                                 <h3 className="text-lg font-semibold">Buzkashi Challenge</h3>
                                 <p className="text-muted-foreground text-sm mb-4">Participate in or watch a game of Buzkashi to earn a massive bonus!</p>
-                                <Button>Claim 10,000 KBC</Button>
+                                <Button>Claim 10,000 MullaCoin</Button>
                              </div>
                          </div>
                     </TabsContent>
@@ -58,7 +58,7 @@ export function ActivityBonuses() {
                              <div className="flex-1">
                                 <h3 className="text-lg font-semibold">Household Hero</h3>
                                 <p className="text-muted-foreground text-sm mb-4">Get rewarded for helping around the house. Complete 3 chores for a bonus.</p>
-                                <Button>Claim 1,500 KBC</Button>
+                                <Button>Claim 1,500 MullaCoin</Button>
                              </div>
                          </div>
                     </TabsContent>
@@ -68,7 +68,7 @@ export function ActivityBonuses() {
                              <div className="flex-1">
                                 <h3 className="text-lg font-semibold">Bazaar Walk</h3>
                                 <p className="text-muted-foreground text-sm mb-4">Walk to a local market or bazaar. Upload a photo to claim your reward.</p>
-                                <Button>Claim 2,000 KBC</Button>
+                                <Button>Claim 2,000 MullaCoin</Button>
                              </div>
                          </div>
                     </TabsContent>

@@ -26,7 +26,7 @@ const questData = {
         { title: "Charity Drive", description: "Donate to a featured charity campaign.", reward: 500, icon: Heart, status: "incomplete" },
     ],
     social: [
-        { title: "Invite Friends", description: "Invite 3 friends to join Kabuli Quest.", reward: 1000, icon: Users, status: "incomplete" },
+        { title: "Invite Friends", description: "Invite 3 friends to join MullaCoin.", reward: 1000, icon: Users, status: "incomplete" },
         { title: "Share Achievement", description: "Share your daily high score on social media.", reward: 50, icon: Share2, status: "completed" },
         { title: "Community Help", description: "Help an elderly neighbor with their groceries.", reward: 500, icon: Handshake, status: "incomplete" },
     ],
@@ -46,7 +46,7 @@ const QuestItem = ({ quest }: { quest: any }) => (
             <p className="text-sm text-muted-foreground">{quest.description}</p>
         </div>
         <div className="text-right">
-            <p className="font-mono font-bold text-lg text-primary">+{quest.reward} KBC</p>
+            <p className="font-mono font-bold text-lg text-primary">+{quest.reward} MullaCoin</p>
             <Button size="sm" disabled={quest.status === 'completed'}>
                 {quest.status === 'completed' ? 'Claimed' : 'Claim'}
             </Button>
@@ -60,7 +60,7 @@ export function QuestList() {
         <Card>
             <CardHeader>
                 <CardTitle className="font-headline">Available Quests</CardTitle>
-                <CardDescription>New quests are available daily. Complete them to earn KabuliCoins!</CardDescription>
+                <CardDescription>New quests are available daily. Complete them to earn MullaCoins!</CardDescription>
             </CardHeader>
             <CardContent>
                 <Tabs defaultValue="cultural" className="w-full">

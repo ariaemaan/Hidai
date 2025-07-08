@@ -13,7 +13,7 @@ export function BalanceCard() {
             </CardHeader>
             <CardContent>
                 <div className="text-4xl font-bold font-mono">{balance.toLocaleString()}</div>
-                <p className="text-xs text-primary-foreground/80 mt-1">Your available KBC balance.</p>
+                <p className="text-xs text-primary-foreground/80 mt-1">Your available MullaCoin balance.</p>
             </CardContent>
         </Card>
     )

@@ -17,7 +17,7 @@ const ptSans = PT_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Kabuli Coins",
+  title: "MullaCoin",
   description: "A culturally-rich Afghan tap-to-earn game.",
 };
 

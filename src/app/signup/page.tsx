@@ -13,7 +13,7 @@ export default function SignupPage() {
           Create an Account
         </h1>
         <p className="text-center text-muted-foreground mb-6">
-          Join Kabuli Coins and start your quest!
+          Join MullaCoin and start your quest!
         </p>
         <SignupForm />
         <p className="mt-4 text-center text-sm text-muted-foreground">

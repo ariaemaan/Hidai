@@ -1,7 +1,7 @@
 import { BalanceCard } from "@/components/dashboard/balance-card";
 import { StatsCard } from "@/components/dashboard/stats-card";
 import { TransactionsHistory } from "@/components/dashboard/transactions-history";
-import { KabiBotChat } from "@/components/dashboard/kabi-bot-chat";
+import { MullaBotChat } from "@/components/dashboard/mulla-bot-chat";
 import { TrendingDown, TrendingUp } from "lucide-react";
 
 export default function DashboardPage() {
@@ -9,7 +9,7 @@ export default function DashboardPage() {
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-headline font-bold tracking-tight">My Wallet</h1>
-        <p className="text-muted-foreground">An overview of your KabuliCoin economy.</p>
+        <p className="text-muted-foreground">An overview of your MullaCoin economy.</p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -18,13 +18,13 @@ export default function DashboardPage() {
           title="Earned (7d)"
           value="15,350"
           icon={<TrendingUp className="h-4 w-4 text-muted-foreground" />}
-          details="KBC"
+          details="MullaCoin"
         />
         <StatsCard
           title="Spent (7d)"
           value="12,500"
           icon={<TrendingDown className="h-4 w-4 text-muted-foreground" />}
-          details="KBC"
+          details="MullaCoin"
         />
       </div>
 
@@ -33,7 +33,7 @@ export default function DashboardPage() {
           <TransactionsHistory />
         </div>
         <div className="lg:col-span-3">
-            <KabiBotChat />
+            <MullaBotChat />
         </div>
       </div>
     </div>
