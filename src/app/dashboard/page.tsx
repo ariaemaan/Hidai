@@ -2,7 +2,7 @@ import { BalanceCard } from "@/components/dashboard/balance-card";
 import { StatsCard } from "@/components/dashboard/stats-card";
 import { TransactionsHistory } from "@/components/dashboard/transactions-history";
 import { WalletActionsCard } from "@/components/dashboard/wallet-actions-card";
-import { PiggyBank, TrendingDown, TrendingUp } from "lucide-react";
+import { TrendingDown, TrendingUp } from "lucide-react";
 
 export default function DashboardPage() {
   return (
@@ -12,7 +12,7 @@ export default function DashboardPage() {
         <p className="text-muted-foreground">An overview of your KabuliCoin economy.</p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <BalanceCard />
         <StatsCard
           title="Earned (7d)"
@@ -25,12 +25,6 @@ export default function DashboardPage() {
           value="12,500"
           icon={TrendingDown}
           details="KBC"
-        />
-        <StatsCard
-          title="Total Staked"
-          value="25,000"
-          icon={PiggyBank}
-          details="+5,000 this week"
         />
       </div>
 
