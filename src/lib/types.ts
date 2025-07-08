@@ -124,3 +124,30 @@ export interface LeaderboardPlayer {
     isCurrentUser?: boolean;
     isFounder?: boolean;
 }
+
+// Trading-specific types
+export type SignalType = 'STRONG_BUY' | 'BUY' | 'HOLD' | 'SELL' | 'STRONG_SELL';
+export type SignalStatus = 'active' | 'closed_win' | 'closed_loss';
+export type AssetClass = 'forex' | 'crypto' | 'commodity' | 'index';
+
+export interface TradingSignal {
+  id: string;
+  asset: string;
+  assetClass: AssetClass;
+  type: SignalType;
+  entry: number;
+  tp: number[];
+  sl: number;
+  riskReward: string;
+  confidence: number;
+  timeframe: string;
+  status: SignalStatus;
+}
+
+export interface MarketAsset {
+    name: string;
+    ticker: string;
+    price: string;
+    change: string;
+    isUp: boolean;
+}
