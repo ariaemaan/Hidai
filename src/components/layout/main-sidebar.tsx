@@ -28,7 +28,6 @@ const menuItems = [
 
 const userMenuItems = [
   { href: "/dashboard/leaderboard", label: "Leaderboard", icon: Trophy },
-  { href: "/dashboard/profile", label: "Profile", icon: User },
 ]
 
 export function MainSidebar() {

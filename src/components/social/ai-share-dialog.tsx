@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { generateSocialPost } from "@/ai/flows/generateSocialPostFlow";
-import { useAuth } from "@/components/auth/auth-provider";
 import { useToast } from "@/hooks/use-toast";
 import {
   Dialog,
@@ -23,16 +22,15 @@ type AIShareDialogProps = {
 };
 
 export function AIShareDialog({ open, onOpenChange, postContext }: AIShareDialogProps) {
-  const { user } = useAuth();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = React.useState(false);
   const [post, setPost] = React.useState("");
 
   React.useEffect(() => {
-    if (open && user && postContext) {
+    if (open && postContext) {
       setIsLoading(true);
       generateSocialPost({
-        userName: user.displayName || "a friend",
+        userName: "A Kabuli Coins player",
         context: postContext,
       })
         .then((response) => {
@@ -52,7 +50,7 @@ export function AIShareDialog({ open, onOpenChange, postContext }: AIShareDialog
           setIsLoading(false);
         });
     }
-  }, [open, user, postContext, toast]);
+  }, [open, postContext, toast]);
 
   const copyToClipboard = () => {
     if (navigator.clipboard) {

@@ -54,14 +54,6 @@ export default function LandingPage() {
         <Link href="/" className="flex items-center justify-center" prefetch={false}>
           <Logo />
         </Link>
-        <nav className="ml-auto flex gap-2 sm:gap-4">
-          <Button asChild variant="ghost">
-            <Link href="/login">Login</Link>
-          </Button>
-          <Button asChild>
-            <Link href="/signup">Sign Up</Link>
-          </Button>
-        </nav>
       </header>
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
@@ -78,10 +70,7 @@ export default function LandingPage() {
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Button asChild size="lg" className="w-full min-[400px]:w-auto">
-                    <Link href="/signup">Get Started</Link>
-                  </Button>
-                  <Button asChild size="lg" variant="outline" className="w-full min-[400px]:w-auto">
-                    <Link href="/dashboard">Continue as Guest</Link>
+                    <Link href="/dashboard">Launch App</Link>
                   </Button>
                 </div>
               </div>
@@ -168,19 +157,13 @@ export default function LandingPage() {
                 Join the Kabuli Coins Community Today
               </h2>
               <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Start your journey of discovery and earning. Create your account and become part of our growing global family.
+                Start your journey of discovery and earning. Become part of our growing global family.
               </p>
             </div>
             <div className="mx-auto w-full max-w-sm space-y-2">
               <Button asChild size="lg" className="w-full">
-                <Link href="/signup">Sign Up Now</Link>
+                <Link href="/dashboard">Launch App</Link>
               </Button>
-               <p className="text-xs text-muted-foreground">
-                Already have an account?{" "}
-                <Link href="/login" className="underline underline-offset-2">
-                  Sign In
-                </Link>
-              </p>
             </div>
           </div>
         </section>

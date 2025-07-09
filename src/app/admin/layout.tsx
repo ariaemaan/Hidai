@@ -1,12 +1,10 @@
 import type { ReactNode } from "react";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
-import { AuthGuard } from "@/components/auth/auth-provider";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { SiteHeader } from "@/components/layout/site-header";
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
-    <AuthGuard>
       <SidebarProvider>
         <AdminSidebar />
         <SidebarInset>
@@ -16,6 +14,5 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           </main>
         </SidebarInset>
       </SidebarProvider>
-    </AuthGuard>
   );
 }
