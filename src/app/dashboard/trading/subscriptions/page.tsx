@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Check, Gem } from "lucide-react";
 import { cn } from "@/lib/utils";
+import type { SubscriptionTier } from "@/lib/types";
 
-const tiers = [
+const tiers: SubscriptionTier[] = [
   {
     name: 'Free',
     price: '$0',

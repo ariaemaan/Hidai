@@ -139,14 +139,6 @@ export default function TradingPage() {
     const [selectedTimeframe, setSelectedTimeframe] = useState(timeframes[2]);
     const [generatedSignal, setGeneratedSignal] = useState<GenerateTradingSignalOutput | null>(null);
 
-    const monthlyBreakdown = [
-        { month: "July 2024", pnl: "+$3,870", gain: "+11.2%" },
-        { month: "June 2024", pnl: "+$3,450", gain: "+10.8%" },
-        { month: "May 2024", pnl: "+$2,940", gain: "+9.5%" },
-        { month: "April 2024", pnl: "+$3,120", gain: "+10.9%" },
-        { month: "March 2024", pnl: "+$2,680", gain: "+9.8%" },
-    ];
-
     const handleGenerateSignal = async () => {
         setIsLoading(true);
         setGeneratedSignal(null);
@@ -219,118 +211,102 @@ export default function TradingPage() {
 
             {generatedSignal && <GeneratedSignalCard signal={generatedSignal} />}
 
-            <Card className="md:col-span-full bg-primary/10 border-primary/20">
-                <CardHeader>
-                    <CardTitle className="font-headline text-primary flex items-center gap-2">
-                        <Gem className="w-6 h-6" />
-                        <span>Unlock Premium Features</span>
-                    </CardTitle>
-                    <CardDescription>
-                        Upgrade your plan to access more signals, advanced analytics, and exclusive content.
-                    </CardDescription>
-                </CardHeader>
-                <CardFooter>
-                     <Button asChild className="w-full sm:w-auto">
-                        <Link href="/dashboard/trading/subscriptions">
-                            View Subscription Plans
-                        </Link>
-                    </Button>
-                </CardFooter>
-            </Card>
-            
-            <Card className="bg-primary/5 border-primary/20">
-                <CardHeader>
-                    <CardTitle className="font-headline text-primary flex items-center gap-2">
-                        <Trophy className="w-6 h-6" />
-                        <span>Live Performance Showcase</span>
-                    </CardTitle>
-                    <CardDescription>
-                        See our AI-generated signals traded on a real account. We believe in full transparency.
-                    </CardDescription>
-                </CardHeader>
-                <CardContent className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
-                    <div className="p-4 rounded-lg bg-background">
-                        <p className="text-sm text-muted-foreground">Total Return</p>
-                        <p className="text-2xl font-bold font-mono text-accent">+89.4%</p>
-                    </div>
-                    <div className="p-4 rounded-lg bg-background">
-                        <p className="text-sm text-muted-foreground">Win Rate</p>
-                        <p className="text-2xl font-bold font-mono">76.8%</p>
-                    </div>
-                    <div className="p-4 rounded-lg bg-background">
-                        <p className="text-sm text-muted-foreground">Starting Balance</p>
-                        <p className="text-2xl font-bold font-mono">$25,000</p>
-                    </div>
-                    <div className="p-4 rounded-lg bg-background">
-                        <p className="text-sm text-muted-foreground">Current Balance</p>
-                        <p className="text-2xl font-bold font-mono">$47,350</p>
-                    </div>
-                </CardContent>
-                <CardFooter>
-                    <Button asChild className="w-full sm:w-auto">
-                        <Link href="/dashboard/trading/live-account">
-                            View Live Account Dashboard
-                        </Link>
-                    </Button>
-                </CardFooter>
-            </Card>
-            
-            <Card>
-                <CardHeader>
-                    <CardTitle className="font-headline flex items-center gap-2">
-                        <BrainCircuit className="w-6 h-6 text-primary" />
-                        <span>Market Intelligence Center</span>
-                    </CardTitle>
-                    <CardDescription>
-                        Access advanced AI-powered analytics, sentiment tracking, and economic event data.
-                    </CardDescription>
-                </CardHeader>
-                <CardFooter>
-                    <Button asChild className="w-full sm:w-auto">
-                        <Link href="/dashboard/trading/intelligence">
-                            Go to Intelligence Center
-                        </Link>
-                    </Button>
-                </CardFooter>
-            </Card>
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                 <Card className="bg-primary/10 border-primary/20">
+                    <CardHeader>
+                        <CardTitle className="font-headline text-primary flex items-center gap-2">
+                            <Gem className="w-6 h-6" />
+                            <span>Unlock Premium Features</span>
+                        </CardTitle>
+                        <CardDescription>
+                            Upgrade your plan to access more signals, advanced analytics, and exclusive content.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardFooter>
+                         <Button asChild className="w-full sm:w-auto">
+                            <Link href="/dashboard/trading/subscriptions">
+                                View Subscription Plans
+                            </Link>
+                        </Button>
+                    </CardFooter>
+                </Card>
+                
+                <Card className="bg-primary/5 border-primary/20">
+                    <CardHeader>
+                        <CardTitle className="font-headline text-primary flex items-center gap-2">
+                            <Trophy className="w-6 h-6" />
+                            <span>Live Performance Showcase</span>
+                        </CardTitle>
+                        <CardDescription>
+                            See our AI-generated signals traded on a real account. We believe in full transparency.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardFooter>
+                        <Button asChild className="w-full sm:w-auto">
+                            <Link href="/dashboard/trading/live-account">
+                                View Live Account Dashboard
+                            </Link>
+                        </Button>
+                    </CardFooter>
+                </Card>
 
-            <Card>
-                <CardHeader>
-                    <CardTitle className="font-headline flex items-center gap-2">
-                        <Users className="w-6 h-6" />
-                        <span>Copy & Social Trading</span>
-                    </CardTitle>
-                    <CardDescription>
-                        Follow the strategies of top-performing community members. Copy their trades automatically and share in their success.
-                    </CardDescription>
-                </CardHeader>
-                <CardFooter>
-                     <Button asChild className="w-full sm:w-auto" variant="outline">
-                        <Link href="/dashboard/trading/copy-trading">
-                            Explore Master Traders
-                        </Link>
-                    </Button>
-                </CardFooter>
-            </Card>
+                 <Card>
+                    <CardHeader>
+                        <CardTitle className="font-headline flex items-center gap-2">
+                            <BrainCircuit className="w-6 h-6 text-primary" />
+                            <span>Market Intelligence Center</span>
+                        </CardTitle>
+                        <CardDescription>
+                            Access advanced AI-powered analytics, sentiment tracking, and economic event data.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardFooter>
+                        <Button asChild className="w-full sm:w-auto">
+                            <Link href="/dashboard/trading/intelligence">
+                                Go to Intelligence Center
+                            </Link>
+                        </Button>
+                    </CardFooter>
+                </Card>
 
-            <Card className="md:col-span-full bg-accent/10 border-accent/20">
-                <CardHeader>
-                    <CardTitle className="font-headline text-accent flex items-center gap-2">
-                        <MessageSquare className="w-6 h-6" />
-                        <span>New: Community Hub</span>
-                    </CardTitle>
-                    <CardDescription>
-                        Join the conversation. Share strategies, ask questions, and learn from fellow traders in our new community hub, featuring forums and educational resources.
-                    </CardDescription>
-                </CardHeader>
-                <CardFooter>
-                     <Button asChild className="w-full sm:w-auto" variant="outline">
-                        <Link href="/dashboard/trading/community">
-                            Explore the Community
-                        </Link>
-                    </Button>
-                </CardFooter>
-            </Card>
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="font-headline flex items-center gap-2">
+                            <Users className="w-6 h-6" />
+                            <span>Copy & Social Trading</span>
+                        </CardTitle>
+                        <CardDescription>
+                            Follow the strategies of top-performing community members. Copy their trades automatically and share in their success.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardFooter>
+                         <Button asChild className="w-full sm:w-auto" variant="outline">
+                            <Link href="/dashboard/trading/copy-trading">
+                                Explore Master Traders
+                            </Link>
+                        </Button>
+                    </CardFooter>
+                </Card>
+
+                <Card className="md:col-span-full bg-accent/10 border-accent/20">
+                    <CardHeader>
+                        <CardTitle className="font-headline text-accent flex items-center gap-2">
+                            <MessageSquare className="w-6 h-6" />
+                            <span>New: Community Hub</span>
+                        </CardTitle>
+                        <CardDescription>
+                            Join the conversation. Share strategies, ask questions, and learn from fellow traders in our new community hub, featuring forums and educational resources.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardFooter>
+                         <Button asChild className="w-full sm:w-auto" variant="outline">
+                            <Link href="/dashboard/trading/community">
+                                Explore the Community
+                            </Link>
+                        </Button>
+                    </CardFooter>
+                </Card>
+            </div>
 
             <Card>
                 <CardHeader>
@@ -397,88 +373,6 @@ export default function TradingPage() {
                     </div>
                 </CardContent>
             </Card>
-
-            <div className="space-y-8">
-                <Card>
-                    <CardHeader>
-                        <CardTitle className="font-headline flex items-center gap-2">
-                            <ShieldCheck className="w-6 h-6 text-primary" />
-                            Verified Trading Performance
-                        </CardTitle>
-                        <CardDescription>
-                            Transparent, real-money results. Verified by third-party auditors.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                        <div className="p-4 rounded-lg bg-muted/50">
-                            <p className="text-sm text-muted-foreground">Total Gain</p>
-                            <p className="text-2xl font-bold font-mono text-accent">+89.4%</p>
-                        </div>
-                         <div className="p-4 rounded-lg bg-muted/50">
-                            <p className="text-sm text-muted-foreground">Win Rate</p>
-                            <p className="text-2xl font-bold font-mono">76.8%</p>
-                        </div>
-                         <div className="p-4 rounded-lg bg-muted/50">
-                            <p className="text-sm text-muted-foreground">Max Drawdown</p>
-                            <p className="text-2xl font-bold font-mono text-destructive">8.7%</p>
-                        </div>
-                         <div className="p-4 rounded-lg bg-muted/50">
-                            <p className="text-sm text-muted-foreground">Sharpe Ratio</p>
-                            <p className="text-2xl font-bold font-mono">2.14</p>
-                        </div>
-                         <div className="p-4 rounded-lg bg-muted/50">
-                            <p className="text-sm text-muted-foreground">Total Trades</p>
-                            <p className="text-2xl font-bold font-mono">847</p>
-                        </div>
-                         <div className="p-4 rounded-lg bg-muted/50">
-                            <p className="text-sm text-muted-foreground">Avg. Win</p>
-                            <p className="text-2xl font-bold font-mono text-accent">+$185</p>
-                        </div>
-                         <div className="p-4 rounded-lg bg-muted/50">
-                            <p className="text-sm text-muted-foreground">Avg. Loss</p>
-                            <p className="text-2xl font-bold font-mono text-destructive">-$89</p>
-                        </div>
-                         <div className="p-4 rounded-lg bg-muted/50">
-                            <p className="text-sm text-muted-foreground">Risk/Reward</p>
-                            <p className="text-2xl font-bold font-mono">1:2.08</p>
-                        </div>
-                    </CardContent>
-                    <CardFooter className="flex flex-wrap gap-4">
-                        <Badge variant="outline" className="gap-1 border-green-500 text-green-500"><CheckCircle className="h-3 w-3" /> MyFXBook Verified</Badge>
-                        <Badge variant="outline" className="gap-1 border-green-500 text-green-500"><CheckCircle className="h-3 w-3" /> Real Account Trading</Badge>
-                        <Badge variant="outline" className="gap-1 border-green-500 text-green-500"><CheckCircle className="h-3 w-3" /> Third-Party Audited</Badge>
-                    </CardFooter>
-                </Card>
-
-                <Card>
-                    <CardHeader>
-                        <CardTitle className="font-headline">Monthly Performance Breakdown</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                       <div className="overflow-x-auto">
-                            <Table>
-                                <TableHeader>
-                                    <TableRow>
-                                        <TableHead>Month</TableHead>
-                                        <TableHead className="text-right">P&L</TableHead>
-                                        <TableHead className="text-right">Gain</TableHead>
-                                    </TableRow>
-                                </TableHeader>
-                                <TableBody>
-                                    {monthlyBreakdown.map((item) => (
-                                        <TableRow key={item.month}>
-                                            <TableCell className="font-medium">{item.month}</TableCell>
-                                            <TableCell className="text-right font-mono text-accent">{item.pnl}</TableCell>
-                                            <TableCell className="text-right font-mono text-accent">{item.gain}</TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                       </div>
-                    </CardContent>
-                </Card>
-            </div>
-
         </div>
     );
 }

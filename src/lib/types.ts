@@ -241,3 +241,14 @@ export interface TrendAnalysis {
     bias: TrendBias;
   }[];
 }
+
+// Subscription Types
+export interface SubscriptionTier {
+  name: string;
+  price: string;
+  pricePeriod: string;
+  description: string;
+  features: string[];
+  isCurrent?: boolean;
+  isRecommended?: boolean;
+}
