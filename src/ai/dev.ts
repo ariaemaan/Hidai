@@ -7,3 +7,4 @@ import './flows/generateMarketingCopyFlow';
 import './flows/generateAdImageFlow';
 import './flows/generateTradingSignalFlow';
 import './flows/analyzeCompetitiveAdvantageFlow';
+import './flows/generateExamFlow';

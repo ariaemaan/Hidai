@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { SidebarProvider, Sidebar, SidebarInset } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { MainSidebar } from "@/components/layout/main-sidebar";
 import { SiteHeader } from "@/components/layout/site-header";
 

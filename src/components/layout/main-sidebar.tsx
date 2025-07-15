@@ -13,7 +13,7 @@ import {
   SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { Logo } from "@/components/logo";
-import { Home, Gamepad2, Trophy, Footprints, ClipboardList, PiggyBank, TrendingUp } from "lucide-react";
+import { Home, Gamepad2, Trophy, Footprints, ClipboardList, PiggyBank, TrendingUp, GraduationCap } from "lucide-react";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { LanguageSwitcher } from "@/components/shared/language-switcher";
 
@@ -21,6 +21,7 @@ const menuItems = [
   { href: "/dashboard", label: "Home", icon: Home },
   { href: "/dashboard/games", label: "Games", icon: Gamepad2 },
   { href: "/dashboard/move", label: "Move", icon: Footprints },
+  { href: "/dashboard/learn", label: "Learn", icon: GraduationCap },
   { href: "/dashboard/quests", label: "Quests", icon: ClipboardList },
   { href: "/dashboard/invest", label: "Invest", icon: PiggyBank },
   { href: "/dashboard/trading", label: "Trading", icon: TrendingUp },
@@ -46,7 +47,7 @@ export function MainSidebar() {
             <SidebarMenuItem key={item.href}>
               <SidebarMenuButton
                 asChild
-                isActive={pathname === item.href}
+                isActive={pathname.startsWith(item.href)}
                 tooltip={{
                   children: item.label,
                   className: "font-headline",
@@ -64,7 +65,7 @@ export function MainSidebar() {
             <SidebarMenuItem key={item.href}>
               <SidebarMenuButton
                 asChild
-                isActive={pathname === item.href}
+                isActive={pathname.startsWith(item.href)}
                 tooltip={{
                   children: item.label,
                   className: "font-headline",
