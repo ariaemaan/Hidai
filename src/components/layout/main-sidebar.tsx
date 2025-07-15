@@ -13,7 +13,7 @@ import {
   SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { Logo } from "@/components/logo";
-import { Home, Gamepad2, Trophy, Footprints, ClipboardList, PiggyBank, TrendingUp, GraduationCap } from "lucide-react";
+import { Home, Gamepad2, Trophy, Footprints, ClipboardList, PiggyBank, TrendingUp, GraduationCap, Shield } from "lucide-react";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { LanguageSwitcher } from "@/components/shared/language-switcher";
 
@@ -47,7 +47,7 @@ export function MainSidebar() {
             <SidebarMenuItem key={item.href}>
               <SidebarMenuButton
                 asChild
-                isActive={pathname.startsWith(item.href)}
+                isActive={pathname.startsWith(item.href) && (item.href !== "/dashboard" || pathname === "/dashboard")}
                 tooltip={{
                   children: item.label,
                   className: "font-headline",
@@ -78,6 +78,21 @@ export function MainSidebar() {
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
+            <SidebarSeparator className="my-2"/>
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                asChild
+                tooltip={{
+                  children: "Admin Panel",
+                  className: "font-headline",
+                }}
+              >
+                <Link href="/admin">
+                  <Shield />
+                  <span>Admin Panel</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter>
