@@ -1,6 +1,6 @@
 import { StatsCard } from "@/components/dashboard/stats-card";
 import { TransactionsHistory } from "@/components/dashboard/transactions-history";
-import { MullaBotChat } from "@/components/dashboard/mulla-bot-chat";
+import { AfghanAiChat } from "@/components/dashboard/mulla-bot-chat";
 import { TrendingDown, TrendingUp, Coins } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
@@ -46,7 +46,7 @@ export default function DashboardPage() {
           <TransactionsHistory />
         </div>
         <div className="lg:col-span-2">
-            <MullaBotChat />
+            <AfghanAiChat />
         </div>
       </div>
     </div>
