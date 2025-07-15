@@ -13,7 +13,7 @@ import {
   SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { Logo } from "@/components/logo";
-import { Home, Gamepad2, User, Trophy, Footprints, ClipboardList, PiggyBank, TrendingUp } from "lucide-react";
+import { Home, Gamepad2, Trophy, Footprints, ClipboardList, PiggyBank, TrendingUp } from "lucide-react";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { LanguageSwitcher } from "@/components/shared/language-switcher";
 
