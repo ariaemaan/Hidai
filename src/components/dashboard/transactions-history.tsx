@@ -17,12 +17,12 @@ import { Button } from "../ui/button"
 
 
 const transactions: DisplayTransaction[] = [
-    { type: 'Launch Bonus', amount: 1000, description: 'Welcome to the EduAfghanX community!', icon: Rocket, time: '1 min ago', direction: 'in' },
-    { type: 'Game Reward', amount: 1500, description: 'Victory in "Kabul Towers"', icon: Gamepad2, time: '20 mins ago', direction: 'in' },
+    { type: 'Launch Bonus', amount: 10000, description: 'Welcome to EduAfghanX!', icon: Rocket, time: '1 min ago', direction: 'in' },
+    { type: 'Game Reward', amount: 1500, description: 'From Tap Game', icon: Gamepad2, time: '20 mins ago', direction: 'in' },
     { type: 'Staking Deposit', amount: -10000, description: 'Locked for 30 days', icon: PiggyBank, time: '1 hour ago', direction: 'out' },
-    { type: 'Daily Bonus', amount: 500, description: 'Daily login reward', icon: Gift, time: '1 day ago', direction: 'in' },
-    { type: 'Game Reward', amount: 850, description: 'High score in "Afghan Runner"', icon: Gamepad2, time: '2 days ago', direction: 'in' },
-    { type: 'Booster Purchase', amount: -2500, description: '2x Point Multiplier', icon: ShoppingCart, time: '2 days ago', direction: 'out' },
+    { type: 'Daily Bonus', amount: 500, description: 'Login streak: Day 1', icon: Gift, time: '1 day ago', direction: 'in' },
+    { type: 'Quest Reward', amount: 850, description: 'Kabul Trivia', icon: Gamepad2, time: '2 days ago', direction: 'in' },
+    { type: 'Spend', amount: -2500, description: '2x Point Multiplier', icon: ShoppingCart, time: '2 days ago', direction: 'out' },
 ]
 
 export function TransactionsHistory() {

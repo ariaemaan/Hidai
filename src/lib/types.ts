@@ -1,87 +1,77 @@
 
-
 import type { ElementType } from 'react';
-// In a real app, you would import this from 'firebase/firestore'
-// For now, we'll define a placeholder
+
+// Firestore-related types
+// A placeholder for the actual Firebase Timestamp type
 export type Timestamp = {
   seconds: number;
   nanoseconds: number;
   toDate: () => Date;
 };
 
-// Users Collection
-export interface UserProfile {
-  name: string;
-  email: string;
+// --- Firestore Collections ---
+
+// /users/{uid}
+export interface User {
+  uid: string;
+  full_name: string;
   phone: string;
-  preferredLanguage: 'dari' | 'pashto' | 'english';
-  avatar: string;
-  createdAt: Timestamp;
-  lastActiveAt: Timestamp;
-}
-
-export interface UserBalance {
-  points: number;
-  stakedPoints: number;
-  stakingRewards: number;
-  totalEarned: number;
-}
-
-export interface UserGameStats {
+  language: 'en' | 'fa' | 'ps';
+  country: string;
+  wallet_balance: number;
+  staked_balance: number;
+  reward_per_second: number;
+  last_active_timestamp: Timestamp;
+  total_earned: number;
+  referral_code: string;
+  referred_by: string | null;
+  daily_login_streak: number;
+  quests_completed: string[]; // Array of quest IDs
+  migration_ready: boolean;
   level: number;
-  xp: number;
-  dailyStreak: number;
-  totalTaps: number;
-  totalSteps: number;
-  questsCompleted: number;
+  joined_at: Timestamp;
 }
 
-export interface UserReferrals {
-  code: string;
-  referredBy: string; // userId
-  referredUsers: string[]; // array of userIds
-  totalReferralRewards: number;
+// /settings/app_settings (Singleton Document)
+export interface AppSettings {
+  total_supply: number;
+  circulating_supply: number;
+  coin_price_usd: number;
+  apr: number;
+  market_cap_usd: number;
+  launch_date: Timestamp;
 }
 
-export interface FirestoreUser {
-  id: string; // Document ID
-  profile: UserProfile;
-  balance: UserBalance;
-  gameStats: UserGameStats;
-  achievements: string[];
-  referrals: UserReferrals;
-}
-
-// Transactions Collection
+// /transactions/{transactionId}
 export interface Transaction {
-  id: string; // Document ID
-  userId: string;
-  type: 'tap_earn' | 'move_earn' | 'quest_reward' | 'daily_bonus' | 'referral_bonus' | 'staking_reward' | 'booster_purchase' | 'staking_deposit' | 'launch_bonus';
+  uid: string;
+  type: 'earn' | 'stake' | 'withdraw' | 'spend' | 'bonus';
   amount: number;
+  source: 'tap_game' | 'referral' | 'quest' | 'login' | 'admin' | 'staking';
   timestamp: Timestamp;
-  metadata: Record<string, any>;
 }
 
-// Quests Collection
+// /quests/{questId}
 export interface Quest {
-  id:string; // Document ID
-  title: LocalizedText;
-  description: LocalizedText;
+  id: string;
+  title: string;
+  description: string;
   reward: number;
-  type: 'cultural' | 'religious' | 'trivia' | 'social' | 'educational';
-  difficulty: 'easy' | 'medium' | 'hard';
-  isActive: boolean;
-  createdAt: Timestamp;
+  category: 'culture' | 'namaz' | 'quiz' | 'physical' | 'tap';
+  is_active: boolean;
 }
 
-export interface LocalizedText {
-    dari: string;
-    pashto: string;
-    english: string;
+// /referrals/{referralId}
+export interface Referral {
+  referrer_uid: string;
+  referred_uid: string;
+  reward_given: boolean;
+  timestamp: Timestamp;
 }
 
-// UI-specific types that may not map 1:1 with Firestore
-// These are useful for component props and mock data
+
+// --- UI-specific types (for component props and mock data) ---
+
 export interface DisplayUser {
     id: string;
     name: string;
@@ -126,7 +116,6 @@ export interface LeaderboardPlayer {
     isFounder?: boolean;
 }
 
-// Trading-specific types
 export type SignalType = 'STRONG_BUY' | 'BUY' | 'HOLD' | 'SELL' | 'STRONG_SELL';
 export type SignalStatus = 'active' | 'closed_win' | 'closed_loss';
 export type AssetClass = 'forex' | 'crypto' | 'commodity' | 'index';
@@ -153,7 +142,6 @@ export interface MarketAsset {
     isUp: boolean;
 }
 
-// Live Trading Account Showcase Types
 export interface LiveAccountStats {
   startingBalance: number;
   currentBalance: number;
@@ -164,8 +152,8 @@ export interface LiveAccountStats {
   activeTrades: number;
   maxDrawdown: number;
   sharpeRatio: number;
-  dailyVaR: number; // Value at Risk
-  currentExposure: number; // Percentage
+  dailyVaR: number; 
+  currentExposure: number; 
   correlationRisk: 'Low' | 'Moderate' | 'High';
 }
 
@@ -189,7 +177,6 @@ export interface RiskAlert {
   asset?: string;
 }
 
-// Copy Trading Types
 export interface MasterTrader {
   id: string;
   name: string;
@@ -203,7 +190,6 @@ export interface MasterTrader {
   isIslamicCompliant: boolean;
 }
 
-// Market Intelligence Types
 export interface MarketIntelligenceSummary {
   sentiment: 'Bullish' | 'Bearish' | 'Neutral';
   sentimentScore: number;
@@ -242,7 +228,6 @@ export interface TrendAnalysis {
   }[];
 }
 
-// Subscription Types
 export interface SubscriptionTier {
   name: string;
   price: string;
