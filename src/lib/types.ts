@@ -21,8 +21,8 @@ export interface UserProfile {
 }
 
 export interface UserBalance {
-  kabuliCoins: number;
-  stakedCoins: number;
+  points: number;
+  stakedPoints: number;
   stakingRewards: number;
   totalEarned: number;
 }
@@ -252,5 +252,3 @@ export interface SubscriptionTier {
   isCurrent?: boolean;
   isRecommended?: boolean;
 }
-
-    

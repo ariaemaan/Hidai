@@ -127,7 +127,7 @@ export default function CoursePage({ params }: { params: { courseId: string } })
                                     Start Exam
                                 </Link>
                             </Button>
-                            <p className="text-xs text-muted-foreground text-center mt-2">Reward: 10,000 Kabuli Coins</p>
+                            <p className="text-xs text-muted-foreground text-center mt-2">Reward: 10,000 Points</p>
                         </CardContent>
                     </Card>
                 </div>

@@ -27,7 +27,7 @@ export default function AdminUsersPage() {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
                     <CardTitle>All Users</CardTitle>
-                    <CardDescription>A list of all users in the Kabuli Coins ecosystem.</CardDescription>
+                    <CardDescription>A list of all users in the EduAfghanX ecosystem.</CardDescription>
                 </div>
                 <div className="flex gap-2 w-full sm:w-auto">
                     <Input placeholder="Search users..." className="w-full sm:w-64" />
@@ -42,7 +42,7 @@ export default function AdminUsersPage() {
                         <TableRow>
                             <TableHead>User</TableHead>
                             <TableHead>Status</TableHead>
-                            <TableHead>Balance (KBC)</TableHead>
+                            <TableHead>Balance (Points)</TableHead>
                             <TableHead>Joined Date</TableHead>
                             <TableHead className="text-right">Actions</TableHead>
                         </TableRow>

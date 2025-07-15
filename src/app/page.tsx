@@ -9,7 +9,7 @@ const features = [
     {
       icon: Gamepad2,
       title: "Play & Earn",
-      description: "Engage in fun games like Tap-to-Earn and Move-to-Earn. The more you play, the more Kabuli Coins you collect.",
+      description: "Engage in fun games like Tap-to-Earn and Move-to-Earn. The more you play, the more Points you collect.",
       image: "https://placehold.co/600x400.png",
       aiHint: "game controller",
     },
@@ -65,7 +65,7 @@ export default function LandingPage() {
                     Explore Afghan Culture. Earn Rewards.
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    Kabuli Coins is a unique tap-to-earn game that rewards you for learning about the rich history, traditions, and beauty of Afghanistan.
+                    EduAfghanX is a unique platform that rewards you for learning about the rich history, traditions, and beauty of Afghanistan.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -154,7 +154,7 @@ export default function LandingPage() {
           <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight font-headline">
-                Join the Kabuli Coins Community Today
+                Join the EduAfghanX Community Today
               </h2>
               <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Start your journey of discovery and earning. Become part of our growing global family.
@@ -169,7 +169,7 @@ export default function LandingPage() {
         </section>
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-muted-foreground">&copy; 2024 Kabuli Coins. All rights reserved.</p>
+        <p className="text-xs text-muted-foreground">&copy; 2024 EduAfghanX. All rights reserved.</p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
           <Link href="/terms" className="text-xs hover:underline underline-offset-4" prefetch={false}>
             Terms of Service

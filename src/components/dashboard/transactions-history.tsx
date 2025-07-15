@@ -18,12 +18,12 @@ import { Button } from "../ui/button"
 
 
 const transactions: DisplayTransaction[] = [
-    { type: 'Launch Bonus', amount: 1000, description: 'Welcome to the Kabuli Coins community!', icon: Rocket, time: '1 min ago', direction: 'in' },
+    { type: 'Launch Bonus', amount: 1000, description: 'Welcome to the EduAfghanX community!', icon: Rocket, time: '1 min ago', direction: 'in' },
     { type: 'Game Reward', amount: 1500, description: 'Victory in "Kabul Towers"', icon: Gamepad2, time: '20 mins ago', direction: 'in' },
     { type: 'Staking Deposit', amount: -10000, description: 'Locked for 30 days', icon: PiggyBank, time: '1 hour ago', direction: 'out' },
     { type: 'Daily Bonus', amount: 500, description: 'Daily login reward', icon: Gift, time: '1 day ago', direction: 'in' },
     { type: 'Game Reward', amount: 850, description: 'High score in "Afghan Runner"', icon: Gamepad2, time: '2 days ago', direction: 'in' },
-    { type: 'Booster Purchase', amount: -2500, description: '2x Coin Multiplier', icon: ShoppingCart, time: '2 days ago', direction: 'out' },
+    { type: 'Booster Purchase', amount: -2500, description: '2x Point Multiplier', icon: ShoppingCart, time: '2 days ago', direction: 'out' },
 ]
 
 export function TransactionsHistory() {
@@ -32,7 +32,7 @@ export function TransactionsHistory() {
       <CardHeader>
         <CardTitle className="font-headline">Transaction History</CardTitle>
         <CardDescription>
-          Your recent coin earnings and spendings.
+          Your recent point earnings and spendings.
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 space-y-3">
@@ -54,7 +54,7 @@ export function TransactionsHistory() {
                         "font-mono font-medium",
                         transaction.direction === 'in' ? "text-accent" : "text-destructive"
                     )}>
-                        {transaction.direction === 'in' ? '+' : ''}{transaction.amount.toLocaleString()} KBC
+                        {transaction.direction === 'in' ? '+' : ''}{transaction.amount.toLocaleString()} Points
                     </p>
                     <p className="text-xs text-muted-foreground">{transaction.time}</p>
                 </div>

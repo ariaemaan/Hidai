@@ -17,13 +17,13 @@ const ptSans = PT_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Kabuli Coins",
-  description: "A culturally-rich Afghan tap-to-earn game.",
+  title: "EduAfghanX",
+  description: "A world-class platform to learn about Afghan culture and earn rewards.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Kabuli Coins",
+    title: "EduAfghanX",
   },
 };
 

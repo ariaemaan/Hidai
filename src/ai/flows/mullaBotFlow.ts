@@ -28,7 +28,7 @@ const prompt = ai.definePrompt({
   name: 'mullaBotPrompt',
   input: {schema: MullaBotInputSchema},
   output: {format: 'text'},
-  prompt: `You are MullaBot, a friendly AI assistant for the "Kabuli Coins" app.
+  prompt: `You are MullaBot, a friendly AI assistant for the "EduAfghanX" app.
   Your personality is respectful, culturally sensitive, encouraging, and knowledgeable about Afghan culture and Islamic values.
   You support users in English, Dari, and Pashto.
 

@@ -23,11 +23,11 @@ export function StepTracker() {
       });
       return;
     }
-    // 1 KBC per 100 steps
-    const coinsEarned = Math.floor(steps / 100);
+    // 1 Point per 100 steps
+    const pointsEarned = Math.floor(steps / 100);
     toast({
       title: "Rewards Claimed!",
-      description: `You've earned ${coinsEarned.toLocaleString()} Kabuli Coins for ${steps.toLocaleString()} steps.`,
+      description: `You've earned ${pointsEarned.toLocaleString()} Points for ${steps.toLocaleString()} steps.`,
     });
     setSteps(0);
   };
@@ -72,7 +72,7 @@ export function StepTracker() {
       </CardContent>
       <CardFooter>
         <Button onClick={handleClaim} className="w-full font-bold" disabled={steps <= 0}>
-            Claim {Math.floor(steps / 100).toLocaleString()} Kabuli Coins
+            Claim {Math.floor(steps / 100).toLocaleString()} Points
         </Button>
       </CardFooter>
     </Card>

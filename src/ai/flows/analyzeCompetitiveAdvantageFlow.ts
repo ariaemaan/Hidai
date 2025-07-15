@@ -32,7 +32,7 @@ export async function analyzeCompetitiveAdvantage(): Promise<AnalyzeCompetitiveA
 const prompt = ai.definePrompt({
   name: 'analyzeCompetitiveAdvantagePrompt',
   output: {schema: AnalyzeCompetitiveAdvantageOutputSchema},
-  prompt: `You are a strategic market analyst AI. Your task is to analyze "Kabuli Coins," a tap-to-earn game that rewards users for learning about Afghan culture, and identify its key competitive advantages.
+  prompt: `You are a strategic market analyst AI. Your task is to analyze "EduAfghanX," an app that rewards users for learning about Afghan culture, and identify its key competitive advantages.
 
   Provide exactly four unique advantages. For each advantage, provide:
   1. A compelling title.

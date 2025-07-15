@@ -205,7 +205,7 @@ export default function ExamPage({ params }: { params: { courseId: string } }) {
                 {passed && (
                      <div className="p-4 rounded-lg bg-accent/10 text-accent-foreground border border-accent/20 mb-6 w-full">
                          <h3 className="font-bold text-accent">Reward Unlocked!</h3>
-                         <p className="font-mono font-bold">+10,000 Kabuli Coins have been added to your wallet.</p>
+                         <p className="font-mono font-bold">+10,000 Points have been added to your wallet.</p>
                      </div>
                 )}
                  

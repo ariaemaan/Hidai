@@ -36,7 +36,7 @@ export function DailyGoals() {
                     </div>
                     <Progress value={progress} />
                     <p className="text-xs text-muted-foreground mt-1 text-right">
-                       Bonus: {goal.bonus}x Kabuli Coins
+                       Bonus: {goal.bonus}x Points
                     </p>
                 </div>
             )

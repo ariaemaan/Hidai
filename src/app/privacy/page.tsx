@@ -20,7 +20,7 @@ export default function PrivacyPolicyPage() {
           <CardContent className="p-6 sm:p-8 space-y-6 text-sm sm:text-base">
             <div className="space-y-2">
                 <h2 className="text-xl font-semibold font-headline">1. Introduction</h2>
-                <p className="text-muted-foreground">Welcome to Kabuli Coins. We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us.</p>
+                <p className="text-muted-foreground">Welcome to EduAfghanX. We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us.</p>
             </div>
             
             <div className="space-y-2">

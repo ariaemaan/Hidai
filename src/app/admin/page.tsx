@@ -87,7 +87,7 @@ export default function AdminDashboardPage() {
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-headline font-bold tracking-tight">Admin Dashboard</h1>
-        <p className="text-muted-foreground">Overview of the Kabuli Coins ecosystem.</p>
+        <p className="text-muted-foreground">Overview of the EduAfghanX ecosystem.</p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -127,7 +127,7 @@ export default function AdminDashboardPage() {
             <BarChart2 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">1.2B KBC</div>
+            <div className="text-2xl font-bold">1.2B Points</div>
             <p className="text-xs text-muted-foreground">25% of circulating supply</p>
           </CardContent>
         </Card>
@@ -208,7 +208,7 @@ export default function AdminDashboardPage() {
         <Card>
             <CardHeader>
                 <CardTitle>Economic Health</CardTitle>
-                <CardDescription>Real-time Kabuli Coins economy vitals.</CardDescription>
+                <CardDescription>Real-time economy vitals.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 <div className="flex items-center">
@@ -226,7 +226,7 @@ export default function AdminDashboardPage() {
                     </div>
                     <div>
                         <p className="text-sm text-muted-foreground">Daily Issuance</p>
-                        <p className="text-2xl font-bold font-mono">1.2M KBC</p>
+                        <p className="text-2xl font-bold font-mono">1.2M Points</p>
                     </div>
                 </div>
                  <div className="flex items-center">
@@ -235,7 +235,7 @@ export default function AdminDashboardPage() {
                     </div>
                     <div>
                         <p className="text-sm text-muted-foreground">Daily Burn</p>
-                        <p className="text-2xl font-bold font-mono">350K KBC</p>
+                        <p className="text-2xl font-bold font-mono">350K Points</p>
                     </div>
                 </div>
             </CardContent>

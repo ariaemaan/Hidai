@@ -30,7 +30,7 @@ export function AIShareDialog({ open, onOpenChange, postContext }: AIShareDialog
     if (open && postContext) {
       setIsLoading(true);
       generateSocialPost({
-        userName: "A Kabuli Coins player",
+        userName: "An EduAfghanX player",
         context: postContext,
       })
         .then((response) => {
@@ -44,7 +44,7 @@ export function AIShareDialog({ open, onOpenChange, postContext }: AIShareDialog
             description: "Could not generate a post. Please try again.",
           });
           // Fallback message
-          setPost(`Come join me on Kabuli Coins! It's a fun way to learn about Afghan culture and earn rewards. #KabuliCoins`);
+          setPost(`Come join me on EduAfghanX! It's a fun way to learn about Afghan culture and earn rewards. #EduAfghanX`);
         })
         .finally(() => {
           setIsLoading(false);

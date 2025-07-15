@@ -25,7 +25,7 @@ export default function CommunityHubPage() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
                     <h1 className="text-3xl font-headline font-bold tracking-tight">Community Trading Hub</h1>
-                    <p className="text-muted-foreground">Learn, share, and grow with the Kabuli Coins trading community.</p>
+                    <p className="text-muted-foreground">Learn, share, and grow with the EduAfghanX trading community.</p>
                 </div>
                 <Button asChild variant="outline" className="w-full sm:w-auto">
                     <Link href="/dashboard/trading">
