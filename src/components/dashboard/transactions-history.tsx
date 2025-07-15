@@ -1,4 +1,3 @@
-
 import {
   Card,
   CardContent,
@@ -37,7 +36,7 @@ export function TransactionsHistory() {
       </CardHeader>
       <CardContent className="flex-1 space-y-3">
         {transactions.map((transaction, index) => (
-            <div key={index} className="flex items-center p-3 -mx-3 rounded-lg transition-colors hover:bg-muted/50">
+            <div key={index} className="flex items-center p-3 -mx-3 rounded-lg">
                  <Avatar className="h-10 w-10 border">
                     <AvatarFallback className={cn(
                         transaction.direction === 'in' ? "bg-accent/10 text-accent" : "bg-destructive/10 text-destructive"

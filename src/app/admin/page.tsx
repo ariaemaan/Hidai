@@ -69,7 +69,7 @@ export default function AdminDashboardPage() {
       setIsLoading(true);
       analyzeCompetitiveAdvantage()
           .then(result => setAdvantages(result.advantages))
-          .catch(error => console.error("Failed to load competitive advantages:", error))
+          .catch(() => {})
           .finally(() => setIsLoading(false));
   }, []);
 

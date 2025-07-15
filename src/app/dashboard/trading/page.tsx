@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -149,7 +148,6 @@ export default function TradingPage() {
             });
             setGeneratedSignal(result);
         } catch (error) {
-            console.error("Error generating trading signal:", error);
             toast({
                 variant: "destructive",
                 title: "AI Signal Error",
@@ -376,7 +374,3 @@ export default function TradingPage() {
         </div>
     );
 }
-
-    
-
-    

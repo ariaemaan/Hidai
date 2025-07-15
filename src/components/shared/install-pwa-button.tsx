@@ -33,12 +33,7 @@ export function InstallPWAButton() {
     e.preventDefault();
     if (!prompt) return;
     prompt.prompt();
-    prompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('User accepted the PWA installation prompt');
-      } else {
-        console.log('User dismissed the PWA installation prompt');
-      }
+    prompt.userChoice.then(() => {
       setPrompt(null);
     });
   };

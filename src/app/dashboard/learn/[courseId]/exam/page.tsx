@@ -49,8 +49,7 @@ export default function ExamPage({ params }: { params: { courseId: string } }) {
                 setExam(data);
                 setStatus('ready');
             })
-            .catch(err => {
-                console.error("Failed to generate exam", err);
+            .catch(() => {
                 toast({ variant: "destructive", title: "Error", description: "Could not load the exam. Please try again." });
                 setStatus('loading'); // Or an error state
             });

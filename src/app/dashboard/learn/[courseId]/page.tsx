@@ -91,7 +91,7 @@ export default function CoursePage({ params }: { params: { courseId: string } })
                             lesson.status === 'locked' && "pointer-events-none"
                          )}>
                             <Card className={cn(
-                                "transition-colors hover:border-primary/50",
+                                "transition-colors",
                                 lesson.status === 'in_progress' && "border-primary/50 ring-2 ring-primary/20",
                                 lesson.status === 'locked' && "bg-muted/50"
                             )}>

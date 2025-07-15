@@ -37,7 +37,6 @@ export function MullaBotChat() {
             const botMessage: Message = { role: 'bot', text: botResponse };
             setMessages(prev => [...prev, botMessage]);
         } catch (error) {
-            console.error("Error calling MullaBot flow:", error);
             const errorMessage: Message = { role: 'bot', text: "I'm having a little trouble connecting right now. Please try again in a moment." };
             setMessages(prev => [...prev, errorMessage]);
         } finally {

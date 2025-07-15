@@ -36,8 +36,7 @@ export function AIShareDialog({ open, onOpenChange, postContext }: AIShareDialog
         .then((response) => {
           setPost(response.post);
         })
-        .catch((error) => {
-          console.error("Error generating social post:", error);
+        .catch(() => {
           toast({
             variant: "destructive",
             title: "AI Error",

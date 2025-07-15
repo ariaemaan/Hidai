@@ -46,8 +46,7 @@ export default function AdminMarketingPage() {
 
         generateMarketingCopy(data)
             .then(setGeneratedContent)
-            .catch(error => {
-                console.error("Error generating marketing copy:", error);
+            .catch(() => {
                 toast({
                     variant: "destructive",
                     title: "AI Text Error",
@@ -58,8 +57,7 @@ export default function AdminMarketingPage() {
 
         generateAdImage({ campaignDetails })
             .then(result => setGeneratedImage(result.imageUrl))
-            .catch(error => {
-                console.error("Error generating ad image:", error);
+            .catch(() => {
                 toast({
                     variant: "destructive",
                     title: "AI Image Error",
