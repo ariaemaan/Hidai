@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen, Award, CheckCircle, Lock, ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -87,13 +87,13 @@ export default function CoursePage({ params }: { params: { courseId: string } })
                 <div className="md:col-span-2 space-y-4">
                     {course.lessons.map((lesson, index) => (
                          <Link key={lesson.id} href={`/dashboard/learn/${courseId}/${lesson.id}`} className={cn(
-                            "block",
+                            "block group",
                             lesson.status === 'locked' && "pointer-events-none"
                          )}>
                             <Card className={cn(
-                                "hover:shadow-lg transition-shadow hover:border-primary/50",
+                                "transition-colors hover:border-primary/50",
                                 lesson.status === 'in_progress' && "border-primary/50 ring-2 ring-primary/20",
-                                lesson.status === 'locked' && "bg-muted/50 hover:shadow-none"
+                                lesson.status === 'locked' && "bg-muted/50"
                             )}>
                                 <CardContent className="p-4 flex items-center gap-4">
                                     <div className="p-3 bg-muted rounded-full">
@@ -112,11 +112,13 @@ export default function CoursePage({ params }: { params: { courseId: string } })
 
                 <div className="md:col-span-1">
                     <Card className="sticky top-20">
-                        <CardHeader>
-                            <CardTitle className="font-headline flex items-center gap-2">
-                                <Award className="text-primary" />
+                        <CardHeader className="flex-col items-start">
+                             <div className="pb-4">
+                                <Award className="text-primary h-8 w-8" />
+                            </div>
+                            <h2 className="font-headline text-xl font-bold">
                                 Final Exam
-                            </CardTitle>
+                            </h2>
                         </CardHeader>
                         <CardContent>
                             <p className="text-muted-foreground text-sm mb-4">
