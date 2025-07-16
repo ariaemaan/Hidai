@@ -20,12 +20,11 @@ const savingsGoals = [
 ];
 
 export default function InvestPage() {
-    const [totalStaked, setTotalStaked] = useState(25000);
+    const [totalStaked] = useState(25000);
     const [lifetimeEarnings, setLifetimeEarnings] = useState(3450);
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setTotalStaked(prev => prev + 1);
             setLifetimeEarnings(prev => prev + (Math.random() * 0.05));
         }, 1000);
 
