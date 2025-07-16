@@ -33,7 +33,7 @@ const prompt = ai.definePrompt({
   name: 'generateMarketingCopyPrompt',
   input: {schema: GenerateMarketingCopyInputSchema},
   output: {schema: GenerateMarketingCopyOutputSchema},
-  prompt: `You are an expert marketing copywriter for Afghan AiHub, an app where users earn rewards by learning about Afghan culture.
+  prompt: `You are an expert marketing copywriter for Ayyan Afg Ai Automation Agency (AAaiAA), an app where users earn rewards by learning about Afghan culture and using AI services.
   Your task is to generate compelling, culturally appropriate marketing content tailored for specific campaigns, audiences, and platforms.
 
   The generated content must be respectful, authentic, and align with Islamic values. Use languages and references that resonate with the target audience.
@@ -47,7 +47,7 @@ const prompt = ai.definePrompt({
   Based on these details, generate the following:
   1.  **Headline**: A powerful and concise headline that grabs attention.
   2.  **Body**: The main text of the post. It should be persuasive and clearly communicate the message. Adapt the length and style for the specified platform.
-  3.  **Hashtags**: A set of relevant hashtags, including brand hashtags like #AfghanAiHub, #AfghanQuest, and others relevant to the campaign.
+  3.  **Hashtags**: A set of relevant hashtags, including brand hashtags like #AAaiAA, #AfghanQuest, #EduAfghanX, and others relevant to the campaign.
 
   Ensure the output is ready to be used in a marketing campaign.
   `,

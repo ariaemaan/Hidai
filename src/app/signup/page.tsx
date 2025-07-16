@@ -30,7 +30,7 @@ export default function SignupPage() {
             await createUserWithEmailAndPassword(auth, email, password);
             toast({
                 title: "Account Created",
-                description: "Welcome to EduAfghanX! You can now log in.",
+                description: "Welcome to AAaiAA! You can now log in.",
             });
             router.push("/login");
         } catch (error: any) {

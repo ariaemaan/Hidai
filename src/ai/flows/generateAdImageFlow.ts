@@ -33,7 +33,7 @@ const generateAdImageFlow = ai.defineFlow(
   async (input) => {
     const {media} = await ai.generate({
       model: 'googleai/gemini-2.0-flash-preview-image-generation',
-      prompt: `Generate a visually appealing and culturally appropriate advertisement image for "Afghan AiHub", an app about earning rewards by learning about Afghan culture. The image should be inspiring and positive.
+      prompt: `Generate a visually appealing and culturally appropriate advertisement image for "Ayyan Afg Ai Automation Agency (AAaiAA)", an app about earning rewards by learning about Afghan culture. The image should be inspiring and positive.
 
       The campaign is about: ${input.campaignDetails}
 

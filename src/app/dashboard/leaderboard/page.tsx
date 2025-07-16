@@ -66,7 +66,7 @@ export default function LeaderboardPage() {
   const [postContext, setPostContext] = useState("");
 
   const handleShareClick = (player: LeaderboardPlayer) => {
-    setPostContext(`I'm celebrating my achievement on Afghan AiHub! I'm currently rank #${player.rank} on the global leaderboard with ${player.score.toLocaleString()} points.`);
+    setPostContext(`I'm celebrating my achievement on AAaiAA! I'm currently rank #${player.rank} on the global leaderboard with ${player.score.toLocaleString()} points.`);
     setIsAiDialogOpen(true);
   };
 

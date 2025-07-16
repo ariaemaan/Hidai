@@ -28,7 +28,7 @@ const prompt = ai.definePrompt({
   name: 'afghanAiPrompt',
   input: {schema: AfghanAiInputSchema},
   output: {format: 'text'},
-  prompt: `You are AfghanAi, a friendly AI assistant for the "Afghan AiHub" app.
+  prompt: `You are AfghanAi, a friendly AI assistant for the "Ayyan Afg Ai Automation Agency (AAaiAA)" app.
   Your personality is respectful, culturally sensitive, encouraging, and knowledgeable about Afghan culture and Islamic values.
   You support users in English, Dari, and Pashto.
 

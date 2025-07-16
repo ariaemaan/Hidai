@@ -17,7 +17,7 @@ import { Button } from "../ui/button"
 
 
 const transactions: DisplayTransaction[] = [
-    { type: 'Launch Bonus', amount: 10000, description: 'Welcome to EduAfghanX!', icon: Rocket, time: '1 min ago', direction: 'in' },
+    { type: 'Launch Bonus', amount: 10000, description: 'Welcome to AAaiAA!', icon: Rocket, time: '1 min ago', direction: 'in' },
     { type: 'Game Reward', amount: 1500, description: 'From Tap Game', icon: Gamepad2, time: '20 mins ago', direction: 'in' },
     { type: 'Staking Deposit', amount: -10000, description: 'Locked for 30 days', icon: PiggyBank, time: '1 hour ago', direction: 'out' },
     { type: 'Daily Bonus', amount: 500, description: 'Login streak: Day 1', icon: Gift, time: '1 day ago', direction: 'in' },

@@ -50,7 +50,7 @@ export default function SettingsPage() {
                 </Avatar>
                 <div>
                     <h2 className="text-2xl font-bold font-headline">{user.email}</h2>
-                    <p className="text-muted-foreground">Welcome to Afghan AiHub!</p>
+                    <p className="text-muted-foreground">Welcome to AAaiAA!</p>
                 </div>
               </div>
               <div className="space-y-2">

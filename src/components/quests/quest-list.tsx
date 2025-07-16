@@ -34,7 +34,7 @@ const questData: DisplayQuestData = {
         { title: "Charity Drive", description: "Donate to a featured charity campaign.", reward: 500, icon: Heart, status: "incomplete" },
     ],
     social: [
-        { title: "Invite Friends", description: "Invite 3 friends to join EduAfghanX.", reward: 1000, icon: Users, status: "incomplete" },
+        { title: "Invite Friends", description: "Invite 3 friends to join AAaiAA.", reward: 1000, icon: Users, status: "incomplete" },
         { title: "Share Achievement", description: "Share your daily high score on social media.", reward: 50, icon: Share2, status: "completed" },
         { title: "Community Help", description: "Help an elderly neighbor with their groceries.", reward: 500, icon: Handshake, status: "incomplete" },
     ],

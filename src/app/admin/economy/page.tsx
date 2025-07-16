@@ -5,7 +5,7 @@ export default function AdminEconomyPage() {
     <div className="space-y-8">
        <div>
         <h1 className="text-3xl font-headline font-bold tracking-tight">Economy Management</h1>
-        <p className="text-muted-foreground">Monitor and manage the EduAfghanX token economy.</p>
+        <p className="text-muted-foreground">Monitor and manage the AAaiAA token economy.</p>
       </div>
       <Card>
         <CardHeader>

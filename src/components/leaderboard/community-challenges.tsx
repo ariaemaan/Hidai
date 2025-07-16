@@ -26,7 +26,7 @@ const challenges = [
   {
     icon: Rocket,
     title: "Social Media Blast",
-    description: "Help us spread the word! Let's reach 1,000 shares with #EduAfghanX.",
+    description: "Help us spread the word! Let's reach 1,000 shares with #AAaiAA.",
     current: 150,
     target: 1000,
     reward: "5,000 Points Drop",

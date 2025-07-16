@@ -18,7 +18,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Afghan AiHub",
+  title: "Ayyan Afg Ai Automation Agency",
   description: "A world-class platform to learn about Afghan culture and earn rewards.",
 };
 

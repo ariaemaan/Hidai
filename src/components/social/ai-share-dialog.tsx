@@ -30,7 +30,7 @@ export function AIShareDialog({ open, onOpenChange, postContext }: AIShareDialog
     if (open && postContext) {
       setIsLoading(true);
       generateSocialPost({
-        userName: "An Afghan AiHub player",
+        userName: "An AAaiAA player",
         context: postContext,
       })
         .then((response) => {
@@ -43,7 +43,7 @@ export function AIShareDialog({ open, onOpenChange, postContext }: AIShareDialog
             description: "Could not generate a post. Please try again.",
           });
           // Fallback message
-          setPost(`Come join me on Afghan AiHub! It's a fun way to learn about Afghan culture and earn rewards. #AfghanAiHub`);
+          setPost(`Come join me on Ayyan Afg Ai Automation Agency! It's a fun way to learn about Afghan culture and earn rewards. #AAaiAA`);
         })
         .finally(() => {
           setIsLoading(false);
