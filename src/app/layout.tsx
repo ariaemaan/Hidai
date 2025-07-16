@@ -19,12 +19,6 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Afghan AiHub",
   description: "A world-class platform to learn about Afghan culture and earn rewards.",
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "Afghan AiHub",
-  },
 };
 
 export default function RootLayout({
@@ -36,7 +30,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="theme-color" content="#D7263D" />
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.png"></link>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

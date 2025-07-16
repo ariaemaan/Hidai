@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Home, User, LogOut, Settings } from "lucide-react"
 import Link from "next/link"
-import { InstallPWAButton } from "@/components/shared/install-pwa-button"
 
 
 export function UserNav() {
@@ -42,7 +41,6 @@ export function UserNav() {
               <span>Settings</span>
             </Link>
           </DropdownMenuItem>
-          <InstallPWAButton />
           <DropdownMenuSeparator />
            <DropdownMenuItem asChild>
              <Link href="/login">
