@@ -3,6 +3,7 @@ import { Poppins, PT_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { SplashScreen } from "@/components/layout/splash-screen";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -53,7 +54,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <SplashScreen>
+            {children}
+          </SplashScreen>
           <Toaster />
         </ThemeProvider>
       </body>
