@@ -17,13 +17,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Kabuli Coins",
+  title: "EduAfghanX",
   description: "A world-class platform to learn about Afghan culture and earn rewards.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Kabuli Coins",
+    title: "EduAfghanX",
   },
 };
 

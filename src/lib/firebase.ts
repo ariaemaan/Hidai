@@ -1,6 +1,5 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
 import { getFirestore, enableMultiTabIndexedDbPersistence } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { getAnalytics, isSupported } from "firebase/analytics";
@@ -19,7 +18,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
@@ -39,4 +37,4 @@ enableMultiTabIndexedDbPersistence(db).catch((err) => {
 // Initialize Analytics if supported
 const analytics = isSupported().then(yes => yes ? getAnalytics(app) : null);
 
-export { app, auth, db, storage, analytics };
+export { app, db, storage, analytics };

@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
 import { Gamepad2, BookOpen, Users, Palette, Heart, BrainCircuit } from "lucide-react";
 import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { motion } from "framer-motion";
 
 const features = [
     {
@@ -47,6 +48,22 @@ const whyUsItems = [
     }
 ];
 
+const cardVariants = {
+  offscreen: {
+    y: 50,
+    opacity: 0,
+  },
+  onscreen: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      bounce: 0.4,
+      duration: 0.8,
+    },
+  },
+};
+
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-dvh bg-background">
@@ -55,12 +72,9 @@ export default function LandingPage() {
           <Logo />
         </Link>
         <nav className="ml-auto flex items-center gap-4 sm:gap-6">
-           <Button variant="ghost" asChild>
-                <Link href="/login">Login</Link>
+           <Button asChild>
+                <Link href="/dashboard">Enter App</Link>
            </Button>
-            <Button asChild>
-                <Link href="/signup">Sign Up</Link>
-            </Button>
         </nav>
       </header>
       <main className="flex-1">
@@ -78,7 +92,7 @@ export default function LandingPage() {
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Button asChild size="lg" className="w-full min-[400px]:w-auto">
-                    <Link href="/signup">Get Started</Link>
+                    <Link href="/dashboard">Get Started</Link>
                   </Button>
                 </div>
               </div>
@@ -105,21 +119,29 @@ export default function LandingPage() {
                 </p>
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl items-stretch gap-8 sm:grid-cols-2 md:grid-cols-3">
+             <motion.div 
+                className="mx-auto grid max-w-5xl items-stretch gap-8 sm:grid-cols-2 md:grid-cols-3"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ staggerChildren: 0.1 }}
+              >
               {features.map((feature) => (
-                <Card key={feature.title} className="flex flex-col">
-                  <CardHeader>
-                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4">
-                        <feature.icon className="h-8 w-8 text-primary" />
-                    </div>
-                     <CardTitle className="text-center font-headline">{feature.title}</CardTitle>
-                  </CardHeader>
-                   <CardContent className="flex-1 text-center">
-                    <p className="text-muted-foreground">{feature.description}</p>
-                  </CardContent>
-                </Card>
+                <motion.div key={feature.title} variants={cardVariants}>
+                    <Card className="flex flex-col h-full">
+                    <CardHeader>
+                        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4">
+                            <feature.icon className="h-8 w-8 text-primary" />
+                        </div>
+                        <CardTitle className="text-center font-headline">{feature.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex-1 text-center">
+                        <p className="text-muted-foreground">{feature.description}</p>
+                    </CardContent>
+                    </Card>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -170,7 +192,7 @@ export default function LandingPage() {
             </div>
             <div className="mx-auto w-full max-w-sm space-y-2">
               <Button asChild size="lg" className="w-full">
-                <Link href="/signup">Sign Up Now</Link>
+                <Link href="/dashboard">Sign Up Now</Link>
               </Button>
             </div>
           </div>
