@@ -9,11 +9,9 @@ import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -94,13 +92,13 @@ export default function ExamPage({ params }: { params: { courseId: string } }) {
                 <p className="text-muted-foreground mt-2 mb-6">
                     This exam consists of {exam?.questions.length} multiple-choice questions. You must score at least 80% to pass and earn your reward. Good luck!
                 </p>
-                 <div className="flex gap-4">
-                    <Button asChild variant="outline">
+                 <div className="flex flex-col sm:flex-row gap-4 w-full max-w-sm">
+                    <Button asChild variant="outline" className="w-full">
                          <Link href={`/dashboard/learn/${courseId}`}>
                              <ArrowLeft className="mr-2 h-4 w-4" /> Go Back
                         </Link>
                     </Button>
-                    <Button size="lg" onClick={() => setStatus('in_progress')}>
+                    <Button size="lg" onClick={() => setStatus('in_progress')} className="w-full">
                         <Sparkles className="mr-2 h-4 w-4" /> Start Exam
                     </Button>
                  </div>

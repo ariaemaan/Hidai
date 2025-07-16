@@ -1,6 +1,6 @@
 '"use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm, Controller } from 'react-hook-form';
 import { generateKankorQuestions, type GenerateKankorOutput, type KankorQuestion } from "@/ai/flows/generateKankorQuestionsFlow";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -21,7 +21,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import Link from "next/link";
 
 const kankorSubjects = ['Mathematics', 'Physics', 'Chemistry', 'Biology', 'History', 'Geography', 'Islamic Studies'];
 const questionCounts = [3, 5, 10, 15];

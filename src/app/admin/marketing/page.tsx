@@ -75,7 +75,7 @@ export default function AdminMarketingPage() {
                 <h1 className="text-3xl font-headline font-bold tracking-tight">AI Marketing Assistant</h1>
                 <p className="text-muted-foreground">Generate culturally-aware marketing content and ad creatives.</p>
             </div>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
                 <Card>
                     <CardHeader>
                         <CardTitle>Content Generator</CardTitle>

@@ -80,7 +80,7 @@ export default function LiveAccountPage() {
                 </div>
                 <Button asChild variant="outline" className="w-full sm:w-auto">
                     <Link href="/dashboard/trading">
-                        <ArrowLeft className="mr-2 h-4 w-4" /> Back to Signals
+                        <ArrowLeft className="mr-2 h-4 w-4" /> Back to Trading
                     </Link>
                 </Button>
             </div>
@@ -90,7 +90,7 @@ export default function LiveAccountPage() {
                     <CardTitle className="font-headline text-primary">Live Risk & Performance Dashboard</CardTitle>
                     <CardDescription>Comprehensive real-time analysis of the live trading account. Last updated: 2 minutes ago</CardDescription>
                 </CardHeader>
-                <CardContent className="grid grid-cols-2 gap-4 text-center md:grid-cols-4">
+                <CardContent className="grid grid-cols-2 gap-4 text-center md:grid-cols-4 lg:grid-cols-4">
                     <div className="p-4 bg-muted/50 rounded-lg">
                         <p className="text-sm text-muted-foreground">Current Balance</p>
                         <p className="text-2xl sm:text-3xl font-bold font-mono">{formatCurrency(accountStats.currentBalance)}</p>
@@ -126,8 +126,8 @@ export default function LiveAccountPage() {
                 </CardContent>
             </Card>
 
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-                <Card>
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+                <Card className="lg:col-span-1">
                     <CardHeader>
                         <CardTitle className="font-headline flex items-center gap-2">
                             <AlertTriangle className="h-5 w-5" /> Risk Alerts
@@ -147,7 +147,7 @@ export default function LiveAccountPage() {
                     </CardContent>
                 </Card>
 
-                 <Card className="md:col-span-2">
+                 <Card className="lg:col-span-2">
                     <CardHeader>
                         <CardTitle className="font-headline">Account Growth</CardTitle>
                         <CardDescription>Starting Balance: {formatCurrency(accountStats.startingBalance)}</CardDescription>

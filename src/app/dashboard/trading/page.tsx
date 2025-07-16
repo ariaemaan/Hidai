@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ChevronsUp, ChevronUp, Minus, ChevronDown, ChevronsDown, CheckCircle, Trophy, Sparkles, Loader2, Users, BrainCircuit, Gem, ShieldCheck, MessageSquare } from "lucide-react";
+import { ChevronsUp, ChevronUp, Minus, ChevronDown, ChevronsDown, Trophy, Sparkles, Loader2, Users, BrainCircuit, Gem, MessageSquare } from "lucide-react";
 import { generateTradingSignal, type GenerateTradingSignalOutput } from "@/ai/flows/generateTradingSignalFlow";
 import type { TradingSignal, SignalType, MarketAsset } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -171,7 +171,7 @@ export default function TradingPage() {
                     <CardDescription>Select an asset and timeframe to get a new AI-powered trading signal instantly.</CardDescription>
                 </CardHeader>
                 <CardContent className="grid grid-cols-1 gap-4 md:grid-cols-3 md:items-end">
-                    <div>
+                    <div className="space-y-2">
                         <Label htmlFor="asset-select">Asset</Label>
                         <Select value={selectedAsset} onValueChange={setSelectedAsset} disabled={isLoading}>
                             <SelectTrigger id="asset-select"><SelectValue /></SelectTrigger>
@@ -180,7 +180,7 @@ export default function TradingPage() {
                             </SelectContent>
                         </Select>
                     </div>
-                    <div>
+                    <div className="space-y-2">
                         <Label htmlFor="timeframe-select">Timeframe</Label>
                         <Select value={selectedTimeframe} onValueChange={setSelectedTimeframe} disabled={isLoading}>
                             <SelectTrigger id="timeframe-select"><SelectValue /></SelectTrigger>
@@ -189,12 +189,10 @@ export default function TradingPage() {
                             </SelectContent>
                         </Select>
                     </div>
-                    <div className="md:self-end">
-                        <Button onClick={handleGenerateSignal} className="w-full font-bold" disabled={isLoading}>
-                            {isLoading ? <Loader2 className="animate-spin" /> : <Sparkles className="mr-2 h-4 w-4" />}
-                            {isLoading ? "Analyzing..." : "Generate Signal"}
-                        </Button>
-                    </div>
+                    <Button onClick={handleGenerateSignal} className="w-full font-bold" disabled={isLoading}>
+                        {isLoading ? <Loader2 className="animate-spin" /> : <Sparkles className="mr-2 h-4 w-4" />}
+                        {isLoading ? "Analyzing..." : "Generate Signal"}
+                    </Button>
                 </CardContent>
             </Card>
 
@@ -310,7 +308,7 @@ export default function TradingPage() {
                 <CardHeader>
                     <CardTitle className="font-headline">Market Overview</CardTitle>
                 </CardHeader>
-                <CardContent className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+                <CardContent className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
                     {marketData.map((asset) => (
                         <div key={asset.ticker} className="p-3 rounded-lg bg-muted/50">
                             <p className="text-sm font-semibold">{asset.name}</p>

@@ -10,7 +10,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyCmAhW_MjHHjBEBOmo6VNzYQfCB0IoZFz4",
   authDomain: "kabuli-coins.firebaseapp.com",
   projectId: "kabuli-coins",
-  storageBucket: "kabuli-coins.firebasestorage.app",
+  storageBucket: "kabuli-coins.appspot.com",
   messagingSenderId: "1048891252149",
   appId: "1:1048891252149:web:218161d421e72c90a84dfc"
 };
