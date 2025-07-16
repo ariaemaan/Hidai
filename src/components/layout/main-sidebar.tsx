@@ -20,6 +20,7 @@ import { LanguageSwitcher } from "@/components/shared/language-switcher";
 const menuItems = [
   { href: "/dashboard", label: "Home", icon: Home },
   { href: "/dashboard/games", label: "Games", icon: Gamepad2 },
+  { href: "/dashboard/earn/dashboard", label: "AfghanX Reward", icon: Gamepad2 },
   { href: "/dashboard/move", label: "Move", icon: Footprints },
   { href: "/dashboard/learn", label: "Learn", icon: GraduationCap },
   { href: "/dashboard/kankor", label: "Kankor Prep", icon: BookMarked },

@@ -1,4 +1,3 @@
-
 import type { ElementType } from 'react';
 
 // Firestore-related types
@@ -18,6 +17,7 @@ export interface User {
   phone: string;
   language: 'en' | 'fa' | 'ps';
   country: string;
+  // --- Deprecated fields to be removed after migration ---
   wallet_balance: number;
   staked_balance: number;
   reward_per_second: number;
@@ -29,10 +29,21 @@ export interface User {
   quests_completed: string[]; // Array of quest IDs
   migration_ready: boolean;
   level: number;
+  // --- New AXC Fields ---
+  axc_wallet_balance: number;
+  axc_staked_balance: number;
+  axc_total_earned: number;
+  axc_last_active: Timestamp;
+  axc_referral_code: string;
+  axc_referred_by: string | null;
+  axc_level: number;
+  axc_daily_login_streak: number;
+  axc_migration_ready: boolean; // default: false
+  // --- Common Fields ---
   joined_at: Timestamp;
 }
 
-// /settings/app_settings (Singleton Document)
+// /settings/app_settings (Singleton Document) - DEPRECATED
 export interface AppSettings {
   total_supply: number;
   circulating_supply: number;
@@ -42,7 +53,7 @@ export interface AppSettings {
   launch_date: Timestamp;
 }
 
-// /transactions/{transactionId}
+// /transactions/{transactionId} - DEPRECATED
 export interface Transaction {
   uid: string;
   type: 'earn' | 'stake' | 'withdraw' | 'spend' | 'bonus';
@@ -51,7 +62,7 @@ export interface Transaction {
   timestamp: Timestamp;
 }
 
-// /quests/{questId}
+// /quests/{questId} - DEPRECATED
 export interface Quest {
   id: string;
   title: string;
@@ -61,13 +72,52 @@ export interface Quest {
   is_active: boolean;
 }
 
-// /referrals/{referralId}
+// /referrals/{referralId} - DEPRECATED
 export interface Referral {
   referrer_uid: string;
   referred_uid: string;
   reward_given: boolean;
   timestamp: Timestamp;
 }
+
+// --- New AXC Collections ---
+// /axc_settings (Singleton Document)
+export interface AXCSettings {
+    total_supply: number; // 1,000,000,000,000
+    circulating_supply: number;
+    apr: number; // 20
+    price_usd: number; // 0.000001
+    launch_date: Timestamp; // Jan 1, 2027
+    reward_rate_per_sec: number; // 10
+}
+
+// /axc_transactions/{transactionId}
+export interface AXCTransaction {
+    uid: string;
+    amount: number;
+    type: 'earn' | 'stake' | 'spend' | 'referral' | 'bonus';
+    source: string;
+    timestamp: Timestamp;
+}
+
+// /axc_quests/{questId}
+export interface AXCQuest {
+    id: string;
+    title: string;
+    description: string;
+    reward: number;
+    category: string;
+    active: boolean;
+}
+
+// /axc_referrals/{referralId}
+export interface AXCReferral {
+    referrer_uid: string;
+    referred_uid: string;
+    reward_given: boolean;
+    timestamp: Timestamp;
+}
+
 
 // --- Kankor Prep Module Firestore Collections ---
 
