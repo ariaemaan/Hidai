@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
@@ -25,7 +26,8 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "noFallthroughCasesInSwitch": true
   },
   "include": [
     "next-env.d.ts",
