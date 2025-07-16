@@ -1,0 +1,77 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+  
+    // Helper function to check if a user is authenticated
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    // Helper function to check if the user is the owner of the data
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+
+    // Users can only read their own data and can only create their own user document.
+    // They can update their own data, but cannot change protected fields like balance.
+    match /users/{userId} {
+      allow read, update: if isSignedIn() && isOwner(userId);
+      allow create: if isSignedIn();
+      
+      // Prevent users from updating their own balance, level, etc.
+      // These should only be updated by server-side Cloud Functions.
+      allow update: if request.resource.data.diff(resource.data).affectedKeys()
+                    .hasOnly(['full_name', 'language', 'country', 'last_active_timestamp']);
+    }
+
+    // Settings are public read-only for all users. No one can write to them except admins (via Functions).
+    match /settings/app_settings {
+      allow read: if isSignedIn();
+      allow write: if false; // Must be updated via a trusted backend/function
+    }
+
+    // Users can create their own transactions, but cannot read others' or update/delete any.
+    match /transactions/{txId} {
+      allow read, update, delete: if false; // Transactions are immutable and private
+      allow create: if isSignedIn() && isOwner(request.resource.data.uid);
+    }
+    
+    // Quests are public-readable.
+    match /quests/{questId} {
+        allow read: if isSignedIn();
+        allow write: if false; // Only admins can create/update quests
+    }
+    
+    // Users can read their own referral data, but that's it.
+    match /referrals/{referralId} {
+      allow read: if isSignedIn() && (isOwner(resource.data.referrer_uid) || isOwner(resource.data.referred_uid));
+      allow write: if false;
+    }
+    
+    // --- Kankor Prep Module Rules ---
+
+    // Kankor questions are public-readable for any signed-in user.
+    match /kankor_questions/{subject}/{questionId} {
+        allow read: if isSignedIn();
+        allow write: if false; // Only admins can add/edit questions
+    }
+    
+    // Users can only read and write their own quiz attempts.
+    match /user_quizzes/{userId}/{attemptId} {
+        allow read, write: if isSignedIn() && isOwner(userId);
+    }
+    
+    // Users can only read their own rewards profile. Updates are handled by server.
+    match /user_rewards/{userId} {
+        allow read: if isSignedIn() && isOwner(userId);
+        allow write: if false;
+    }
+    
+    // Users can create their own top-up requests but cannot read others' or modify them.
+    match /topup_requests/{userId}/{requestId} {
+        allow read, update: if false;
+        allow create: if isSignedIn() && isOwner(userId);
+    }
+  }
+}
