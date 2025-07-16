@@ -1,27 +1,28 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Book, Edit, Trophy, Zap } from "lucide-react";
+import Link from 'next/link';
 
 const kankorFeatures = [
     {
-        icon: Book,
-        title: "Question Bank",
-        description: "Access thousands of MCQs categorized by subject.",
-        link: "#",
-        cta: "Start Practicing"
+        icon: Edit,
+        title: "AI Quiz Generator",
+        description: "Generate custom quizzes on any subject to test your knowledge.",
+        link: "/dashboard/kankor/quiz",
+        cta: "Create a Quiz"
     },
     {
-        icon: Edit,
-        title: "Smart Quizzes",
-        description: "Take timed exams & custom quizzes to test your knowledge.",
-        link: "#",
-        cta: "Take a Quiz"
+        icon: Book,
+        title: "Practice Questions",
+        description: "Access thousands of MCQs categorized by subject.",
+        link: "/dashboard/kankor/quiz",
+        cta: "Start Practicing"
     },
     {
         icon: Zap,
         title: "Daily Challenge",
         description: "A quick, mixed-subject quiz to warm you up.",
-        link: "#",
+        link: "/dashboard/kankor/quiz",
         cta: "Start Challenge"
     },
     {
@@ -69,9 +70,9 @@ export default function KankorPrepPage() {
                 </CardContent>
                 <CardFooter>
                     <Button asChild className="w-full font-bold">
-                        <a href={feature.link}>
+                        <Link href={feature.link}>
                             {feature.cta} <ArrowRight className="ml-2 h-4 w-4" />
-                        </a>
+                        </Link>
                     </Button>
                 </CardFooter>
             </Card>

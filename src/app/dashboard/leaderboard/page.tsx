@@ -1,4 +1,4 @@
-"use client";
+'"use client";
 
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -66,7 +66,7 @@ export default function LeaderboardPage() {
   const [postContext, setPostContext] = useState("");
 
   const handleShareClick = (player: LeaderboardPlayer) => {
-    setPostContext(`I'm celebrating my achievement on EduAfghanX! I'm currently rank #${player.rank} on the global leaderboard with ${player.score.toLocaleString()} points.`);
+    setPostContext(`I'm celebrating my achievement on Afghan AiHub! I'm currently rank #${player.rank} on the global leaderboard with ${player.score.toLocaleString()} points.`);
     setIsAiDialogOpen(true);
   };
 

@@ -11,7 +11,7 @@ export default function DashboardPage() {
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-headline font-bold tracking-tight">My Wallet</h1>
-        <p className="text-muted-foreground">An overview of your EduAfghanX economy.</p>
+        <p className="text-muted-foreground">An overview of your Afghan AiHub economy.</p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">

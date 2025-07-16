@@ -1,4 +1,4 @@
-"use client";
+'"use client";
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -87,7 +87,7 @@ export default function AdminDashboardPage() {
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-headline font-bold tracking-tight">Admin Dashboard</h1>
-        <p className="text-muted-foreground">Overview of the EduAfghanX ecosystem.</p>
+        <p className="text-muted-foreground">Overview of the Afghan AiHub ecosystem.</p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">

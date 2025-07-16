@@ -1,4 +1,4 @@
-"use client";
+'"use client";
 
 import * as React from "react";
 import { generateSocialPost } from "@/ai/flows/generateSocialPostFlow";
@@ -30,7 +30,7 @@ export function AIShareDialog({ open, onOpenChange, postContext }: AIShareDialog
     if (open && postContext) {
       setIsLoading(true);
       generateSocialPost({
-        userName: "An EduAfghanX player",
+        userName: "An Afghan AiHub player",
         context: postContext,
       })
         .then((response) => {
@@ -43,7 +43,7 @@ export function AIShareDialog({ open, onOpenChange, postContext }: AIShareDialog
             description: "Could not generate a post. Please try again.",
           });
           // Fallback message
-          setPost(`Come join me on EduAfghanX! It's a fun way to learn about Afghan culture and earn rewards. #EduAfghanX`);
+          setPost(`Come join me on Afghan AiHub! It's a fun way to learn about Afghan culture and earn rewards. #AfghanAiHub`);
         })
         .finally(() => {
           setIsLoading(false);

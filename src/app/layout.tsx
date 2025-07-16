@@ -17,13 +17,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "EduAfghanX",
+  title: "Afghan AiHub",
   description: "A world-class platform to learn about Afghan culture and earn rewards.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "EduAfghanX",
+    title: "Afghan AiHub",
   },
 };
 

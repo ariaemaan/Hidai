@@ -29,10 +29,10 @@ const prompt = ai.definePrompt({
   name: 'generateSocialPostPrompt',
   input: {schema: GenerateSocialPostInputSchema},
   output: {schema: GenerateSocialPostOutputSchema},
-  prompt: `You are a creative and encouraging social media expert for EduAfghanX, an app where users earn rewards by learning about Afghan culture.
+  prompt: `You are a creative and encouraging social media expert for Afghan AiHub, an app where users earn rewards by learning about Afghan culture.
   Your task is to generate a short, exciting, and culturally appropriate social media post for a user named {{userName}}.
   The post should be in English but feel free to start with a culturally relevant greeting like "As-salamu alaykum!" or use words like "Alhamdulillah".
-  Include relevant hashtags like #EduAfghanX, #AfghanCulture, and #Afghanistan.
+  Include relevant hashtags like #AfghanAiHub, #AfghanCulture, and #Afghanistan.
 
   The user wants to create a post about the following:
   "{{context}}"
