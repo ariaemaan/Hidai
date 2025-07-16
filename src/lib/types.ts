@@ -69,6 +69,53 @@ export interface Referral {
   timestamp: Timestamp;
 }
 
+// --- Kankor Prep Module Firestore Collections ---
+
+// kankor_questions/{subject}/{questionId}
+export interface KankorQuestion {
+  id: string;
+  question: string;
+  options: string[];
+  correctAnswer: string;
+  explanation: string;
+  difficulty: 'Easy' | 'Medium' | 'Hard';
+  tags: string[];
+  subject: string;
+}
+
+// user_quizzes/{userId}/{attemptId}
+export interface UserQuizAttempt {
+  id: string;
+  userId: string;
+  questions: string[]; // Array of questionIds
+  userAnswers: string[];
+  score: number;
+  timeTaken: number; // in seconds
+  passed: boolean;
+  timestamp: Timestamp;
+}
+
+// user_rewards/{userId}
+export interface UserRewardsProfile {
+  userId: string;
+  points: number;
+  totalQuizzes: number;
+  streak: number;
+  lastActivity: Timestamp;
+}
+
+// topup_requests/{userId}/{requestId}
+export interface TopupRequest {
+  id: string;
+  userId: string;
+  pointsUsed: number;
+  network: 'AWCC' | 'Roshan' | 'MTN' | 'Etisalat';
+  amount: number; // AFN
+  status: 'pending' | 'completed' | 'failed';
+  phoneNumber: string;
+  requestedAt: Timestamp;
+}
+
 
 // --- UI-specific types (for component props and mock data) ---
 

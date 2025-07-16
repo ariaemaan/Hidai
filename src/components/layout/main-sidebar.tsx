@@ -13,7 +13,7 @@ import {
   SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { Logo } from "@/components/logo";
-import { Home, Gamepad2, Trophy, Footprints, ClipboardList, PiggyBank, TrendingUp, GraduationCap, Shield } from "lucide-react";
+import { Home, Gamepad2, Trophy, Footprints, ClipboardList, PiggyBank, TrendingUp, GraduationCap, Shield, BookMarked } from "lucide-react";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { LanguageSwitcher } from "@/components/shared/language-switcher";
 
@@ -22,6 +22,7 @@ const menuItems = [
   { href: "/dashboard/games", label: "Games", icon: Gamepad2 },
   { href: "/dashboard/move", label: "Move", icon: Footprints },
   { href: "/dashboard/learn", label: "Learn", icon: GraduationCap },
+  { href: "/dashboard/kankor", label: "Kankor Prep", icon: BookMarked },
   { href: "/dashboard/quests", label: "Quests", icon: ClipboardList },
   { href: "/dashboard/invest", label: "Invest", icon: PiggyBank },
   { href: "/dashboard/trading", label: "Trading", icon: TrendingUp },
