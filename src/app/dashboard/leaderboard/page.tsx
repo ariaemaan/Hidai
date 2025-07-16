@@ -111,7 +111,7 @@ export default function LeaderboardPage() {
                             <TableCell>
                                 <div className="flex items-center gap-4">
                                 <Avatar className="h-12 w-12">
-                                    <AvatarImage src={`https://placehold.co/40x40.png?text=${player.name.charAt(0)}`} alt={player.name} data-ai-hint="avatar user" />
+                                    <AvatarImage src={`https://placehold.co/40x40.png?text=A`} alt={player.name} data-ai-hint="avatar user" />
                                     <AvatarFallback>{player.name.charAt(0)}</AvatarFallback>
                                 </Avatar>
                                 <div>

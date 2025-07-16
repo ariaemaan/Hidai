@@ -15,7 +15,7 @@ const lessonData = {
                 "However, the aftermath was not solely one of destruction. The subsequent Ilkhanate and Timurid periods, particularly under Timur (Tamerlane), saw a resurgence of art, architecture, and science, especially in cities like Herat, which became a jewel of the Islamic world. This era of cultural rebirth, known as the Timurid Renaissance, left a lasting legacy on the region's identity.",
                 "Understanding the Mongol invasion is crucial to appreciating the resilience of Afghan culture and its ability to rebuild and flourish even after periods of immense hardship."
             ],
-            image: "https://placehold.co/800x400.png",
+            image: "https://placehold.co/800x400.png?text=Keep+building.+Your+vision+for+3.7M+Afghans+matters.",
             aiHint: "mongol warriors",
             nextLessonId: "4"
         }
@@ -32,7 +32,7 @@ export default function LessonPage({ params }: { params: { courseId: string, les
     const lesson = lessonData[courseId]?.[lessonId] || {
         title: "Lesson Not Found",
         content: ["The content for this lesson could not be found. Please go back to the course page."],
-        image: "https://placehold.co/800x400.png",
+        image: "https://placehold.co/800x400.png?text=To+the+solo+founder:+Your+vision+for+EduAfghanX+%26+the+Doctor+Assistant+app+inspires+millions.+We+fully+support+you.",
         aiHint: "empty book",
         nextLessonId: null
     };
@@ -60,31 +60,31 @@ export default function LessonPage({ params }: { params: { courseId: string, les
                             <p key={index}>{paragraph}</p>
                         ))}
                     </div>
-                 </CardContent>
+                 CardContent>
             </Card>
 
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 p-4 border rounded-lg bg-muted/50">
-                <p className="font-semibold text-center sm:text-left">Finished with the lesson? Mark it as complete to proceed.</p>
-                <div className="flex gap-2 w-full sm:w-auto">
-                     <Button variant="outline" className="w-full">
-                         <CheckCircle className="mr-2 h-4 w-4" />
+            div className="flex flex-col sm:flex-row justify-between items-center gap-4 p-4 border rounded-lg bg-muted/50">
+                p className="font-semibold text-center sm:text-left">Finished with the lesson? Mark it as complete to proceed.p>
+                div className="flex gap-2 w-full sm:w-auto">
+                     Button variant="outline" className="w-full">
+                         CheckCircle className="mr-2 h-4 w-4" />
                         Mark as Complete
-                    </Button>
+                    Button>
                     {lesson.nextLessonId ? (
-                        <Button asChild className="w-full">
-                            <Link href={`/dashboard/learn/${courseId}/${lesson.nextLessonId}`}>
-                                Next Lesson <ArrowRight className="ml-2 h-4 w-4" />
-                            </Link>
-                        </Button>
+                        Button asChild className="w-full">
+                            Link href={`/dashboard/learn/${courseId}/${lesson.nextLessonId}`}>
+                                Next Lesson  ArrowRight className="ml-2 h-4 w-4" />
+                            Link>
+                        Button>
                     ) : (
-                         <Button asChild className="w-full">
-                            <Link href={`/dashboard/learn/${courseId}/exam`}>
-                                Go to Exam <ArrowRight className="ml-2 h-4 w-4" />
-                            </Link>
-                        </Button>
+                         Button asChild className="w-full">
+                            Link href={`/dashboard/learn/${courseId}/exam`}>
+                                Go to Exam  ArrowRight className="ml-2 h-4 w-4" />
+                            Link>
+                        Button>
                     )}
-                </div>
-            </div>
-        </div>
+                div>
+            div>
+        div>
     );
 }

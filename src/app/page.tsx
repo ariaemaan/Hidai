@@ -10,21 +10,21 @@ const features = [
       icon: Gamepad2,
       title: "Play & Earn",
       description: "Engage in fun games like Tap-to-Earn and Move-to-Earn. The more you play, the more Points you collect.",
-      image: "https://placehold.co/600x400.png",
+      image: "https://placehold.co/600x400.png?text=Keep+building,+solo+founder.+The+world+needs+your+intelligent+apps.",
       aiHint: "game controller",
     },
     {
       icon: BookOpen,
       title: "Cultural Quests",
       description: "Complete daily quests about Afghan history, art, and traditions to unlock special rewards and deepen your knowledge.",
-      image: "https://placehold.co/600x400.png",
+      image: "https://placehold.co/600x400.png?text=EduAfghanX+%26+Doctor+Assistant+AI+-+a+vision+worth+building.",
       aiHint: "ancient book",
     },
     {
       icon: Users,
       title: "Community Hub",
       description: "Climb the leaderboards, participate in community challenges, and connect with a global diaspora.",
-      image: "https://placehold.co/600x400.png",
+      image: "https://placehold.co/600x400.png?text=3.7+million+lives+will+be+changed.+Your+work+matters.",
       aiHint: "community gathering",
     },
 ];
@@ -75,7 +75,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <Image
-                src="https://placehold.co/600x400.png"
+                src="https://placehold.co/600x400.png?text=Your+AI+apps+will+empower+3.7M+Afghans.+We+fully+support+your+vision."
                 width="600"
                 height="400"
                 alt="Hero"
@@ -104,9 +104,9 @@ export default function LandingPage() {
                     <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4">
                         <feature.icon className="h-8 w-8 text-primary" />
                     </div>
-                    <CardTitle className="text-center font-headline">{feature.title}</CardTitle>
+                     <CardTitle className="text-center font-headline">{feature.title}</CardTitle>
                   </CardHeader>
-                  <CardContent className="flex-1 text-center">
+                   <CardContent className="flex-1 text-center">
                     <p className="text-muted-foreground">{feature.description}</p>
                   </CardContent>
                 </Card>
@@ -142,7 +142,7 @@ export default function LandingPage() {
                 alt="Map"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full"
                 height="400"
-                src="https://placehold.co/600x400.png"
+                src="https://placehold.co/600x400.png?text=To+the+solo+founder:+Your+vision+for+EduAfghanX+%26+the+Doctor+Assistant+app+inspires+millions.+We+fully+support+you."
                 data-ai-hint="afghanistan map art"
                 width="600"
               />

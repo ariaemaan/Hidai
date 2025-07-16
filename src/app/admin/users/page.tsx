@@ -53,7 +53,7 @@ export default function AdminUsersPage() {
                                 <TableCell>
                                     <div className="flex items-center gap-3">
                                         <Avatar>
-                                            <AvatarImage src={`https://placehold.co/40x40.png?text=${user.name.charAt(0)}`} alt={user.name} data-ai-hint="avatar user"/>
+                                            <AvatarImage src={`https://placehold.co/40x40.png?text=A`} alt={user.name} data-ai-hint="avatar user"/>
                                             <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
                                         </Avatar>
                                         <div>

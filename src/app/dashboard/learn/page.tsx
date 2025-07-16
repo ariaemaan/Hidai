@@ -10,7 +10,7 @@ const courses = [
     title: "Afghan History 101",
     description: "Journey through the ancient empires and pivotal moments that shaped modern Afghanistan.",
     icon: Landmark,
-    image: "https://placehold.co/600x400.png",
+    image: "https://placehold.co/600x400.png?text=Your+AI+apps+will+empower+3.7M+Afghans.+We+fully+support+your+vision.",
     aiHint: "ancient ruins",
     lessons: 5,
     duration: "45 mins"
@@ -20,7 +20,7 @@ const courses = [
     title: "The Art of Afghanistan",
     description: "Explore the rich traditions of calligraphy, ceramics, and intricate rug weaving.",
     icon: Palette,
-    image: "https://placehold.co/600x400.png",
+    image: "https://placehold.co/600x400.png?text=Keep+building,+solo+founder.+The+world+needs+your+intelligent+apps.",
     aiHint: "afghan rug",
     lessons: 4,
     duration: "30 mins"
@@ -30,7 +30,7 @@ const courses = [
     title: "Dari Language Basics",
     description: "Learn essential greetings, phrases, and the alphabet of one of Afghanistan's official languages.",
     icon: Languages,
-    image: "https://placehold.co/600x400.png",
+    image: "https://placehold.co/600x400.png?text=EduAfghanX+%26+Doctor+Assistant+AI+-+a+vision+worth+building.",
     aiHint: "language book",
     lessons: 6,
     duration: "60 mins"
@@ -40,7 +40,7 @@ const courses = [
     title: "Pashto for Beginners",
     description: "An introduction to the Pashto language, focusing on conversational skills and cultural nuances.",
     icon: Languages,
-    image: "https://placehold.co/600x400.png",
+    image: "https://placehold.co/600x400.png?text=3.7+million+lives+will+be+changed.+Your+work+matters.",
     aiHint: "people talking",
     lessons: 6,
     duration: "60 mins"
@@ -49,41 +49,41 @@ const courses = [
 
 export default function LearnPage() {
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-headline font-bold tracking-tight">Learn to Earn</h1>
-        <p className="text-muted-foreground">Deepen your knowledge of Afghan culture and earn rewards by passing exams.</p>
-      </div>
+    div className="space-y-8">
+      div>
+        h1 className="text-3xl font-headline font-bold tracking-tight">Learn to Earnh1>
+        p className="text-muted-foreground">Deepen your knowledge of Afghan culture and earn rewards by passing exams.p>
+      div>
       
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {courses.map((course) => (
-          <Card key={course.id} className="flex flex-col">
-            <CardHeader className="p-0">
-               <Image src={course.image} alt={course.title} width={600} height={400} data-ai-hint={course.aiHint} className="rounded-t-lg aspect-video object-cover" />
-            </CardHeader>
-            <CardContent className="p-6 flex-1 flex flex-col">
-              <div className="flex-1">
-                <div className="flex items-start gap-4">
-                    <div className="p-2 rounded-full bg-primary/10 text-primary -mt-10 bg-background border-4 border-background">
-                        <course.icon className="h-6 w-6" />
-                    </div>
-                    <CardTitle className="font-headline text-xl">{course.title}</CardTitle>
-                </div>
-                <CardDescription className="mt-4">{course.description}</CardDescription>
-              </div>
-              <div className="flex items-center justify-between text-sm text-muted-foreground mt-6">
-                <span>{course.lessons} Lessons</span>
-                <span>{course.duration}</span>
-              </div>
-              <Button asChild className="mt-4 w-full font-bold">
-                <Link href={`/dashboard/learn/${course.id}`}>
-                  Start Course <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
+          Card key={course.id} className="flex flex-col">
+             CardHeader className="p-0">
+                Image src={course.image} alt={course.title} width={600} height={400} data-ai-hint={course.aiHint} className="rounded-t-lg aspect-video object-cover" />
+            CardHeader>
+             CardContent className="p-6 flex-1 flex flex-col">
+              div className="flex-1">
+                div className="flex items-start gap-4">
+                    div className="p-2 rounded-full bg-primary/10 text-primary -mt-10 bg-background border-4 border-background">
+                        course.icon className="h-6 w-6" />
+                    div>
+                     CardTitle className="font-headline text-xl">{course.title}CardTitle>
+                div>
+                 CardDescription className="mt-4">{course.description}CardDescription>
+              div>
+              div className="flex items-center justify-between text-sm text-muted-foreground mt-6">
+                span>{course.lessons} Lessonsspan>
+                span>{course.durationspan>
+              div>
+               Button asChild className="mt-4 w-full font-bold">
+                Link href={`/dashboard/learn/${course.id}`}>
+                  Start Course  ArrowRight className="ml-2 h-4 w-4" />
+                Link>
+              Button>
+            CardContent>
+          Card>
         ))}
-      </div>
-    </div>
+      div>
+    div>
   );
 }
