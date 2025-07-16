@@ -3,27 +3,27 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
 import { Gamepad2, BookOpen, Users, Palette, Heart, BrainCircuit } from "lucide-react";
 import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
 const features = [
     {
       icon: Gamepad2,
       title: "Play & Earn",
-      description: "Engage in fun games like Tap-to-Earn and Move-to-Earn. The more you play, the more Points you collect.",
+      description: "Engage in fun, culturally-themed games like Tap-to-Earn and Move-to-Earn. Every action rewards you with Points that can be used within the app.",
       image: "https://placehold.co/600x400.png",
       aiHint: "game controller",
     },
     {
       icon: BookOpen,
-      title: "Cultural Quests",
-      description: "Complete daily quests about Afghan history, art, and traditions to unlock special rewards and deepen your knowledge.",
+      title: "Learn & Grow",
+      description: "Dive into interactive lessons on Afghan history, art, and language. Pass quizzes and exams to unlock significant rewards and climb the leaderboards.",
       image: "https://placehold.co/600x400.png",
       aiHint: "ancient book",
     },
     {
       icon: Users,
       title: "Community Hub",
-      description: "Climb the leaderboards, participate in community challenges, and connect with a global diaspora.",
+      description: "Connect with a global diaspora. Compete in community-wide challenges, see your rank, and share your achievements with friends.",
       image: "https://placehold.co/600x400.png",
       aiHint: "community gathering",
     },
@@ -54,6 +54,14 @@ export default function LandingPage() {
         <Link href="/" className="flex items-center justify-center" prefetch={false}>
           <Logo />
         </Link>
+        <nav className="ml-auto flex items-center gap-4 sm:gap-6">
+           <Button variant="ghost" asChild>
+                <Link href="/login">Login</Link>
+           </Button>
+            <Button asChild>
+                <Link href="/signup">Sign Up</Link>
+            </Button>
+        </nav>
       </header>
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
@@ -70,7 +78,7 @@ export default function LandingPage() {
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Button asChild size="lg" className="w-full min-[400px]:w-auto">
-                    <Link href="/dashboard">Launch App</Link>
+                    <Link href="/signup">Get Started</Link>
                   </Button>
                 </div>
               </div>
@@ -162,7 +170,7 @@ export default function LandingPage() {
             </div>
             <div className="mx-auto w-full max-w-sm space-y-2">
               <Button asChild size="lg" className="w-full">
-                <Link href="/dashboard">Launch App</Link>
+                <Link href="/signup">Sign Up Now</Link>
               </Button>
             </div>
           </div>

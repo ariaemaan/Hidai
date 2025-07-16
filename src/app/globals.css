@@ -8,44 +8,44 @@ body {
 
 @layer base {
   :root {
-    /* New 2025 Premium Theme */
-    /* Primary: Royal Blue (#2563EB) -> HSL(221, 83%, 53%) */
-    /* Background: Off-white (#F8F9FA) -> HSL(210, 17%, 98%) */
-    /* Accent: Vibrant Teal (#14B8A6) -> HSL(174, 80%, 40%) */
-
-    --background: 210 17% 98%;
+    /* Kabuli Coins Theme (Afghan Flag Inspired) */
+    /* Primary: Red (#D7263D) -> HSL(353, 68%, 50%) */
+    /* Background: Light Gray (#F2F4F3) -> HSL(150, 8%, 95%) */
+    /* Accent: Green (#629069) -> HSL(130, 18%, 48%) */
+    
+    --background: 150 8% 95%;
     --foreground: 224 71% 4%;
     --card: 0 0% 100%;
     --card-foreground: 224 71% 4%;
     --popover: 0 0% 100%;
     --popover-foreground: 224 71% 4%;
-    --primary: 221 83% 53%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 353 68% 50%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 174 80% 40%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 130 18% 48%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 221 83% 53%;
-    --chart-1: 221 83% 53%;
-    --chart-2: 174 80% 40%;
+    --ring: 353 68% 50%;
+    --chart-1: 353 68% 50%;
+    --chart-2: 130 18% 48%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 224 71% 4%;
-    --sidebar-primary: 221 83% 53%;
-    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-primary: 353 68% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 210 40% 96.1%;
     --sidebar-accent-foreground: 222.2 47.4% 11.2%;
     --sidebar-border: 214.3 31.8% 91.4%;
-    --sidebar-ring: 221 83% 53%;
+    --sidebar-ring: 353 68% 50%;
   }
 
   .dark {
@@ -55,32 +55,32 @@ body {
     --card-foreground: 210 40% 98%;
     --popover: 217 33% 17%;
     --popover-foreground: 210 40% 98%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 353 78% 65%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 174 80% 45%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 130 28% 63%;
+    --accent-foreground: 224 71% 4%;
     --destructive: 0 63% 40%;
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 217 91% 60%;
-    --chart-1: 217 91% 60%;
-    --chart-2: 174 80% 45%;
+    --ring: 353 78% 65%;
+    --chart-1: 353 78% 65%;
+    --chart-2: 130 28% 63%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
     --sidebar-background: 222 47% 11%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 217 91% 60%;
-    --sidebar-primary-foreground: 222.2 47.4% 11.2%;
+    --sidebar-primary: 353 78% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 217.2 32.6% 17.5%;
     --sidebar-accent-foreground: 210 40% 98%;
     --sidebar-border: 217.2 32.6% 17.5%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-ring: 353 78% 65%;
   }
 }
 
