@@ -36,35 +36,46 @@ export default function AdminMarketingPage() {
         }
     });
 
-    const onSubmit = async (data: GenerateMarketingCopyInput) => {
+    const handleGenerateText = async (data: GenerateMarketingCopyInput) => {
         setIsTextLoading(true);
-        setIsImageLoading(true);
         setGeneratedContent(null);
+        try {
+            const content = await generateMarketingCopy(data);
+            setGeneratedContent(content);
+        } catch (error) {
+            console.error("AI Text Generation Error:", error);
+            toast({
+                variant: "destructive",
+                title: "AI Text Error",
+                description: "Failed to generate marketing content. Please try again.",
+            });
+        } finally {
+            setIsTextLoading(false);
+        }
+    };
+
+    const handleGenerateImage = async (data: GenerateMarketingCopyInput) => {
+        setIsImageLoading(true);
         setGeneratedImage(null);
-
-        const campaignDetails = `Goal: ${data.goal}, Audience: ${data.audience}, Tone: ${data.tone}`;
-
-        generateMarketingCopy(data)
-            .then(setGeneratedContent)
-            .catch(() => {
-                toast({
-                    variant: "destructive",
-                    title: "AI Text Error",
-                    description: "Failed to generate marketing content. Please try again.",
-                });
-            })
-            .finally(() => setIsTextLoading(false));
-
-        generateAdImage({ campaignDetails })
-            .then(result => setGeneratedImage(result.imageUrl))
-            .catch(() => {
-                toast({
-                    variant: "destructive",
-                    title: "AI Image Error",
-                    description: "Failed to generate ad image. Please try again.",
-                });
-            })
-            .finally(() => setIsImageLoading(false));
+        try {
+            const campaignDetails = `Goal: ${data.goal}, Audience: ${data.audience}, Tone: ${data.tone}`;
+            const result = await generateAdImage({ campaignDetails });
+            setGeneratedImage(result.imageUrl);
+        } catch (error) {
+            console.error("AI Image Generation Error:", error);
+            toast({
+                variant: "destructive",
+                title: "AI Image Error",
+                description: "Failed to generate ad image. Please try again.",
+            });
+        } finally {
+            setIsImageLoading(false);
+        }
+    };
+    
+    const onSubmit = async (data: GenerateMarketingCopyInput) => {
+        handleGenerateText(data);
+        handleGenerateImage(data);
     };
 
     const isLoading = isTextLoading || isImageLoading;
@@ -89,7 +100,7 @@ export default function AdminMarketingPage() {
                                     name="goal"
                                     control={control}
                                     render={({ field }) => (
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isLoading}>
                                             <SelectTrigger><SelectValue /></SelectTrigger>
                                             <SelectContent>{campaignGoals.map(g => <SelectItem key={g} value={g}>{g}</SelectItem>)}</SelectContent>
                                         </Select>
@@ -102,7 +113,7 @@ export default function AdminMarketingPage() {
                                     name="audience"
                                     control={control}
                                     render={({ field }) => (
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isLoading}>
                                             <SelectTrigger><SelectValue /></SelectTrigger>
                                             <SelectContent>{targetAudiences.map(a => <SelectItem key={a} value={a}>{a}</SelectItem>)}</SelectContent>
                                         </Select>
@@ -115,7 +126,7 @@ export default function AdminMarketingPage() {
                                     name="tone"
                                     control={control}
                                     render={({ field }) => (
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isLoading}>
                                             <SelectTrigger><SelectValue /></SelectTrigger>
                                             <SelectContent>{tones.map(t => <SelectItem key={t} value={t}>{t}</SelectItem>)}</SelectContent>
                                         </Select>
@@ -128,7 +139,7 @@ export default function AdminMarketingPage() {
                                     name="platform"
                                     control={control}
                                     render={({ field }) => (
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isLoading}>
                                             <SelectTrigger><SelectValue /></SelectTrigger>
                                             <SelectContent>{platforms.map(p => <SelectItem key={p} value={p}>{p}</SelectItem>)}</SelectContent>
                                         </Select>

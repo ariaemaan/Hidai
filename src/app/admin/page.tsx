@@ -3,20 +3,21 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Users, BarChart2, DollarSign, Activity, AlertTriangle, Flame, Coins, ArrowRightLeft, Shield } from "lucide-react";
+import { Users, BarChart2, DollarSign, Activity, AlertTriangle, Flame, Coins, ArrowRightLeft, Shield, type LucideIcon } from "lucide-react";
 import { Bar, BarChart, XAxis, YAxis, Cell } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import { useEffect, useState } from "react";
 import { analyzeCompetitiveAdvantage, type CompetitiveAdvantage } from "@/ai/flows/analyzeCompetitiveAdvantageFlow";
-import { icons } from "lucide-react";
+import * as icons from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
-type IconName = keyof typeof icons;
+type IconName = keyof Omit<typeof icons, "createLucideIcon" | "LucideIcon">;
 
-const RenderIcon = ({ name, className }: { name: IconName; className?: string }) => {
-  const LucideIcon = icons[name];
+const RenderIcon = ({ name, className }: { name: string; className?: string }) => {
+  const LucideIcon = icons[name as IconName] as LucideIcon;
   if (!LucideIcon) {
     return <Shield className={className} />;
   }
@@ -62,6 +63,7 @@ const suspiciousActivity = [
 
 
 export default function AdminDashboardPage() {
+  const { toast } = useToast();
   const [advantages, setAdvantages] = useState<CompetitiveAdvantage[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -69,9 +71,16 @@ export default function AdminDashboardPage() {
       setIsLoading(true);
       analyzeCompetitiveAdvantage()
           .then(result => setAdvantages(result.advantages))
-          .catch(() => {})
+          .catch((err) => {
+            console.error("Failed to analyze competitive advantage:", err);
+            toast({
+              variant: "destructive",
+              title: "AI Analysis Error",
+              description: "Could not fetch competitive advantages.",
+            });
+          })
           .finally(() => setIsLoading(false));
-  }, []);
+  }, [toast]);
 
   const getRiskBadgeVariant = (level: string): 'destructive' | 'secondary' => {
     switch (level) {
@@ -193,7 +202,7 @@ export default function AdminDashboardPage() {
                 advantages.map((advantage, index) => (
                     <div key={index} className="flex items-start gap-4 p-4 rounded-lg bg-muted/50">
                         <div className="p-3 rounded-full bg-primary/10">
-                           <RenderIcon name={advantage.icon as IconName} className="h-6 w-6 text-primary" />
+                           <RenderIcon name={advantage.icon} className="h-6 w-6 text-primary" />
                         </div>
                         <div>
                             <h4 className="font-semibold">{advantage.title}</h4>
