@@ -9,9 +9,12 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
-import { Home, User } from "lucide-react"
+import { Home, User, LogOut, Settings } from "lucide-react"
 import Link from "next/link"
+import { InstallPWAButton } from "@/components/shared/install-pwa-button"
 
 
 export function UserNav() {
@@ -27,12 +30,26 @@ export function UserNav() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 font-body" align="end" forceMount>
-          <Button asChild variant="ghost" className="w-full justify-start">
+          <DropdownMenuItem asChild>
             <Link href="/">
               <Home className="mr-2 h-4 w-4" />
               <span>Homepage</span>
             </Link>
-          </Button>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/dashboard/settings">
+              <Settings className="mr-2 h-4 w-4" />
+              <span>Settings</span>
+            </Link>
+          </DropdownMenuItem>
+          <InstallPWAButton />
+          <DropdownMenuSeparator />
+           <DropdownMenuItem asChild>
+             <Link href="/login">
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Log out</span>
+            </Link>
+          </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

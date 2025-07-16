@@ -13,21 +13,21 @@ const features = [
       icon: Gamepad2,
       title: "Play & Earn",
       description: "Engage in fun, culturally-themed games like Tap-to-Earn and Move-to-Earn. Every action rewards you with Points that can be used within the app.",
-      image: "https://placehold.co/600x400.png",
+      image: "https://placehold.co/1024x768.png",
       aiHint: "game controller",
     },
     {
       icon: BookOpen,
       title: "Learn & Grow",
       description: "Dive into interactive lessons on Afghan history, art, and language. Pass quizzes and exams to unlock significant rewards and climb the leaderboards.",
-      image: "https://placehold.co/600x400.png",
+      image: "https://placehold.co/1024x768.png",
       aiHint: "ancient book",
     },
     {
       icon: Users,
       title: "Community Hub",
       description: "Connect with a global diaspora. Compete in community-wide challenges, see your rank, and share your achievements with friends.",
-      image: "https://placehold.co/600x400.png",
+      image: "https://placehold.co/1024x768.png",
       aiHint: "community gathering",
     },
 ];
@@ -99,12 +99,13 @@ export default function LandingPage() {
                 </div>
               </div>
               <Image
-                src="https://placehold.co/600x400.png"
-                width="600"
-                height="400"
+                src="https://placehold.co/1200x800.png"
+                width="1200"
+                height="800"
                 alt="Hero"
                 data-ai-hint="afghanistan landscape"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
+                priority
               />
             </div>
           </div>
@@ -173,10 +174,10 @@ export default function LandingPage() {
               <Image
                 alt="Map"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full"
-                height="400"
-                src="https://placehold.co/600x400.png"
+                height="800"
+                src="https://placehold.co/1200x800.png"
                 data-ai-hint="afghanistan map art"
-                width="600"
+                width="1200"
               />
             </div>
           </div>

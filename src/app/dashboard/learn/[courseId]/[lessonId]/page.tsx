@@ -15,7 +15,7 @@ const lessonData = {
                 "However, the aftermath was not solely one of destruction. The subsequent Ilkhanate and Timurid periods, particularly under Timur (Tamerlane), saw a resurgence of art, architecture, and science, especially in cities like Herat, which became a jewel of the Islamic world. This era of cultural rebirth, known as the Timurid Renaissance, left a lasting legacy on the region's identity.",
                 "Understanding the Mongol invasion is crucial to appreciating the resilience of Afghan culture and its ability to rebuild and flourish even after periods of immense hardship."
             ],
-            image: "https://placehold.co/800x400.png",
+            image: "https://placehold.co/1200x600.png",
             aiHint: "mongol warriors",
             nextLessonId: "4"
         }
@@ -32,7 +32,7 @@ export default function LessonPage({ params }: { params: { courseId: string, les
     const lesson = lessonData[courseId]?.[lessonId] || {
         title: "Lesson Not Found",
         content: ["The content for this lesson could not be found. Please go back to the course page."],
-        image: "https://placehold.co/800x400.png",
+        image: "https://placehold.co/1200x600.png",
         aiHint: "empty book",
         nextLessonId: null
     };
@@ -52,7 +52,7 @@ export default function LessonPage({ params }: { params: { courseId: string, les
 
             <Card>
                  <CardHeader className="p-0">
-                    <Image src={lesson.image} alt={lesson.title} width={800} height={400} data-ai-hint={lesson.aiHint} className="rounded-t-lg aspect-video object-cover" />
+                    <Image src={lesson.image} alt={lesson.title} width={1200} height={600} data-ai-hint={lesson.aiHint} className="rounded-t-lg aspect-video object-cover" />
                  </CardHeader>
                  <CardContent className="p-6 md:p-8">
                     <div className="prose prose-lg dark:prose-invert max-w-none">
