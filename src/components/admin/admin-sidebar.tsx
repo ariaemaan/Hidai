@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/sidebar";
 import { Logo } from "@/components/logo";
 import { Home, Users, BarChart2, Shield, FileText, Megaphone, ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const menuItems = [
   { href: "/admin", label: "Dashboard", icon: Home },
@@ -40,7 +39,7 @@ export function AdminSidebar() {
             <SidebarMenuItem key={item.href}>
               <SidebarMenuButton
                 asChild
-                isActive={pathname.startsWith(item.href) && (item.href !== "/admin" || pathname === "/admin")}
+                isActive={pathname === item.href}
                 tooltip={{
                   children: item.label,
                   className: "font-headline",

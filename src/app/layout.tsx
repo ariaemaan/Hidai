@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { SplashScreen } from "@/components/layout/splash-screen";
+import { AuthProvider } from "@/contexts/auth-context";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -46,9 +47,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SplashScreen>
-            {children}
-          </SplashScreen>
+          <AuthProvider>
+            <SplashScreen>
+              {children}
+            </SplashScreen>
+          </AuthProvider>
           <Toaster />
         </ThemeProvider>
       </body>
