@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Users, BarChart2, DollarSign, Activity, AlertTriangle, Flame, Coins, ArrowRightLeft } from "lucide-react";
+import { Users, BarChart2, DollarSign, Activity, AlertTriangle, Flame, Coins, ArrowRightLeft, Shield } from "lucide-react";
 import { Bar, BarChart, XAxis, YAxis, Cell } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -18,7 +18,7 @@ type IconName = keyof typeof icons;
 const RenderIcon = ({ name, className }: { name: IconName; className?: string }) => {
   const LucideIcon = icons[name];
   if (!LucideIcon) {
-    return <AlertTriangle className={className} />;
+    return <Shield className={className} />;
   }
   return <LucideIcon className={className} />;
 };
@@ -280,3 +280,5 @@ export default function AdminDashboardPage() {
     </div>
   );
 }
+
+    

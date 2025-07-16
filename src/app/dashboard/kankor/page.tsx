@@ -41,6 +41,18 @@ export default function KankorPrepPage() {
         <p className="text-muted-foreground">Your complete toolkit for Kankor success. Powered by AI.</p>
       </div>
       
+       <Card>
+        <CardHeader>
+          <CardTitle className="font-headline">Welcome to the Kankor Prep Hub!</CardTitle>
+          <CardDescription>
+            This section is your dedicated resource for mastering the Kankor exam. Here you can access a vast question bank, take smart quizzes, participate in daily challenges, and track your progress on the leaderboard.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p>Select an option from the features below to get started on your journey to success.</p>
+        </CardContent>
+      </Card>
+
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
         {kankorFeatures.map((feature) => (
             <Card key={feature.title} className="flex flex-col">
@@ -87,3 +99,5 @@ export default function KankorPrepPage() {
     </div>
   );
 }
+
+    
