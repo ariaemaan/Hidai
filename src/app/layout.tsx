@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, PT_Sans } from "next/font/google";
+import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
@@ -11,9 +11,8 @@ const poppins = Poppins({
   variable: "--font-headline",
 });
 
-const ptSans = PT_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "700"],
   variable: "--font-body",
 });
 
@@ -36,17 +35,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="theme-color" content="#D7263D" />
+        <meta name="theme-color" content="#2563EB" />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png"></link>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>
       <body
-        className={`${poppins.variable} ${ptSans.variable} font-body antialiased`}
+        className={`${poppins.variable} ${inter.variable} font-body antialiased`}
       >
         <ThemeProvider
           attribute="class"
